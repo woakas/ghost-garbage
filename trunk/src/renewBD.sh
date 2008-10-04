@@ -1,4 +1,5 @@
 #!/bin/bash
+#Forma de uso sudo su - postgres -c `pwd`/renewBD.sh
 BASEREAL="ghostBD"
 DBTEMPLATE="ghostBD_template"
 USER="ghost"

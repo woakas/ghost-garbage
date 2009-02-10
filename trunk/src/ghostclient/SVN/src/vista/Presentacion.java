@@ -9,7 +9,7 @@ import javax.microedition.lcdui.Image;
 
 public class Presentacion extends Canvas {
 	
-	private Image img, log1;
+	private Image img, log1, op1;
 	private BotonIni bot;
 	Pantalla ref;
 	
@@ -19,7 +19,8 @@ public class Presentacion extends Canvas {
 		bot = new BotonIni("Comenzar", this);
 		try {
 			img = Image.createImage("/negro.jpg");
-			log1 = Image.createImage("/o.png");
+			log1 = Image.createImage("/logo1p.png");
+			op1 = Image.createImage("/logo1p.jpg");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,9 +43,11 @@ public class Presentacion extends Canvas {
 		bot.paint(g, getWidth(), getHeight());
 		
 		if(bot.opcion == 1){
+			g.drawImage(op1, 10, 100, Graphics.TOP|Graphics.LEFT);
+		}
+		if(bot.opcion == 2){
 			g.drawImage(log1, 10, 100, Graphics.TOP|Graphics.LEFT);
 		}
-
 	}
 	public void keyPressed(int keyCode) {
 		

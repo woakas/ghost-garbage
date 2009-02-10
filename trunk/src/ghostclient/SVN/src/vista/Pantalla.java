@@ -16,6 +16,8 @@ public class Pantalla extends MIDlet {
 	private Presentacion pres;
 	private Form f;
 	private Intro intro;
+	private Ayuda ayuda;
+	private Informacion informacion;
 	private Image img;
 			
 	public Pantalla() throws IOException {
@@ -23,14 +25,23 @@ public class Pantalla extends MIDlet {
 		f.append(new BotonIni("Inicio", f));
 		p = Display.getDisplay(this);
 		pres = new Presentacion(this);
-		img = Image.createImage("/Escudo.png");
+		img = Image.createImage("/decarta.png");
 		intro = new Intro(p, pres, img, 5000);
+		ayuda = new Ayuda(p, pres);
+		informacion = new Informacion(p, pres);
 	}
 	
 	
 	public void getOpcion(int opcion) {
 		this.opcion = opcion;
 		if(opcion == 1){
+			p.setCurrent(intro);
+		}
+		if(opcion == 2){
+			p.setCurrent(informacion);
+		}
+		if(opcion == 3){
+			p.setCurrent(ayuda);
 		}
 		if(opcion == 4){
 			notifyDestroyed();
@@ -41,7 +52,6 @@ public class Pantalla extends MIDlet {
 	protected void pauseApp() {
 	}
 	protected void startApp() throws MIDletStateChangeException {
-		
 		p.setCurrent(intro);
 	}
 }

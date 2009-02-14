@@ -1,0 +1,55 @@
+project myProjectId "Tesis Ghos Garbage" "1.0" 2008-08-01 - 2009-02-01 {
+  now 2008-08-01
+}
+
+task start "Inicio del proyecto" {
+  start 2008-08-01
+
+  task plan "Recoleción de Datos" {
+    length 6m
+  }
+  task plataforma "Desarrollo de la plataforma LBS" {
+    start 2008-09-01
+    length 1m
+  }
+  task aplicativo "Desarrollo del aplicativo" {
+    start 2008-09-23
+    length 11w
+  }
+  task mobile "Conexión de la plataforma web con el aplicativo móvil" {
+    start 2008-10-15
+    length 9w
+  }
+  task test "Pruebas y test de unidad al aplicativo" {
+    length 5w
+    depends !plataforma
+  }
+  task testSeguridad "Test de seguridad, usuarios y perfiles" {
+    length 1m
+    depends !mobile
+  }
+  task documentacion "Desarrollo de Documentación" {
+    start 2008-09-01
+    length 5m
+  }
+}
+
+#export "FullProject.tjp" {
+#  taskattributes all
+#}
+
+
+
+
+
+
+taskreport "Tracking Gantt" {
+  headline "Tracking Gantt Chart"
+  columns hierarchindex, name, start, end, duration { title "Duration Days" },chart
+  timeformat "%a %Y-%m-%d"
+  loadunit days
+  hideresource 1
+}
+
+
+xmlreport "project1.tjx" { version 2 }

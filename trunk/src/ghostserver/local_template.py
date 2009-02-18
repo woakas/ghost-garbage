@@ -1,8 +1,8 @@
 
 import os
 DATABASE_ENGINE = 'postgresql_psycopg2'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'migtrace'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'migtrace'             # Not used with sqlite3.
+DATABASE_NAME = 'ghost'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'garbage'             # Not used with sqlite3.
 DATABASE_PASSWORD = 'pepito'         # Not used with sqlite3.
 DATABASE_HOST = 'localhost'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
@@ -10,7 +10,7 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 
 
 
-ROOT_ROOT='/home/woakas/mig/Migtrace/trunk/data/static'
+ROOT_ROOT='/home/woakas/Tesis/svn/trunk/data/static'
 MEDIA_ROOT =  ROOT_ROOT+'/media'
 CSS_ROOT = ROOT_ROOT+'/css'
 JS_ROOT = ROOT_ROOT+'/js'
@@ -38,7 +38,6 @@ ROOT_PREFIX=""
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),
 		 os.path.join(os.path.dirname(__file__), 'ghost_lbs/templates'),
 		)
-DEBUG=True
 ADMINS=ADMINS = (
 		('Andres Angulo', 
 		'woakas@gmail.com'),
@@ -46,4 +45,7 @@ ADMINS=ADMINS = (
                  'draco770@hotmail.com'),
                 )
 
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 

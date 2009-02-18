@@ -1,9 +1,6 @@
 # Django settings for ghost project.
 from local_settings import *
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
 MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
@@ -11,7 +8,7 @@ MANAGERS = ADMINS
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Bogota'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -45,7 +42,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'ghost.urls'
+ROOT_URLCONF = 'urls'
 
 
 LOGIN_URL=URL_PREFIX

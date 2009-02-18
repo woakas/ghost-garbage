@@ -1,17 +1,30 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls.defaults import *
+from django.contrib.gis import admin
+import settings 
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    # (r'^ghost/', include('ghost.foo.urls')),
+    (r'^'+settings.ROOT_PREFIX+'lbs/', include('ghostserver.ghost_lbs.urls')),
+    (r'^'+settings.ROOT_PREFIX+'', include('ghostserver.ghost.urls')),
 
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # (r'^admin/(.*)', admin.site.root),
+    (r'^'+settings.ROOT_PREFIX+'admin/(.*)', admin.site.root),
 )
+
+
+
+
+#Permite servir desde el servidor de django imágenes y archivos 
+#No se debe realizar esto en un servidor en producción
+if settings.STATIC_MEDIA:
+    urlpatterns += patterns('',
+     ## Servir Archivos Media, css y JS
+     (r'^'+settings.ROOT_PREFIX+'static/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT , 'show_indexes': True}),
+     (r'^'+settings.ROOT_PREFIX+'static/css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_ROOT , 'show_indexes': True}),
+     (r'^'+settings.ROOT_PREFIX+'static/js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_ROOT , 'show_indexes': True}),
+    )

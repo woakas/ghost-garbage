@@ -1,0 +1,11 @@
+{% extends "databrowse/base.html" %}
+{% block style %}
+{{ block.super }}
+<style type="text/css>"
+#nav { text-align: right; background:#fff4ba; border-bottom:1px solid #ddd; padding:0 20px; }
+</style>
+{% endblock %}
+
+{% block content %}
+{% block nav-global %}<div id ="nav">&nbsp;&nbsp;<a href='/'>Welcome Page</a> | <a href='/admin/'>Admin Site</a></div>{% endblock %}
+{% endblock %}

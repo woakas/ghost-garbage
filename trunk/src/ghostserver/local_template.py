@@ -37,7 +37,7 @@ URL_PREFIX = '/'
 ROOT_PREFIX=""
 
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),
-		 os.path.join(os.path.dirname(__file__), 'ghost_lbs/templates'),
+		 os.path.join(os.path.dirname(__file__), 'ghost/templates'),
 		)
 ADMINS=ADMINS = (
 		('Andres Angulo', 

@@ -1,8 +1,8 @@
 
 import os
 DATABASE_ENGINE = 'postgresql_psycopg2'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'ghost'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'garbage'             # Not used with sqlite3.
+DATABASE_NAME = 'ghostBD'             # Or path to database file if using sqlite3.
+DATABASE_USER = 'ghost'             # Not used with sqlite3.
 DATABASE_PASSWORD = 'pepito'         # Not used with sqlite3.
 DATABASE_HOST = 'localhost'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.databrowse',
+    'ghostserver.ghost_lbs'
 #    'django.contrib.contenttypes',
 
 

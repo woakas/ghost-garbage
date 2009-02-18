@@ -1,0 +1,16 @@
+= Instalación de Ghostserver =
+
+Se debe tener instalado geodjango para esto siga la información de:http://wiki.ghost.webhop.org/InstalarGeoDjango con esto tendrá una base de datos template y luego utilice renewBD.sh para regenerar la base de datos este script se debe ejecutar como el usuario postgres y creará la Base de datos con la información de postgis incorporado.
+
+== Iniciar el aplicativo GhostServer ==
+Para iniciar el aplicativo por primera vez ejecute dentro de la carpeta ghostserver
+
+{{{
+./manage syncdb
+}}}
+
+y luego para ejecutar el aplicativo
+
+{{{
+./manage runserver 0.0.0.0:8888
+}}}

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.gis import admin as admingis
-from ghost_lbs.models import *
+from geolbs.models import *
 from django.contrib.contenttypes import generic
 
 

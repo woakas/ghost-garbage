@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    (r'^'+settings.ROOT_PREFIX+'lbs/', include('ghostserver.ghost_lbs.urls')),
+    (r'^'+settings.ROOT_PREFIX+'lbs/', include('ghostserver.geolbs.urls')),
     (r'^'+settings.ROOT_PREFIX+'', include('ghostserver.ghost.urls')),
 
 

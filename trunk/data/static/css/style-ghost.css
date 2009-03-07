@@ -36,6 +36,14 @@ a:hover
 {
     text-decoration: none;
 }
+input,
+textarea,
+select {
+  padding: 1px;
+  font: 400 1em verdana, sans-serif;
+  border: 1px solid #CCC;
+}
+
 
 /* Outer */
 

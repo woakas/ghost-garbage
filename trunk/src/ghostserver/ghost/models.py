@@ -51,3 +51,27 @@ class Perfiles(models.Model) :
     def __unicode__(self):
         return u"%s" % (self.grupo)
 
+class Preferencias(models.Model) :
+    nombre = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=1000)
+
+    class Meta:
+        verbose_name_plural='Preferencias'
+
+    def __unicode__(self):
+        return u"%s" % (self.nombre)
+
+
+class PreferenciasUsuarios(models.Model) :
+    usuario = models.ForeignKey(User)
+    valor = models.CharField(max_length=200, null=True )
+    preferencia = models.ForeignKey(Preferencias)
+
+
+    class Meta:
+        verbose_name_plural='Preferencias de Usuario'
+
+    def __unicode__(self):
+        return u"%s : %s" % (self.preferencia,self.valor)
+
+

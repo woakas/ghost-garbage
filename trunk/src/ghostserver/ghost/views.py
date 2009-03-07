@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.http import HttpResponse,HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+
+import settings
 from ghost import forms
+from ghost import models as ghostModels
+from ghost.constsappli import *
+
 
 
 def entry(request):
@@ -16,7 +23,7 @@ def entry(request):
                     login(request, user)
                     if 'next' in request.GET.keys() :
                         return HttpResponseRedirect(settings.URL_PREFIX+request.GET['next'][1:])
-                    a=models.PreferenciasUsuarios.objects.filter(preferencia=models.Preferencias.objects.get(nombre='paginaentrada'),usuario=user)
+                    a=ghostModels.PreferenciasUsuarios.objects.filter(preferencia=ghostModels.Preferencias.objects.get(nombre='paginaentrada'),usuario=user)
                     if a.count()==0:
                         logon=DEFAULTLOGON
                     else:
@@ -31,7 +38,7 @@ def entry(request):
         if request.user.is_authenticated():
             #If the user is authenticated we won't show the login form, we redirect to the preferences homepage
             print DEFAULTLOGON
-            a=models.PreferenciasUsuarios.objects.filter(preferencia=models.Preferencias.objects.get(nombre='paginaentrada'),usuario=request.user)
+            a=ghostModels.PreferenciasUsuarios.objects.filter(preferencia=ghostModels.Preferencias.objects.get(nombre='paginaentrada'),usuario=request.user)
             if a.count()==0:
                 logon=DEFAULTLOGON
             else:

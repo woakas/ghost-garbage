@@ -9,14 +9,49 @@
     {% block css %}
     <link rel="stylesheet" href="{{ MEDIA_URL|safe }}css/style-ghost.css" type="text/css" />
     {% endblock %}
+    <!--[if lt IE 7]>
+<script language="JavaScript">
+function correctPNG() // correctly handle PNG transparency in Win IE 5.5 & 6.
+{
+   var arVersion = navigator.appVersion.split("MSIE")
+   var version = parseFloat(arVersion[1])
+   if ((version >= 5.5) && (document.body.filters)) 
+   {
+      for(var i=0; i<document.images.length; i++)
+      {
+         var img = document.images[i]
+         var imgName = img.src.toUpperCase()
+         if (imgName.substring(imgName.length-3, imgName.length) == "PNG")
+         {
+            var imgID = (img.id) ? "id='" + img.id + "' " : ""
+            var imgClass = (img.className) ? "class='" + img.className + "' " : ""
+            var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' "
+            var imgStyle = "display:inline-block;" + img.style.cssText 
+            if (img.align == "left") imgStyle = "float:left;" + imgStyle
+            if (img.align == "right") imgStyle = "float:right;" + imgStyle
+            if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle
+            var strNewHTML = "<span " + imgID + imgClass + imgTitle
+            + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";"
+            + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
+            + "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>" 
+            img.outerHTML = strNewHTML
+            i = i-1
+         }
+      }
+   }    
+}
+window.attachEvent("onload", correctPNG);
+</script>
+<![endif]-->
+
   </head>
   {% block body %}
   <body>
     {% endblock %}
     <div id="outer">
       <div id="header">
-        <div style="position:relative; width:25%; margin-top:-3em;float:left; margin-right:-30em;margin-left:8em;"><img src="{{ MEDIA_URL|safe }}media/logo.png"></div>
-        <h1>Ghost Garbage</a></h1>
+        <div style="position:relative; z-index:1; width: 15em; float:left; margin-top:-2em; margin-right:-30em;margin-left:3em;"><img src="{{ MEDIA_URL|safe }}media/logo.png"></div>
+        <h1>Ghost Garbage</h1>
         <h2>by Lodur and Woakas</h2>
       </div>
       
@@ -33,9 +68,73 @@
         </ul>
       </div>
       <div id="content">
-        <div id="xbg1"></div>
+        <div id="xbg1">
+        </div>
         <div id="primaryContentContainer">
-          <div id="primaryContent">
+          <div id="secondaryContentRight">
+            {% block secondaryContentRight %}
+            {% endblock %}
+          </div>
+
+          <div id="primaryContentRight">
+            {% block primaryContentRight %}
+            {% endblock %}
+          </div>
+
+          <div id="primaryContentLeft" >
+            {% block primaryContentLeft %}
+            {% endblock %}
+          </div>
+
+          <div id="primaryContent" >
+            {% block primaryContent %}
+            {% endblock %}
+          </div>
+        </div>
+        <div id="secondaryContentLeft">
+            {% block secondaryContentLeft %}
+            {% endblock %}
+        </div>
+
+        <div class="clear"></div>
+      </div>
+      <div id="footer">
+        {% block footer %}
+        <p><a href="/">Ghost Garbage</a> | <a href="http://wiki.ghost.webhop.org">Wiki Documentation</a></p>
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
+
+
+
+          {% comment %}           
+          <h3>Etiam suscipit et</h3>
+          <p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
+
+          <h3>Fusce dolor tristique</h3>
+          <p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
+          <h3>Nunc pellentesque</h3>
+          <p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
+          <h3>Ipsum Dolorem</h3>
+          <ul>
+            <li><a href="#">Sagittis Bibendum Erat</a></li>
+            <li><a href="#">Malesuada Turpis</a></li>
+            <li><a href="#">Quis Gravida Massa</a></li>
+            <li><a href="#">Inerat Viverra Ornare</a></li>
+          </ul>
+          {% endcomment %}
+
+
+
+
+
+
+            {% comment %} 
+
+
+
             <span class="titletext">Ghost Garbage</span>
 	    {% if titlesection %}
 	    <br />
@@ -47,7 +146,7 @@
             <strong>Ghost Garbage</strong><br />
 	    {% endblock %}
             
-            {% comment %} 
+
             <h2>Welcome to Sitename.com!</h2>
             <p><strong>Burned</strong> is a free template from <a href="http://freecsstemplates.org/">Free CSS Templates</a> released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>. You're free to use it for both commercial or personal use. I only ask that you link back to <a href="http://www.freecsstemplates.org/">my site</a> in some way. Enjoy :)</p>
             <p>Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in, congue in, dui. Nunc rhoncus placerat augue. Donec justo odio, eleifend varius, volutpat venenatis, sagittis ut, orci. Donec nulla est, laoreet quis, pellentesque in, congue in, dui. Nunc rhoncus placerat augue. Donec justo odio, eleifend varius, volutpat venenatis, sagittis ut, orci. Nullam et orci in erat viverra ornare. Nunc pellentesque.</p>
@@ -93,32 +192,3 @@
               </tr>
             </table>
             {% endcomment %}
-          </div>
-        </div>
-        <div id="secondaryContent">
-          {% comment %} 
-          <h3>Etiam suscipit et</h3>
-          <p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
-          <h3>Fusce dolor tristique</h3>
-          <p>Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
-          <h3>Nunc pellentesque</h3>
-          <p>Sed vestibulum blandit nisl. Quisque elementum convallis purus. Suspendisse potenti. Donec nulla est, laoreet quis, pellentesque in. <a href="#">More&#8230;</a></p>
-          <h3>Ipsum Dolorem</h3>
-          <ul>
-            <li><a href="#">Sagittis Bibendum Erat</a></li>
-            <li><a href="#">Malesuada Turpis</a></li>
-            <li><a href="#">Quis Gravida Massa</a></li>
-            <li><a href="#">Inerat Viverra Ornare</a></li>
-          </ul>
-          {% endcomment %}
-        </div>
-        <div class="clear"></div>
-      </div>
-      <div id="footer">
-        {% block footer %}
-        <p><a href="/">Ghost Garbage</a> | <a href="wiki.ghost.webhop.org">Wiki Documentation</a></p>
-        {% endblock %}
-      </div>
-    </div>
-  </body>
-</html>

@@ -1,0 +1,11 @@
+{% extends "main_template.html" %}
+{% block maininfo %}
+<strong>Bienvenido a Ghost Garbage, favor ingrese su nombre y su usuario.</strong><br />
+
+<form method="post">
+<table>
+{{ form }}
+<tr><td colspan="2"><input type="submit" value="Ingresar">
+</table>
+</form>
+{% endblock %}

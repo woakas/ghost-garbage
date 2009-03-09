@@ -31,9 +31,9 @@ def entry(request):
                 
                     return HttpResponseRedirect(settings.URL_PREFIX+logon)
                 else :
-                    return render_to_response('index.html', {'form': form },context_instance=RequestContext(request))
+                    return render_to_response('entry.html', {'form': form },context_instance=RequestContext(request))
             else:
-                return render_to_response('index.html', {'form': form },context_instance=RequestContext(request))
+                return render_to_response('entry.html', {'form': form },context_instance=RequestContext(request))
     else:
         if request.user.is_authenticated():
             #If the user is authenticated we won't show the login form, we redirect to the preferences homepage
@@ -45,4 +45,15 @@ def entry(request):
                 logon=a[0].valor
             return HttpResponseRedirect(settings.URL_PREFIX+logon)
         form = forms.LoginForm()
-    return render_to_response('index.html', {'form': form},context_instance=RequestContext(request))
+    return render_to_response('entry.html', {'form': form},context_instance=RequestContext(request))
+
+
+
+def index(request):
+    """
+       Información sobre el Juego
+    """
+    form = forms.LoginForm()
+
+    return render_to_response('index.html',{'form': form},context_instance=RequestContext(request))
+    

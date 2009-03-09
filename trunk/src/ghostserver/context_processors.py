@@ -19,9 +19,7 @@ def menu(request):
     submenu_stt=None
     menus=set()
     submenus=set()
-    if request.user.is_anonymous()==True:
-        #When the user is not logged, there is no menu to show
-        return {'menu':[], 'submenu':[]}
+    print request.user
     
     path=request.get_full_path().strip("/")
     a=modelsGhost.Menu.objects.filter(url=path,padre__isnull=True)
@@ -44,7 +42,9 @@ def menu(request):
         menus=modelsGhost.Menu.objects.filter(padre__isnull=True)
         if menu_stt:
             submenus=modelsGhost.Menu.objects.filter(padre__isnull=False, padre=menu_stt)
-    else:
+        menus_user=[]
+        submenus_user=[]
+    elif request.user.is_anonymous()==False:
         #Se adicionas los menús y submenús asociados a los grupos en donde pertenezca el usuario
         menus_user=[i for i in modelsGhost.Menu.objects.filter(perfiles__grupo__user=request.user,padre__isnull=True)]
         submenus_user=[i for i in modelsGhost.Menu.objects.filter(perfiles__grupo__user=request.user,padre__isnull=False)]
@@ -54,16 +54,24 @@ def menu(request):
         if pers.count() >0:
             menus_user=menus_user+[i for i in pers[0].menus.filter(padre__isnull=True)]
             submenus_user=submenus_user+[i for i in pers[0].menus.filter(padre__isnull=False)]
-        
-        for i in menus_user:
-            menus.add(i)
-        if menu_stt in menus_user:
-            for i in modelsGhost.Menu.objects.filter(padre=menu_stt): 
-                submenus.add(i)
-        for i in submenus_user:
-            if i.padre==menu_stt:
-                submenus.add(i)
-            menus.add(i.padre)
+    else:
+        #if request.user.is_anonymous()==True:
+        #When the user is not logged, there is no menu to show
+        menus_user=[i for i in modelsGhost.Menu.objects.filter(perfiles__grupo__name=constsappli.GROUPANONYMUS,padre__isnull=True)]
+        submenus_user=[i for i in modelsGhost.Menu.objects.filter(perfiles__grupo__name=constsappli.GROUPANONYMUS,padre__isnull=False)]
+        #print menus_user
+        #print submenus_user
+        #return {'menu':[], 'submenu':[]}
+    
+    for i in menus_user:
+        menus.add(i)
+    if menu_stt in menus_user:
+        for i in modelsGhost.Menu.objects.filter(padre=menu_stt): 
+            submenus.add(i)
+    for i in submenus_user:
+        if i.padre==menu_stt:
+            submenus.add(i)
+        menus.add(i.padre)
    
     try:
         menus.add(modelsGhost.Menu.objects.filter(padre__isnull=True,url=constsappli.DEFAULTLOGON.strip('/'))[0])
@@ -76,7 +84,8 @@ def menu(request):
         sub_men.insert(0,("activo",menu_stt))
     else:
         sub_men.insert(0,("",menu_stt))
-          
+    
+    print men,sub_men
     return {'menus':men, 'submenus':sub_men }
 
 

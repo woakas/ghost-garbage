@@ -232,22 +232,45 @@ select {
     width: 100%;
 }
 
-#primaryContent
+#primaryContentRight
 {
     margin: 2em 3.0em 0em 19em;
     padding: 0em 0em 0em 1.5em;
     border-left: solid 1px #DFBF99;
 }
 
+#primaryContentLeft
+{
+    margin: 2em 18em 0em 1em;
+    padding: 0em 0em 0em 1.5em;
+    border-right: solid 1px #DFBF99;
+}
+
+#primaryContent
+{
+    margin: 2em 3.0em 0em 1em;
+    padding: 0em 0em 0em 1.5em;
+}
+
 /* Secondary Content */
 
-#secondaryContent
+#secondaryContentLeft
 {
     position: relative;
     z-index: 2;
     float: right;
     width: 15em;
     margin-top: 2em;
+}
+
+#secondaryContentRight
+{
+    position: relative;
+    z-index: 2;
+    float: right;
+    width: 14em;
+    margin-top: 2em;
+    margin-right: 3em;
 }
 
 /* Footer */

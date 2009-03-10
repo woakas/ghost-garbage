@@ -33,7 +33,7 @@ public final class Ayuda extends Canvas implements CommandListener{
 	    Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 		g.setFont(fuente);
 		g.setColor(255, 255, 255);
-		g.drawString ("Hola Mundo. asdqwertyuiopasdfghjkl", 0 , 0, Graphics.LEFT | Graphics.TOP);
+		g.drawString ("Hola Mundo. asdqwe\nuiopasdfghjkl", 0 , 0, Graphics.LEFT | Graphics.TOP);
 		}
 
 		public void commandAction(Command c, Displayable s) {

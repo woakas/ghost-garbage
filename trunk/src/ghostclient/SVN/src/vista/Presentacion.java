@@ -9,7 +9,7 @@ import javax.microedition.lcdui.Image;
 
 public class Presentacion extends Canvas {
 	
-	private Image img, log1, op1;
+	private Image img, log1, log2,log3,log4;
 	private BotonIni bot;
 	Pantalla ref;
 	
@@ -19,9 +19,11 @@ public class Presentacion extends Canvas {
 		bot = new BotonIni("Comenzar", this);
 		try {
 			img = Image.createImage("/negro.jpg");
-			log1 = Image.createImage("/logo1p.png");
-			op1 = Image.createImage("/logo1p.jpg");
-		} catch (IOException e) {
+			log1 = Image.createImage("/logoj.png");
+			log2 = Image.createImage("/info.png");
+			log3 = Image.createImage("/ayuda.png");
+			log4 = Image.createImage("/cerrar.png");
+			} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -33,20 +35,26 @@ public class Presentacion extends Canvas {
 		Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 		g.setFont(fuente);
 		g.setColor(90, 90, 90);
-		g.drawString("Ghost Garbage", 40, 20, Graphics.TOP|Graphics.LEFT);
+		g.drawString("Ghost Garbage",getWidth() / 4 , 20, Graphics.TOP|Graphics.LEFT);
 		
 		g.setColor(255, 255, 255);
-		g.drawString("Ghost Garbage", 42, 22, Graphics.TOP|Graphics.LEFT);
+		g.drawString("Ghost Garbage", getWidth() / 4 +2, 22, Graphics.TOP|Graphics.LEFT);
 		
 		fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
 		g.setFont(fuente);
 		bot.paint(g, getWidth(), getHeight());
 		
 		if(bot.opcion == 1){
-			g.drawImage(op1, 10, 100, Graphics.TOP|Graphics.LEFT);
+			g.drawImage(log1, 10, 60, Graphics.TOP|Graphics.LEFT);
 		}
 		if(bot.opcion == 2){
-			g.drawImage(log1, 10, 100, Graphics.TOP|Graphics.LEFT);
+			g.drawImage(log2, 10, 60, Graphics.TOP|Graphics.LEFT);
+		}
+		if(bot.opcion == 3){
+			g.drawImage(log3, 10, 60, Graphics.TOP|Graphics.LEFT);
+		}
+		if(bot.opcion == 4){
+			g.drawImage(log4, 10, 60, Graphics.TOP|Graphics.LEFT);
 		}
 	}
 	public void keyPressed(int keyCode) {

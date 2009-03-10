@@ -1,12 +1,12 @@
 package vista;
 
 import java.io.IOException;
-
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
+import com.tutorial.*;
 
 public class Pantalla extends MIDlet {
 	
@@ -16,6 +16,7 @@ public class Pantalla extends MIDlet {
 	private Presentacion pres;
 	private Form f;
 	private Intro intro;
+	private HelloMap mapa;
 	private Ayuda ayuda;
 	private Informacion informacion;
 	private Image img;
@@ -25,9 +26,10 @@ public class Pantalla extends MIDlet {
 		f.append(new BotonIni("Inicio", f));
 		p = Display.getDisplay(this);
 		pres = new Presentacion(this);
-		img = Image.createImage("/decarta.png");
+		img = Image.createImage("/logogrup.png");
 		intro = new Intro(p, pres, img, 5000);
 		ayuda = new Ayuda(p, pres);
+		mapa = new HelloMap((MIDlet)(this), p, pres);
 		informacion = new Informacion(p, pres);
 	}
 	
@@ -35,7 +37,7 @@ public class Pantalla extends MIDlet {
 	public void getOpcion(int opcion) {
 		this.opcion = opcion;
 		if(opcion == 1){
-			p.setCurrent(intro);
+			p.setCurrent(mapa.call());
 		}
 		if(opcion == 2){
 			p.setCurrent(informacion);

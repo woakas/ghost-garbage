@@ -1,14 +1,21 @@
 {% extends "main_template.html" %}
 {% block primaryContentLeft %}
-<strong>Bienvenido a Ghost Garbage, favor ingrese su nombre y su usuario.</strong><br />
-<p>esto es un lindo mensaje de pureba</p>
-{% endblock %}
+<h2>¿Que es Ghost Garbage?</h2><br />
+<p>Ghost Garbage es un juego el cual se basa en técnología LBS para determinar puntos cercanos y sevicios asociados directamente a la posición de la persona espacialmente</p>
+<h4>¿Que es LBS?</h4>
+<p>Los LBS (Location Based Services) hacen referencia a Servicios Basados en Localización o para algunos autores simplemente Servicios de Localización.
+Los Servicios Basados en Localización buscan ofrecer un servicio personalizado a los usuarios basado en información de ubicación geográfica de estos. Para su operación utiliza tecnología de sistemas de información geográfica, alguna tecnología de posicionamiento bien sea de lado Cliente/Terminal (Ej. GPS) o de lado servidor/operador (Ej. servicio de posicionamiento suministrado por el operador de la red NBL) y tecnología de comunicación de redes para transmitir información hacia una aplicación LBS que pueda procesar y responder la solicitud. </p>
+<p>
+“Los servicios de localización son servicios que integran una localización o ubicación de un dispositivo móvil con otra información para proveer un valor agregado a un usuario (Definición Jochen Schiller)”</p>
 
+</p>
+{% endblock %}
 {% block secondaryContentRight %}
 <form method="post">
 
 {{ form }}
 <input type="submit" value="Ingresar">
-
 </form>
+<br>
+<img  src="/static/media/screenshots/screenshot0.png">
 {% endblock %}

@@ -19,7 +19,6 @@ def menu(request):
     submenu_stt=None
     menus=set()
     submenus=set()
-    print request.user
     
     path=request.get_full_path().strip("/")
     a=modelsGhost.Menu.objects.filter(url=path,padre__isnull=True)
@@ -62,9 +61,9 @@ def menu(request):
         #print menus_user
         #print submenus_user
         #return {'menu':[], 'submenu':[]}
-    
     for i in menus_user:
         menus.add(i)
+
     if menu_stt in menus_user:
         for i in modelsGhost.Menu.objects.filter(padre=menu_stt): 
             submenus.add(i)
@@ -85,7 +84,7 @@ def menu(request):
     else:
         sub_men.insert(0,("",menu_stt))
     
-    print men,sub_men
+    #print men,sub_men
     return {'menus':men, 'submenus':sub_men }
 
 

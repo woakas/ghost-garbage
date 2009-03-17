@@ -51,23 +51,36 @@ window.attachEvent("onload", correctPNG);
     <div id="outer">
       <div id="header">
         <div style="position:relative; z-index:1; width: 15em; float:left; margin-top:-2em; margin-right:-30em;margin-left:3em;"><img src="{{ MEDIA_URL|safe }}media/logo.png"></div>
-        <h1>Ghost Garbage</h1>
-        <h2>by Lodur and Woakas</h2>
-      </div>
-      
-      <div id="menu">
-        <ul>
-          {% for state, menu in menus %}
-          {% ifequal state "activo" %}
-          <li><a href="#" class="actual" title="">{{ menu.name }}</a></li>
-          {% else %}
-          <li><a href="/{{ menu.url }}" title="">{{ menu.name }}</a></li>
-          <a href=""></a>
-          {% endifequal %}
-          {% endfor %}
-        </ul>
-      </div>
-      <div id="content">
+          <h1>Ghost Garbage</h1>
+          <h2>by Lodur and Woakas</h2>
+        </div>
+        
+        <div id="menu">
+          <div class="m_menu">
+            <ul>
+              {% for state, menu in menus %}
+              {% ifequal state "activo" %}
+              <li><a href="#" class="actual" title="">{{ menu.name }}</a></li>
+              {% else %}
+              <li><a href="/{{ menu.url }}" title="">{{ menu.name }}</a></li>
+              <a href=""></a>
+              {% endifequal %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="submenu" >
+            {% for state, submenu in submenus %}
+            {% ifequal state "activo" %}
+            <a class="actualsub" style="text-decoration:underline;">{{ submenu.name }}</a>|
+            {% else %}
+            <a href="/{{ submenu.url }}">{{ submenu.name }}</a>|
+            {% endifequal %}
+            {% endfor %}
+	  </div>
+
+        </div>
+        
+        <div id="content">
         <div id="xbg1">
         </div>
         <div id="primaryContentContainer">
@@ -107,8 +120,6 @@ window.attachEvent("onload", correctPNG);
   </body>
 </html>
 
-
-
           {% comment %}           
           <h3>Etiam suscipit et</h3>
           <p>Rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
@@ -125,16 +136,7 @@ window.attachEvent("onload", correctPNG);
             <li><a href="#">Inerat Viverra Ornare</a></li>
           </ul>
           {% endcomment %}
-
-
-
-
-
-
             {% comment %} 
-
-
-
             <span class="titletext">Ghost Garbage</span>
 	    {% if titlesection %}
 	    <br />

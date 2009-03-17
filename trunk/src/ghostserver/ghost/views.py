@@ -28,7 +28,7 @@ def entry(request):
                         logon=DEFAULTLOGON
                     else:
                         logon=a[0].valor
-                
+                        
                     return HttpResponseRedirect(settings.URL_PREFIX+logon)
                 else :
                     return render_to_response('entry.html', {'form': form },context_instance=RequestContext(request))
@@ -37,7 +37,6 @@ def entry(request):
     else:
         if request.user.is_authenticated():
             #If the user is authenticated we won't show the login form, we redirect to the preferences homepage
-            print DEFAULTLOGON
             a=ghostModels.PreferenciasUsuarios.objects.filter(preferencia=ghostModels.Preferencias.objects.get(nombre='paginaentrada'),usuario=request.user)
             if a.count()==0:
                 logon=DEFAULTLOGON
@@ -49,10 +48,17 @@ def entry(request):
 
 
 
+def gallery(request):
+    """Gallery de Imágenes
+    """
+    return render_to_response('gallery.html',context_instance=RequestContext(request))
+
 def index(request):
     """
        Información sobre el Juego
     """
+    if request.method == 'POST':
+        return entry(request)
     form = forms.LoginForm()
 
     return render_to_response('index.html',{'form': form},context_instance=RequestContext(request))

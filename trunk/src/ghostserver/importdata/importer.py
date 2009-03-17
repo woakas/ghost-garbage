@@ -28,9 +28,9 @@ addons=[
 #User's Grants first the name of the group, second an array with the permissions, third
 #an array with the actual urls that make the menu entries be visible.
 permissions=[
-	     #["instaladorMig",["instalar"],["Instalación|Realizar una Instalación"]],
-             #["supervisorInstalacionesMig",["instalar", "modificar_instalacion","eliminar_instalacion","reporte_instalacion"],["Instalación"]]
-             ]
+    ["Anonymus",["anonymus"],["Index","About","Login"]],
+    #["supervisorInstalacionesMig",["instalar", "modificar_instalacion","eliminar_instalacion","reporte_instalacion"],["Instalación"]]
+    ]
 
 if __name__ == '__main__':
     data=[converter, addons]

@@ -1,6 +1,7 @@
 {% extends "main_template.html" %}
-{% block maininfo %}
-<strong>Bienvenido a Ghost Garbage, favor ingrese su nombre y su usuario.</strong><br />
+{% block primaryContentRight %}
+<div>
+<h2>Login:</h2>
 
 <form method="post">
 <table>
@@ -8,4 +9,12 @@
 <tr><td colspan="2"><input type="submit" value="Ingresar">
 </table>
 </form>
+</div>
+{% endblock %}
+
+
+{% block secondaryContentLeft %}
+<span style="text-align: center;"><img src="/static/media/logogrup.png"  width="85%" height="85%">
+</span>
+
 {% endblock %}

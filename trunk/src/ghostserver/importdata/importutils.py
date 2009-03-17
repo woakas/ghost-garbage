@@ -88,16 +88,16 @@ def theperms(groups,funname="g1") :
     print "def %s():" % funname
     for group in groups:
         a="\tg=Group(name='%s')\n\tg.save()" % group[0]
-        for i in group[1]:
-            a+="\n\tg.permissions.add(Permission.objects.get(codename='%s'))" % i
+        #for i in group[1]:
+        #    a+="\n\tg.permissions.add(Permission.objects.get(codename='%s'))" % i
         if len(group[2]):
             a+="\n\tperf=Perfiles(grupo=g,descripcion='%s');perf.save()" % group[0]
             for i in group[2]:
                 tp=tuple(i.split("|"))
                 if len(tp)==1:
-                    a+="\n\tperf.menus.add(ItemMenu.objects.get(padre=None,name='%s'))" % tp
+                    a+="\n\tperf.menus.add(Menu.objects.get(padre=None,name='%s'))" % tp
                 else:
-                    a+="\n\tperf.menus.add(ItemMenu.objects.get(padre=ItemMenu.objects.get(name='%s'),name='%s'))" % tp
+                    a+="\n\tperf.menus.add(Menu.objects.get(padre=Menu.objects.get(name='%s'),name='%s'))" % tp
         print a
 
 

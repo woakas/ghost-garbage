@@ -6,7 +6,8 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
-import com.tutorial.*;
+
+import com.tesis.*;
 
 public class Pantalla extends MIDlet {
 	

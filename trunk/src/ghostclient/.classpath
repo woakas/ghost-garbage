@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src" />
-	<classpathentry kind="src" path="res" />
-	<classpathentry kind="con" path="J2MELIB" />
-	<classpathentry kind="lib"
-		path="C:/lib/nutiteq_maps_library_0.8.0_src_0/maps_lib-0.8.0.jar" />
-	<classpathentry kind="output" path="bin" />
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="J2MELIB"/>
+	<classpathentry kind="lib" path="C:/lib/nutiteq_maps_library_0.8.0_src_0/maps_lib-0.8.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

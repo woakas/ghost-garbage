@@ -26,7 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.databrowse',
-    'ghostserver.ghost_lbs'
+    'ghostserver.geolbs'
 #    'django.contrib.contenttypes',
 
 

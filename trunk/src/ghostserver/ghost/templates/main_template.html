@@ -53,6 +53,11 @@ window.attachEvent("onload", correctPNG);
         <div style="position:relative; z-index:1; width: 15em; float:left; margin-top:-2em; margin-right:-30em;margin-left:3em;"><img src="{{ MEDIA_URL|safe }}media/logo.png"></div>
           <h1>Ghost Garbage</h1>
           <h2>by Lodur and Woakas</h2>
+          <div class="subheader" >
+            {% if user.is_authenticated %}
+             <a href="{% url user_settings %}" title="{{ user.username }}">{{ user.username }}</a> | <a href="{% url auth_logout %}" class="logout" title="Salir">logout</a>
+            {% endif %}
+          </div>
         </div>
         
         <div id="menu">

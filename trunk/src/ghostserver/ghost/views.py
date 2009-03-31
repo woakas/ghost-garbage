@@ -3,6 +3,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required,user_passes_test
+from django.core.urlresolvers import reverse
+
 
 import settings
 from ghost import forms
@@ -48,10 +51,33 @@ def entry(request):
 
 
 
+def user(request):
+    """Opciones de Usuario
+    """
+    if request.user.is_authenticated():
+        return render_to_response('user.html',context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse('auth_login'))
+    
+
+
 def gallery(request):
     """Gallery de Imágenes
     """
     return render_to_response('gallery.html',context_instance=RequestContext(request))
+
+
+def devel(request):
+    """Devel 
+    """
+    return render_to_response('devel.html',context_instance=RequestContext(request))
+
+def about(request):
+    """About 
+    """
+    return render_to_response('about.html',context_instance=RequestContext(request))
+
+
 
 def index(request):
     """

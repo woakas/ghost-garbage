@@ -28,7 +28,7 @@ addons=[
 #User's Grants first the name of the group, second an array with the permissions, third
 #an array with the actual urls that make the menu entries be visible.
 permissions=[
-    ["Anonymus",["anonymus"],["Index","About","Login"]],
+    ["Anonymus",["anonymus"],["Index","About","Login|Registrar"]],
     #["supervisorInstalacionesMig",["instalar", "modificar_instalacion","eliminar_instalacion","reporte_instalacion"],["Instalación"]]
     ]
 

@@ -83,7 +83,8 @@ def menu(request):
         sub_men.insert(0,("activo",menu_stt))
     else:
         sub_men.insert(0,("",menu_stt))
-    
+
+        
     #print men,sub_men
     return {'menus':men, 'submenus':sub_men }
 

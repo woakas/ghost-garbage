@@ -4,6 +4,11 @@ from django.contrib.auth.models import User,Group
 from ghost.constsappli import *
 
 class Menu(models.Model) :
+    """Maneja los menus para la aplicacion,
+       aquellos menus que no tengan padre son aquellos que son raices y 
+       los menus que tengan padre son submenus ademas se tiene el atributo posicion
+       para determinar con que orden deben ir dentro de la aplicacion
+    """
     name = models.CharField(max_length=40)
     url = models.CharField(max_length=100, unique=True)
     desc = models.CharField(max_length=1000, null=True ,blank=True)
@@ -50,6 +55,7 @@ class Perfiles(models.Model) :
 
     def __unicode__(self):
         return u"%s" % (self.grupo)
+
 
 class Preferencias(models.Model) :
     nombre = models.CharField(max_length=100)

@@ -8,12 +8,15 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    (r'^'+settings.ROOT_PREFIX+'lbs/', include('ghostserver.geolbs.urls')),
-    (r'^'+settings.ROOT_PREFIX+'', include('ghostserver.ghost.urls')),
+    (r'^lbs/', include('ghostserver.geolbs.urls')),
+    (r'^', include('ghostserver.ghost.urls')),
 
 
-    # Uncomment the next line to enable the admin:
-    (r'^'+settings.ROOT_PREFIX+'admin/(.*)', admin.site.root),
+    # Descomente la siguiente linea si desea tener documentación sobre el aplicativo
+#    (r'^admin/doc/', include('django.contrib.admindocs.urls')), 
+    (r'^admin/(.*)', admin.site.root),
+    (r'^accounts/', include('registration.urls')),
+
 )
 
 

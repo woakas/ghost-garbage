@@ -1,4 +1,5 @@
 Index||Inicio donde se encontrara Información de noticias|1
-Login|login|Página para logearse dentro del sistema|2
-About|about|Información sobre|3
-Juego|game|Menú para el manejo de juegos y estadisticas de los mismos|4
+Lbs|lbs|Menú para el manejo de LBS|3
+Juego|game|Menú para el manejo de juegos|4
+About|about|Información sobre|5
+Login|accounts|Opciones del usuario|10

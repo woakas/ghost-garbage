@@ -78,6 +78,37 @@ select {
     text-decoration: none;
 }
 
+.subheader
+{
+    text-align: right;
+    color: #747474;
+    text-decoration:none;
+}
+
+.subheader a
+{
+    color: #747474;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+
+.subheader a:hover
+{
+    text-decoration: underline;
+}
+
+
+.submenu a{
+    /*font: 0.7em Tahoma, sans-serif;*/
+    font-size: 11px;
+    font-weight:bold;
+    color: #555050;
+    /*color:#604040;*/
+    text-decoration:none;
+}
+
+
 /* Menu */
 
 #menu

@@ -30,7 +30,6 @@ private Displayable next;
 private Image icon;
 private StringItem message;
 
-	
 	public HelloMap(MIDlet midlet, Display display, Displayable next ) {
 		this.display = display;
 		this.next = next;
@@ -38,13 +37,9 @@ private StringItem message;
 		menu=new Command("Menu",Command.BACK,2);
 		mapItem = new MapItem("Map", "tutorial", midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), 12);
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
-		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.UP);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
-		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.DOWN);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
-		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.LEFT);
 		mapItem.defineControlKey(ControlKeys.MOVE_RIGHT_KEY, Canvas.KEY_NUM6);
-		mapItem.defineControlKey(ControlKeys.MOVE_RIGHT_KEY, Canvas.RIGHT);
 		//define a Control Key para seleccionar un sitio 
 		mapItem.defineControlKey(ControlKeys.SELECT_KEY, -5);
 		
@@ -90,8 +85,8 @@ private StringItem message;
 	       if(System.getProperty("microedition.location.version")!= null){
 	    	   final LocationSource dataSource = new LocationAPIProvider(3000);
 	    	   try{
-	    		   final Image gpsPresentImage = Image.createImage("/presenteGps.png");
-	    		   final Image gpsConnectionLost = Image.createImage("/perdidaGps.png");
+	    		   final Image gpsPresentImage = Image.createImage("/banderinazul.png");
+	    		   final Image gpsConnectionLost = Image.createImage("/banderinrojo.png");
 	    		   final LocationMarker marker = new NutiteqLocationMarker(new PlaceIcon(gpsPresentImage, 4, 16),
 	    				   new PlaceIcon(gpsConnectionLost, 4, 16),3000, true);
 	    		   dataSource.setLocationMarker(marker);

@@ -28,3 +28,5 @@ def addAtributo(request):
 
     return render_to_response('geolbs.html',context_instance=RequestContext(request))
     
+
+

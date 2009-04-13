@@ -89,3 +89,14 @@ def index(request):
 
     return render_to_response('index.html',{'form': form},context_instance=RequestContext(request))
     
+
+
+
+def login_mobile(request):
+    response = HttpResponse()
+    if not request.user.is_authenticated():
+        response.status_code = 401
+        return response
+    
+    response.status_code = 200
+    return response

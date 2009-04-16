@@ -10,6 +10,7 @@ urlpatterns = patterns('ghostserver.ghost.views',
                        url(r'^login/$' , 'entry'),
                        url(r'^about/$' , 'about'),
                        url(r'^user/$' , 'about'),
+                       url(r'^accounts/profile/$' , 'devel'),
                        url(r'^accounts/$' , 'user', name="user_settings"),
                        url(r'^mobile/login$' , 'login_mobile', name="login_mobile"),
                        )

@@ -66,7 +66,7 @@ def gallery(request):
     """
     return render_to_response('gallery.html',context_instance=RequestContext(request))
 
-
+@login_required
 def devel(request):
     """Devel 
     """

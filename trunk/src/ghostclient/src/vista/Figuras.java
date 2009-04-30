@@ -13,7 +13,7 @@ public class Figuras extends CustomItem {
 	
 	protected Figuras(String nombre, Displayable d) {
 	super(nombre);
-		seth(d.getHeight());
+	    seth(d.getHeight());
 	    setw(d.getWidth());
 		try {
 			img = Image.createImage("/Fondo.png");
@@ -23,7 +23,7 @@ public class Figuras extends CustomItem {
 			e.printStackTrace();
 		}
 	}
-
+	
 	protected void paint(Graphics g, int w, int h) {
 		g.drawImage(img, 0, 0, Graphics.TOP|Graphics.LEFT);
 		g.drawImage(img1, 10, 0, Graphics.TOP|Graphics.LEFT);

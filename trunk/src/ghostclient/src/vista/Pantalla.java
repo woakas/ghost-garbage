@@ -6,13 +6,11 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
-
 import com.tesis.*;
 
 public class Pantalla extends MIDlet {
 	
 	int opcion;
-		
 	private Display p;
 	private Presentacion pres;
 	private Form f;
@@ -20,7 +18,7 @@ public class Pantalla extends MIDlet {
 	private HelloMap mapa;
 	private Ayuda ayuda;
 	private Informacion informacion;
-	private Image img, img1, img2;
+	private Image img, img1;
 	private Usuarios usuarios;
 			
 	public Pantalla() throws IOException {
@@ -29,16 +27,14 @@ public class Pantalla extends MIDlet {
 		p = Display.getDisplay(this);
 		pres = new Presentacion(this);
 		img = Image.createImage("/logogrup.png");
-		img1 = Image.createImage("/escobita.png");
-		img2 = Image.createImage("/fantasma.png");
+		img1 = Image.createImage("/cerrar.png");
 		intro = new Intro(p, pres, img, 5000);
 		mapa = new HelloMap((MIDlet)(this), p, pres);
-		usuarios = new Usuarios(p,pres,img1,img2,mapa);
+		usuarios = new Usuarios(p,pres,img1,mapa);
 		ayuda = new Ayuda(p, pres);
 		informacion = new Informacion(p, pres);
 	}
-	
-	
+		
 	public void getOpcion(int opcion) {
 		this.opcion = opcion;
 		if(opcion == 1){

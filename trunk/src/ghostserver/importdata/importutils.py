@@ -104,6 +104,8 @@ def theperms(groups,funname="g1") :
 
 
 def complete(data,permissions,additionallibs="""from ghost.models import *
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.sites.models import Site
 from django.contrib.auth.models import Group, Permission
 from django.contrib.gis.utils import LayerMapping
 import datetime

@@ -13,7 +13,9 @@ Los Servicios Basados en Localización buscan ofrecer un servicio personalizado 
 {% block secondaryContentRight %}
 <form method="post">
 
-{{ form }}
+<tr><th><label for="id_usuario">Usuario:</label></th><td><input id="id_usuario" type="text" name="usuario" maxlength="20" /></td></tr>
+
+<tr><th><label for="id_clave">Clave:</label></th><td><input id="id_clave" type="password" name="clave" maxlength="20" /></td></tr>
 <input type="submit" value="Ingresar">
 </form>
 <a style="font-size: 13px;"  href="{% url registration_register %}"> Crear una cuenta</a><br>

@@ -62,17 +62,6 @@ def user(request):
 
 
 
-def index(request):
-    """
-       Información sobre el Juego
-    """
-    if request.method == 'POST':
-        return entry(request)
-    form = forms.LoginForm()
-
-    return render_to_response('index.html',{'form': form},context_instance=RequestContext(request))
-    
-
 
 
 def login_mobile(request):

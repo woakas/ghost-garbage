@@ -1,0 +1,9 @@
+{% extends "main_template.html" %}
+{% block title %}
+{{ flatpage.title }}
+{% endblock %}
+
+{% block primaryContent %}
+<h2>{{ flatpage.title }}</h2><br />
+{{ flatpage.content }}
+{% endblock %}

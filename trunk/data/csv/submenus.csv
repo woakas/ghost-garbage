@@ -1,6 +1,6 @@
-Juego|Crear Juego|game/add|Adición de juegos|1
-Juego|Eliminar Juego|game/del|Eliminar Juego|2
-Index|Galería|index/gallery|Galería de imágenes|1
-Index|Devel|index/devel|Desarrolladores|2
-Login|Cambiar Contraseña|accounts/password/change|Cambiar Contraseña|1
-Login|Registrar|accounts/register|Registrarse en el sistema|2
+Juego|Crear Juego|game/addi/|Adición de juegos|1
+Juego|Eliminar Juego|game/del/|Eliminar Juego|2
+Index|Galería|index/gallery/|Galería de imágenes|1
+Index|Devel|index/devel/|Desarrolladores|2
+Login|Cambiar Contraseña|accounts/password/change/|Cambiar Contraseña|1
+Login|Registrar|accounts/register/|Registrarse en el sistema|2

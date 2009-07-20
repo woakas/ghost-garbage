@@ -61,23 +61,6 @@ def user(request):
     
 
 
-def gallery(request):
-    """Gallery de Imágenes
-    """
-    return render_to_response('gallery.html',context_instance=RequestContext(request))
-
-@login_required
-def devel(request):
-    """Devel 
-    """
-    return render_to_response('devel.html',context_instance=RequestContext(request))
-
-def about(request):
-    """About 
-    """
-    return render_to_response('about.html',context_instance=RequestContext(request))
-
-
 
 def index(request):
     """

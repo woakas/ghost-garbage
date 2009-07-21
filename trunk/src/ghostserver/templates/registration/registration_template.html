@@ -1,0 +1,22 @@
+{% extends "main_template.html" %}
+
+{% block primaryContentRight %}
+<h2>{% block nameRegistration %}{% endblock %}</h2>
+<p>{% block descriptionRegistration %}{% endblock %}</p>
+<form method="post" >
+<table>
+{{ form }}
+<tr><td colspan="2" style="text-align: right;"><input type="submit" value="{% block valueRegistration %}{% endblock %}"/></td></tr>
+</table>
+</form>
+{% block otrosRegistration %}
+{% endblock %}
+
+{% endblock %}
+
+{% block secondaryContentLeft %}
+<span style="text-align: center;"><img src="/static/media/logogrup.png"  width="85%" height="85%">
+</span>
+
+{% endblock %}
+

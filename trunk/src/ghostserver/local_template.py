@@ -15,7 +15,7 @@ MEDIA_ROOT =  ROOT_ROOT+'/media'
 CSS_ROOT = ROOT_ROOT+'/css'
 JS_ROOT = ROOT_ROOT+'/js'
 MEDIA_URL =   '/static/'
-LOG_FILE = "/tmp/djangoMig.log"
+LOG_FILE = "/tmp/djangoGhost.log"
 STATIC_MEDIA=True
 
 INSTALLED_APPS = (
@@ -60,7 +60,9 @@ ADMINS=ADMINS = (
                  'draco770@hotmail.com'),
                 )
 
+APPEND_SLASH=True
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-APPEND_SLASH=False
+

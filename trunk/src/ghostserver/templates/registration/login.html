@@ -1,20 +1,11 @@
-{% extends "main_template.html" %}
-{% block primaryContentRight %}
+{% extends "registration/registration_template.html" %}
 {% load i18n %}
-<h2>Login:</h2>
-<form action="" method="post">
-<table>
-{{ form }}
-<tr><td colspan="2"><input type="submit" value="{% trans 'Change my password' %}" /></td></tr>
-</table>
-</form>
+
+{% block nameRegistration %}Entrar:{% endblock %}
+{% block descriptionRegistration %}Ingrese su nombre de usuario y contraseña:{% endblock %}
+{% block valueRegistration %}{% trans 'Change my password' %}{% endblock %}
+
+{% block otrosRegistration %}
 <a style="font-size: 14px;"  href="{% url registration_register %}"> Crear una cuenta</a><br>
 <a style="font-size: 14px;"  href="{% url auth_password_reset %}"> Olvido su contraseña?</a>
 {% endblock %}
-
-{% block secondaryContentLeft %}
-<span style="text-align: center;"><img src="/static/media/logogrup.png"  width="85%" height="85%">
-</span>
-
-{% endblock %}
-

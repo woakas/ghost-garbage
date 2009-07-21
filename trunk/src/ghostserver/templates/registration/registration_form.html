@@ -1,17 +1,6 @@
-{% extends "main_template.html" %}
-{% block primaryContentRight %}
-<form method="post" action="">
-<table>
-{{ form }}
-</table>
-<input type="submit" />
-</form>
+{% extends "registration/registration_template.html" %}
+{% load i18n %}
 
-{% endblock %}
-
-{% block secondaryContentLeft %}
-<span style="text-align: center;"><img src="/static/media/logogrup.png"  width="85%" height="85%">
-</span>
-
-{% endblock %}
-
+{% block nameRegistration %}Nuevo Usuario:{% endblock %}
+{% block descriptionRegistration %}Por favor diligencie las siguientes opciones para crear un nuevo usuario{% endblock %}
+{% block valueRegistration %}Crear Usuario{% endblock %}

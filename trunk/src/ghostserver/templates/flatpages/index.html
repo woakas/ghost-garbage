@@ -11,7 +11,7 @@ Los Servicios Basados en Localización buscan ofrecer un servicio personalizado 
 </p>
 {% endblock %}
 {% block secondaryContentRight %}
-<form method="post">
+<form method="post" action="{% url login_entry %}">
 
 <tr><th><label for="id_usuario">Usuario:</label></th><td><input id="id_usuario" type="text" name="usuario" maxlength="20" /></td></tr>
 

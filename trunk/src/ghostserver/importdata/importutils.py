@@ -116,7 +116,8 @@ import datetime
     example add "from ghost.models import *"...
     http://code.djangoproject.com/wiki/InitialSQLDataDiangoORMWay
     Adding the data with python install.py"""
-    print """# -*- coding: utf-8 -*-
+    print """#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from os import environ
 environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
@@ -154,7 +155,13 @@ def addShape(mapp, *args, **kwargs):
 
 
         
-        
+
+
+def createMain():
+    print """\n\nif __name__ == '__main__':
+    makeitall()
+    g1()
+"""
                 
     
     

@@ -27,9 +27,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.databrowse',
     'django.contrib.flatpages',
-    'ghostserver.geolbs',
-    'ghostserver.ghost',
-    'ghostserver.registration',
+    'geolbs',
+    'ghost',
+    'registration',
 #    'django.contrib.admindocs',
 #    'django.contrib.contenttypes',
 
@@ -61,7 +61,6 @@ ADMINS=ADMINS = (
                 )
 
 APPEND_SLASH=True
-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

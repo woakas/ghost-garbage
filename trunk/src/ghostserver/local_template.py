@@ -10,7 +10,7 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 
 
 
-ROOT_ROOT='/home/woakas/personal/ghost/trunk/data/static'
+ROOT_ROOT='/home/woakas/Tesis/svn/trunk/data/static'
 MEDIA_ROOT =  ROOT_ROOT+'/media'
 CSS_ROOT = ROOT_ROOT+'/css'
 JS_ROOT = ROOT_ROOT+'/js'
@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.databrowse',
+    'django.contrib.flatpages',
     'ghostserver.geolbs',
     'ghostserver.ghost',
     'ghostserver.registration',
@@ -62,4 +63,4 @@ ADMINS=ADMINS = (
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+APPEND_SLASH=False

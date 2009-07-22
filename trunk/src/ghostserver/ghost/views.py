@@ -15,11 +15,17 @@ from ghost.constsappli import *
 
 
 
-@login_required
+
+
+
 def profile(request):
-    """Vista para el Profile"""
+    """Opciones de Usuario
+    """
+    if request.user.is_authenticated():
+        return render_to_response('user.html',context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect(reverse('auth_login'))
     
-    return render_to_response('user.html',context_instance=RequestContext(request))
 
 
 

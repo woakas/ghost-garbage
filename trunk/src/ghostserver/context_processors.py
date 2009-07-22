@@ -20,7 +20,8 @@ def menu(request):
     menus=set()
     submenus=set()
     
-    path=request.get_full_path().lstrip("/")
+    path=str(request.path).lstrip("/")
+    
     a=modelsGhost.Menu.objects.filter(url=path,padre__isnull=True)
     if a.count()>0:
         menu_stt=a[0]

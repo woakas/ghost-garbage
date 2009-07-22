@@ -47,7 +47,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'urls'
 
 
-LOGIN_URL=URL_PREFIX+'login/'
+LOGIN_URL=URL_PREFIX+'accounts/login/'
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
 "django.core.context_processors.debug",

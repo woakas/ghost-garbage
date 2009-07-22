@@ -3,12 +3,14 @@
 {% block primaryContentRight %}
 <h2>{% block nameRegistration %}{% endblock %}</h2>
 <p>{% block descriptionRegistration %}{% endblock %}</p>
+{% block formRegistration %}
 <form method="post" >
 <table>
 {{ form }}
 <tr><td colspan="2" style="text-align: right;"><input type="submit" value="{% block valueRegistration %}{% endblock %}"/></td></tr>
 </table>
 </form>
+{% endblock %}
 {% block otrosRegistration %}
 {% endblock %}
 

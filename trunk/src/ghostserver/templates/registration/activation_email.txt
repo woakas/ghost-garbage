@@ -1,1 +1,13 @@
-Please click here to activate your account: /accounts/activate/{{ activation_key }}/
+Está recibiendo este mensaje debido a que solicitó una cuenta en 
+para el sitio: {{ site_name }}
+
+Por favor, para terminar el registro vaya a la siguiente página, si usted no
+ha solicitado ningun registro haga caso omiso de este correo.
+
+{{ site }}{% url registration_activate activation_key %}
+
+
+¡Gracias por usar nuestro sitio!
+
+El equipo de {{ site_name }}
+

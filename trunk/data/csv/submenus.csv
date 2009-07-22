@@ -3,7 +3,9 @@ Index|Devel|index/devel/|Desarrolladores|2
 Sobre|Licencia|about/licence/|Licencia|1
 Usuario|Entrar|accounts/login/|Entrar en el sistema|1
 Usuario|Cambiar Contraseña|accounts/password/change/|Cambiar Contraseña|2
+Usuario|Contraseña lista|accounts/password/change/done/|Contraseña lista|2
 Usuario|Registrar|accounts/register/|Registrarse en el sistema|3
+Usuario|Registro Completo|accounts/register/complete/|Registro Completoa|3
 Usuario|Nueva Contraseña|accounts/password/reset/|Nuevo Contraseña|4
 Usuario|Salida|accounts/logout/|Salir|10
 Juego|Crear Juego|game/add/|Adición de Juegos|1

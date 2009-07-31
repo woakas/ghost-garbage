@@ -4,6 +4,15 @@ from django.contrib.gis import admin
 import settings 
 
 
+
+
+from django.contrib import databrowse
+from geolbs.models import Linea, Poligono
+
+databrowse.site.register(Linea)
+databrowse.site.register(Poligono)
+
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -15,6 +24,7 @@ urlpatterns = patterns('',
     # Descomente la siguiente linea si desea tener documentación sobre el aplicativo
 #    (r'^admin/doc/', include('django.contrib.admindocs.urls')), 
     (r'^admin/(.*)', admin.site.root),
+    (r'^databrowse/(.*)', databrowse.site.root),
     (r'^accounts/', include('registration.urls')),
 
 )

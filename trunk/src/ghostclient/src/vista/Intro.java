@@ -1,6 +1,11 @@
 package vista;
 import java.util.Timer;
-import javax.microedition.lcdui.*;
+
+import javax.microedition.lcdui.Canvas;
+import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 public final class Intro extends Canvas {
 	

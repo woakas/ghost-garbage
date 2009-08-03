@@ -11,9 +11,9 @@ public class Presentacion extends Canvas {
 	
 	private Image img, log1, log2,log3,log4;
 	private BotonIni bot;
-	Pantalla ref;
+	GhostGarbage ref;
 	
-	public Presentacion(Pantalla ref) {
+	public Presentacion(GhostGarbage ref) {
 		
 		this.ref = ref;
 		bot = new BotonIni("Comenzar", this);

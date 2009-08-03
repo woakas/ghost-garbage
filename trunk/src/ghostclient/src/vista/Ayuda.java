@@ -1,9 +1,9 @@
 package vista;
+import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
@@ -33,7 +33,7 @@ public final class Ayuda extends Canvas implements CommandListener{
 	    Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 		g.setFont(fuente);
 		g.setColor(255, 255, 255);
-		g.drawString ("Hola Mundo. asdqwe\nuiopasdfghjkl", 0 , 0, Graphics.LEFT | Graphics.TOP);
+		g.drawString ("Hola Mundo.", 0 , 0, Graphics.LEFT | Graphics.TOP);
 		}
 
 		public void commandAction(Command c, Displayable s) {

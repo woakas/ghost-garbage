@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="con" path="J2MELIB"/>
-	<classpathentry kind="lib" path="C:/lib/nutiteq_maps_library_0.8.0_src_0/maps_lib-0.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maps_lib-0.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Archivos de programa/Java/jre1.6.0_07/lib/rt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

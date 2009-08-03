@@ -2,6 +2,7 @@ package Logica;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 

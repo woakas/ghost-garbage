@@ -1,27 +1,29 @@
 package vista;
 
 import java.io.IOException;
+
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
-import com.tesis.*;
 
-public class Pantalla extends MIDlet {
+import com.tesis.Map;
+
+public class GhostGarbage extends MIDlet {
 	
 	int opcion;
 	private Display p;
 	private Presentacion pres;
 	private Form f;
 	private Intro intro;
-	private HelloMap mapa;
+	private Map mapa;
 	private Ayuda ayuda;
 	private Informacion informacion;
 	private Image img, img1;
 	private Usuarios usuarios;
 			
-	public Pantalla() throws IOException {
+	public GhostGarbage() throws IOException {
 		f = new Form("Ghost Garbage");
 		f.append(new BotonIni("Inicio", f));
 		p = Display.getDisplay(this);
@@ -29,7 +31,7 @@ public class Pantalla extends MIDlet {
 		img = Image.createImage("/logogrup.png");
 		img1 = Image.createImage("/cerrar.png");
 		intro = new Intro(p, pres, img, 5000);
-		mapa = new HelloMap((MIDlet)(this), p, pres);
+		mapa = new Map((MIDlet)(this), p, pres);
 		usuarios = new Usuarios(p,pres,img1,mapa);
 		ayuda = new Ayuda(p, pres);
 		informacion = new Informacion(p, pres);

@@ -1,53 +1,66 @@
 package com.tesis;
 
-import javax.microedition.midlet.MIDlet;
-//import javax.microedition.midlet.MIDletStateChangeException;
-import javax.microedition.lcdui.*;
-import com.nutiteq.MapItem;
-//import com.nutiteq.maps.*;
-import com.nutiteq.components.WgsPoint;
-import com.nutiteq.controls.ControlKeys;
 import java.io.IOException;
-import com.nutiteq.components.Place;
+
+import javax.microedition.lcdui.Canvas;
+import javax.microedition.lcdui.Command;
+import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.StringItem;
+import javax.microedition.midlet.MIDlet;
+
+import com.nutiteq.MapItem;
 import com.nutiteq.components.Line;
 import com.nutiteq.components.LineStyle;
+import com.nutiteq.components.Place;
+import com.nutiteq.components.PlaceIcon;
+import com.nutiteq.components.WgsPoint;
+import com.nutiteq.controls.ControlKeys;
+import com.nutiteq.kml.KmlService;
+import com.nutiteq.kml.KmlUrlReader;
 import com.nutiteq.listeners.PlaceListener;
-//KML
-import com.nutiteq.kml.*;
-//paquetes de localizacion
 import com.nutiteq.location.LocationMarker;
 import com.nutiteq.location.LocationSource;
-import com.nutiteq.location.providers.LocationAPIProvider;
 import com.nutiteq.location.NutiteqLocationMarker;
-import com.nutiteq.components.PlaceIcon; 
+import com.nutiteq.location.providers.LocationAPIProvider;
 
-public class HelloMap  implements CommandListener,PlaceListener{
+public class Map  implements CommandListener,PlaceListener{
 private Form mMainForm;
 private MapItem mapItem;
-private Command regresar, menu;
+private Command regresar, menu, arrojar, poder;
 private Display display;
 private Displayable next;
 private Image icon;
 private StringItem message;
+private static int zoom=12;
 
-	public HelloMap(MIDlet midlet, Display display, Displayable next ) {
+	public Map(MIDlet midlet, Display display, Displayable next ) {
 		this.display = display;
 		this.next = next;
-		regresar=new Command("Regresar",Command.EXIT,1);
-		menu=new Command("Menu",Command.BACK,2);
-		mapItem = new MapItem("Map", "tutorial", midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), 12);
+		mapItem = new MapItem("Mapa", "Tesis", midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom);
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
 		mapItem.defineControlKey(ControlKeys.MOVE_RIGHT_KEY, Canvas.KEY_NUM6);
+		mapItem.defineControlKey(ControlKeys.SELECT_KEY, Canvas.KEY_POUND);
+		mapItem.defineControlKey(ControlKeys.SELECT_KEY, Canvas.KEY_STAR);
 		//define a Control Key para seleccionar un sitio 
 		mapItem.defineControlKey(ControlKeys.SELECT_KEY, -5);
 		
+		menu=new Command("Menu Principal",Command.EXIT,2);
+		regresar=new Command("Regresar",Command.OK,1);
+		poder=new Command("Poder",Command.OK,1);
+		arrojar=new Command("Arrojar",Command.OK,1);
 		mMainForm =new Form ("Ghost Garbage");
-		//mMainForm.append(new StringItem(null, "Hello, map!"));
-		mMainForm.append(mapItem);
+		mMainForm.append(mapItem);		
 		mMainForm.addCommand(menu);
 		mMainForm.addCommand(regresar);
+		mMainForm.addCommand(arrojar);
+		mMainForm.addCommand(poder);
 		mMainForm.setCommandListener(this);
 		mapItem.startMapping();
 		message = new StringItem("","");
@@ -72,14 +85,20 @@ private StringItem message;
 				//	new WgsPoint(-74.13538813591003, 4.630740894173603),
 				//	new WgsPoint(-74.13138813591003, 4.631740894173603),
 			};
-	       
-	       final Line line = new Line(linePoints, new LineStyle(0xFF0000, 5));
+			
+		   final Line line = new Line(linePoints, new LineStyle(0xFF0000, 5));
 	       mapItem.addLine(line);
 	       
 	       //definir la clase de escucha para los Places
 	       mapItem.setPlaceListener(this);
+	       
 	       //adicionar Layer KML al mapa con Panoramio
-	       mapItem.addKmlService(new KmlUrlReader("http://www.panoramio.com/panoramio.kml?LANG=en_US.utf8",true));
+	       //prueba 
+	       //KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/featureserver/prueba.kml",true);
+	       KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
+	       //mapItem.addKmlService(new KmlUrlReader("http://map.elphel.com/Elphel_Cameras.kml",true));
+	       //mapItem.addKmlService(new KmlUrlReader("http://www.panoramio.com/panoramio.kml?LANG=en_US.utf8",true));
+	       mapItem.addKmlService(pp);
 	       
 	       //mostrar Localizacion gps
 	       if(System.getProperty("microedition.location.version")!= null){
@@ -110,14 +129,26 @@ private StringItem message;
 	}
 	
 
-	public void commandAction (Command c, Displayable s){
-		if (c==menu){
-			System.out.println("Sirve");	
-		}
+	public void commandAction (Command c, Displayable d){
+		if(c==menu){
+			display.setCurrent(next); 			
+		} 
+		
 		else if (c==regresar){
-			display.setCurrent(next); 
+			//zoom = 2;
+			System.out.println("Menu Regresar");
+			KmlService kk[]= new KmlService[mapItem.getKmlServices().length];
+			for (int i=0; i < mapItem.getKmlServices().length; i ++){
+				kk [i]= mapItem.getKmlServices()[i]; 				
+			}
+			for (int i=0; i < kk.length; i ++){
+				mapItem.removeKmlService(kk[i]);
+			}
+			for (int i=0; i < kk.length; i ++){
+				mapItem.addKmlService(kk[i]);
+			}
 		}		
-}
+	} 
 	public Form call(){
 		return mMainForm;
 		

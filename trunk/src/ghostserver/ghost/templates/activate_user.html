@@ -1,0 +1,20 @@
+{% extends "main_template.html" %}
+
+{% block primaryContentRight %}
+<h2>Verificación</h2>
+<p>Por favor para terminar de validar su usario complete la siguiente información</p>
+<form method="post" >
+<table>
+{{ form }}
+<tr><td colspan="2" style="text-align: right;"><input type="submit" value="Activar Cuenta"/></td></tr>
+</table>
+</form>
+
+{% endblock %}
+
+{% block secondaryContentLeft %}
+<span style="text-align: center;"><img src="/static/media/logogrup.png"  width="85%" height="85%">
+</span>
+
+{% endblock %}
+

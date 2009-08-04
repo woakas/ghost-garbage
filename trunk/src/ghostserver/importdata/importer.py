@@ -30,6 +30,7 @@ addons=[
 #an array with the actual urls that make the menu entries be visible.
 permissions=[
     ["Anonymus",["anonymus"],["Index","Sobre","Usuario|Registrar","Usuario|Entrar","Usuario|Nueva Contraseña"]],
+    ["Jugador",["jugador"],["Index","Sobre","Usuario|Cambiar Contraseña","Usuario|Salida","Juego"]],
     #["supervisorInstalacionesMig",["instalar", "modificar_instalacion","eliminar_instalacion","reporte_instalacion"],["Instalación"]]
     ]
 

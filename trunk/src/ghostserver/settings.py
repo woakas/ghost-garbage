@@ -48,6 +48,7 @@ ROOT_URLCONF = 'urls'
 
 
 LOGIN_URL=URL_PREFIX+'accounts/login/'
+LOGIN_REDIRECT_URL=URL_PREFIX+"accounts/"
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
 "django.core.context_processors.debug",
@@ -56,3 +57,6 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
 "context_processors.menu",
 "context_processors.cfg"
 )
+
+
+

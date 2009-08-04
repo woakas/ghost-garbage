@@ -27,21 +27,24 @@ class Menu(models.Model) :
 class Personas(models.Model) :
     nombre = models.CharField(max_length=80)
     apellidos = models.CharField(max_length=40)
-    docid = models.CharField(max_length=30)
-    correo = models.CharField(max_length=100, blank = True )
-    movil = models.CharField(max_length=100, blank =True )
-    telefono = models.CharField(max_length=50, blank = True )
-    user = models.ForeignKey(User,null= True)
+    movil = models.CharField(max_length=100, blank =True,null=True)
+    telefono = models.CharField(max_length=50, blank = True, null=True)
+    url = models.URLField(blank=True,null=True)
+    user = models.ForeignKey(User)
     foto = models.ImageField(upload_to='images/people',blank=True)
     sexo = models.IntegerField(choices=CHOICES_TYPE_SEX)
     menus = models.ManyToManyField(Menu,blank=True)
 
     class Meta:
         verbose_name_plural='Personas'
-        
+    
+
+    def getCorreo(self):
+        return self.user.email
+    
 
     def __unicode__(self):
-        return u"%s %s [%s]" % (self.nombre,self.apellidos,self.docid) 
+        return u"%s %s [%s]" % (self.nombre,self.apellidos,self.user) 
   
 
 class Perfiles(models.Model) :

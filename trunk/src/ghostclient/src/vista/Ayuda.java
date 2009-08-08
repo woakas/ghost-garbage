@@ -37,13 +37,11 @@ public final class Ayuda extends Canvas implements CommandListener{
 		}
 
 		public void commandAction(Command c, Displayable s) {
-			if (c==seguir){
-				System.out.println("Sirve");	
+			if (c==seguir){		
 			}
 			else if (c==regresar){
 				display.setCurrent(next); 
-			}
-			display.setCurrent(this); 			
+			} 			
 		}
 	
 }

@@ -66,6 +66,5 @@ public class Usuarios extends Form implements CommandListener {
 		else if (co==regresar){
 			display.setCurrent(next); 
 		}
-		display.setCurrent(this); 	
 	}
 }

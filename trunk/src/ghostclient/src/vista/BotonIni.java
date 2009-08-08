@@ -49,9 +49,10 @@ public class BotonIni extends CustomItem {
 	protected void paint(Graphics g, int w, int h) {
 		
 		if(seleccionador){
-			g.setColor(55, 55, 55);
+			g.setColor(200, 200, 200);
 			g.fillRoundRect(x-17, (y+selec)-3, w+10, alto+7, 20, 45);
 		}
+		
 		g.fillRoundRect(x-15, y, w+10, alto, 20, 45);
 		g.setColor(90, 90, 90);
 		g.fillRoundRect(x-14, y+1, w+10, alto, 20, 45);

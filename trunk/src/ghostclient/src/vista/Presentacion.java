@@ -9,7 +9,7 @@ import javax.microedition.lcdui.Image;
 
 public class Presentacion extends Canvas {
 	
-	private Image img, log1, log2,log3,log4;
+	private Image log1, log2,log3,log4;
 	private BotonIni bot;
 	GhostGarbage ref;
 	
@@ -18,7 +18,6 @@ public class Presentacion extends Canvas {
 		this.ref = ref;
 		bot = new BotonIni("Comenzar", this);
 		try {
-			img = Image.createImage("/negro.jpg");
 			log1 = Image.createImage("/logoj.png");
 			log2 = Image.createImage("/info.png");
 			log3 = Image.createImage("/ayuda.png");
@@ -30,7 +29,10 @@ public class Presentacion extends Canvas {
 
 	protected void paint(Graphics g) {
 		
-		g.drawImage(img, 0, 0, Graphics.TOP|Graphics.LEFT);
+		
+		g.setColor(0,0,0);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
 		
 		Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 		g.setFont(fuente);
@@ -74,10 +76,10 @@ public class Presentacion extends Canvas {
 		switch (key) {
 		case Canvas.DOWN:
 			if(bot.selec<=60){
-				System.out.println("opcion: "+ bot.opcion);
+				//System.out.println("opcion: "+ bot.opcion);
 				bot.selec = bot.selec+30;
 				bot.opcion = bot.opcion+1;
-				System.out.println("opcion: "+ bot.opcion);
+				//System.out.println("opcion: "+ bot.opcion);
 			}
 			repaint();
 			break;
@@ -86,7 +88,7 @@ public class Presentacion extends Canvas {
 			if(bot.selec>= 30){
 				bot.selec = bot.selec-30;
 				bot.opcion = bot.opcion-1;
-				System.out.println("opcion: "+ bot.opcion);
+				//System.out.println("opcion: "+ bot.opcion);
 			}
 			repaint();
 			break;

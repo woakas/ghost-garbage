@@ -136,7 +136,6 @@ private static int zoom=12;
 		
 		else if (c==regresar){
 			//zoom = 2;
-			System.out.println("Menu Regresar");
 			KmlService kk[]= new KmlService[mapItem.getKmlServices().length];
 			for (int i=0; i < mapItem.getKmlServices().length; i ++){
 				kk [i]= mapItem.getKmlServices()[i]; 				

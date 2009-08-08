@@ -9,14 +9,13 @@ import javax.microedition.lcdui.Image;
 
 public class Figuras extends CustomItem {
 	private int w,h;
-	private Image img,img1,img2;
+	private Image img1,img2;
 	
 	protected Figuras(String nombre, Displayable d) {
 	super(nombre);
 	    seth(d.getHeight());
 	    setw(d.getWidth());
 		try {
-			img = Image.createImage("/Fondo.png");
 			img1 = Image.createImage("/escobita.png");
 			img2 = Image.createImage("/fantasma.png");
 			} catch (IOException e) {
@@ -25,7 +24,8 @@ public class Figuras extends CustomItem {
 	}
 	
 	protected void paint(Graphics g, int w, int h) {
-		g.drawImage(img, 0, 0, Graphics.TOP|Graphics.LEFT);
+		g.setColor(0,0,0);
+		g.fillRect(0, 0, w, h);
 		g.drawImage(img1, 10, 0, Graphics.TOP|Graphics.LEFT);
 		g.drawImage(img2, w/2+10, 0, Graphics.TOP|Graphics.LEFT);
 	}

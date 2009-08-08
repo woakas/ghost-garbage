@@ -33,7 +33,6 @@ public class Informacion extends Form implements CommandListener{
 		}
 		else if (c==regresar){
 			display.setCurrent(next); 
-		}
-		display.setCurrent(this); 			
+		} 			
 	}
 }

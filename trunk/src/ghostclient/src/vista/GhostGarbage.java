@@ -40,7 +40,6 @@ public class GhostGarbage extends MIDlet {
 	public void getOpcion(int opcion) {
 		this.opcion = opcion;
 		if(opcion == 1){
-			//p.setCurrent(mapa.call());
 			p.setCurrent(usuarios);
 		}
 		if(opcion == 2){

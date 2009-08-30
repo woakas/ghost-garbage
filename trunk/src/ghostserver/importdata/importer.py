@@ -17,6 +17,7 @@ converter=[
 ("SubMenus","submenus.csv","pa=Menu.objects.get(name='%s')","Menu(name='%s',url='%s',desc='%s',padre=pa,posicion=%s)",[0],1),
 ("Preferencias","preferencias.csv","","Preferencias(nombre='%s',descripcion='%s')"),
 ("FlatPages","flatpages.csv","s=Site.objects.get(id=SITE_ID)","s.flatpage_set.create(url='%s',title='%s',template_name='%s',registration_required=%s)"),
+#("shape","country.shp","Poligono","{'nombre':'CNTRY_NAME','tipolugar':{'nombre':'TIPOLUGAR'},'dentrode':{'nombre':'PLANETA'}}"),
 ]
 
 

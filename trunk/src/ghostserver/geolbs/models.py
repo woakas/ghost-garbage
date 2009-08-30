@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import User,Group
 from django.contrib.gis.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-#from ghost_lbs.constsappli import *
-
 
 
 class TiposLugar(models.Model) :
@@ -91,33 +88,25 @@ class Linea(models.Model):
             return u"%s" % (', '.join(map(lambda x: x.__unicode__(), lug)))
 
 
-class Atributo(models.Model):
-    nombre=models.CharField(max_length=50)
-    
-    class Meta:
-        verbose_name_plural='Atributos'
 
-
-    def __unicode__(self):
-        return u"%s" % (self.nombre)
-
-
-class ClaseDeServicio(models.Model):
+class TypesService(models.Model):
+    """Tipos de Servicio asiciado directamente a la lógica del como
+       funciona el servicio
+    """
     nombre = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=100, blank=True )
+    logica = models.TextField()
     
     class Meta:
-        verbose_name_plural='Clases de Servicio'
+        verbose_name_plural='Tipos de Servicio'
 
     def __unicode__(self):
         return u"%s" % (self.nombre)
 
 
-class Servicio(models.Model):
-    tipo =models.ForeignKey(ClaseDeServicio)
-    atributos =models.ManyToManyField(Atributo)
+class Service(models.Model):
+    tipo =models.ForeignKey(TypesService)
     lugar =models.ForeignKey(Lugares)
-    
     
     class Meta:
         verbose_name_plural='Servicios'

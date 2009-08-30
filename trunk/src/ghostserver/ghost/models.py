@@ -72,7 +72,7 @@ class Preferencias(models.Model) :
 
 
 class PreferenciasUsuarios(models.Model) :
-    usuario = models.ForeignKey(User)
+    usuario = models.ForeignKey(Personas)
     valor = models.CharField(max_length=200, null=True )
     preferencia = models.ForeignKey(Preferencias)
 

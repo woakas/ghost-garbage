@@ -1,0 +1,3 @@
+Jugador|Tipo de feature que solo puede tenerla un jugador
+Service|Tipo de feature que solo puede estar como servicio
+Service_Jugador|Tipo de feature que puede ser jugador o servicio

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-fr django.db import models
+from django.db import models
 from ghost import models as ghostModels
 from geolbs import models as geolbsModels
 from django.contrib.contenttypes import generic
@@ -15,10 +15,10 @@ class Juego(models.Model):
     
 
     class Meta:
-        verbose_name_plural='Features del Juego'
+        verbose_name_plural='Juegos'
     
     def __unicode__(self):
-        return u"%s" % (self.nombre)
+        return u"%s" % (self.name)
 
 
 
@@ -30,6 +30,7 @@ class Jugador(models.Model) :
     nickname = models.CharField(max_length=40,blank=True,null=True)
     persona = models.ForeignKey(ghostModels.Personas)
     juego = models.ForeignKey(Juego)
+    position = models.ForeignKey(geolbsModels.Punto)
     
 
     class Meta:
@@ -49,6 +50,7 @@ class TypesFeatures(models.Model):
 
     """
     nombre = models.CharField(max_length=30)
+    descripcion = models.TextField(blank=True,null=True)
     
     class Meta:
         verbose_name_plural='Tipos de Features'

@@ -43,6 +43,9 @@ class Personas(models.Model) :
         return self.user.email
     
 
+    #def setActivo(self,jugador):
+        
+
     def __unicode__(self):
         return u"%s %s [%s]" % (self.nombre,self.apellidos,self.user) 
   

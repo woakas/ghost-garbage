@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'geolbs',
     'ghost',
+    'garbage',
     'registration',
 #    'django.contrib.admindocs',
 #    'django.contrib.contenttypes',
@@ -57,7 +58,7 @@ ADMINS=ADMINS = (
 		('Andres Angulo', 
 		'woakas@gmail.com'),
 		('Diego Cordero',
-                 'draco770@hotmail.com'),
+                 'draco770@gmail.com'),
                 )
 
 APPEND_SLASH=True

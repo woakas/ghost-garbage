@@ -94,7 +94,7 @@ class TypesService(models.Model):
        funciona el servicio
     """
     nombre = models.CharField(max_length=30)
-    descripcion = models.CharField(max_length=100, blank=True )
+    descripcion = models.CharField(max_length=100, blank=True, null=True)
     logica = models.TextField()
     
     class Meta:

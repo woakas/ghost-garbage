@@ -51,9 +51,9 @@ public class Usuarios extends Form implements CommandListener {
 		if (co==ingresar){
 			tm = new Timer();
 			pr = new Progreso(load);
-			tm.scheduleAtFixedRate(pr, 0, 500);
+			tm.scheduleAtFixedRate(pr, 0, 800);
 			//System.out.println("prueba " +ConnectHttp.getUrl("http://dev.ghost.webhop.org/mobile/login","ghost","garbage"));
-			if (ConnectHttp.getUrl("http://dev.ghost.webhop.org/mobile/login",usuario.getString(),password.getString()) == null){
+			if (ConnectHttp.getUrl("http://ghost.webhop.org/mobile/login",usuario.getString(),password.getString()) == null){
 				System.out.println("prueba1 " +ConnectHttp.getUrl("http://dev.ghost.webhop.org/mobile/login"));
 				display.setCurrent(alert);
 				display.vibrate(2);

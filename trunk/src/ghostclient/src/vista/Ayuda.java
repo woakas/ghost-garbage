@@ -1,47 +1,34 @@
 package vista;
-import javax.microedition.lcdui.Canvas;
+
+import java.io.IOException;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Font;
-import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.TextField;
 
-
-public final class Ayuda extends Canvas implements CommandListener{
-	
+public class Ayuda extends Form implements CommandListener {
 	private Display display;
 	private Displayable next;
-	private Command seguir, regresar;
-	
-	
-	public Ayuda(Display display, Displayable next) {
-	seguir=new Command("Seguir",Command.SCREEN,1);
-	regresar=new Command("Regresar",Command.BACK,2);
-	this.display = display;
+	private TextField ayuda;
+	private Command regresar;
+			
+	public Ayuda (Display display, Displayable next) throws IOException{
+	super("Ayuda");
+	ayuda= new TextField("Usuario","",30,TextField.ANY);
+	regresar=new Command("Regresar",Command.BACK,1);
+	append(new AyudaFiguras(null, this));
+	append(ayuda);
 	this.next = next;
-	display.setCurrent(this);
-	addCommand(seguir);
+	this.display = display;
 	addCommand(regresar);
 	setCommandListener(this);
-}
+	}
 	
-		
-		protected void paint(Graphics g) {
-		g.setColor(125, 125, 125);
-	    g.fillRect (0, 0, getWidth(), getHeight()); 
-	    Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
-		g.setFont(fuente);
-		g.setColor(255, 255, 255);
-		g.drawString ("Hola Mundo.", 0 , 0, Graphics.LEFT | Graphics.TOP);
+	public void commandAction(Command co, Displayable d){
+		if (co==regresar){
+			display.setCurrent(next); 
 		}
-
-		public void commandAction(Command c, Displayable s) {
-			if (c==seguir){		
-			}
-			else if (c==regresar){
-				display.setCurrent(next); 
-			} 			
-		}
-	
+	}
 }

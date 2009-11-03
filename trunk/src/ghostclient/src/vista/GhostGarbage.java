@@ -28,6 +28,7 @@ public class GhostGarbage extends MIDlet {
 		f.append(new BotonIni("Inicio", f));
 		p = Display.getDisplay(this);
 		pres = new Presentacion(this);
+        pres.setFullScreenMode(true);
 		img = Image.createImage("/logogrup.png");
 		img1 = Image.createImage("/cerrar.png");
 		intro = new Intro(p, pres, img, 5000);

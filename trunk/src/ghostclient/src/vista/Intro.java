@@ -16,6 +16,7 @@ public final class Intro extends Canvas {
 	private int dismissTime;
 
 	public Intro(Display display, Displayable next, Image image,int dismissTime) {
+		setFullScreenMode(true);
 		timer = new Timer();
 		this.display = display;
 		this.next = next;

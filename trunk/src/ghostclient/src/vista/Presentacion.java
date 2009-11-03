@@ -14,7 +14,7 @@ public class Presentacion extends Canvas {
 	GhostGarbage ref;
 	
 	public Presentacion(GhostGarbage ref) {
-		
+        setFullScreenMode(true);
 		this.ref = ref;
 		bot = new BotonIni("Comenzar", this);
 		try {
@@ -28,20 +28,14 @@ public class Presentacion extends Canvas {
 	}
 
 	protected void paint(Graphics g) {
-		
-		
 		g.setColor(0,0,0);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
-		
 		Font fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
 		g.setFont(fuente);
 		g.setColor(90, 90, 90);
 		g.drawString("Ghost Garbage",getWidth() / 4 , 20, Graphics.TOP|Graphics.LEFT);
-		
 		g.setColor(255, 255, 255);
 		g.drawString("Ghost Garbage", getWidth() / 4 +2, 22, Graphics.TOP|Graphics.LEFT);
-		
 		fuente = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
 		g.setFont(fuente);
 		bot.paint(g, getWidth(), getHeight());
@@ -60,40 +54,23 @@ public class Presentacion extends Canvas {
 		}
 	}
 	public void keyPressed(int keyCode) {
-		
-		switch (keyCode) {
-		case -5:
-			
+		switch (getGameAction(keyCode)) {
+		case FIRE:
 			ref.getOpcion(bot.opcion);
-			repaint();
 			break;
-		default:
-			break;
-		}
-		
-		int key = getGameAction(keyCode);
-		
-		switch (key) {
 		case Canvas.DOWN:
 			if(bot.selec<=60){
-				//System.out.println("opcion: "+ bot.opcion);
 				bot.selec = bot.selec+30;
 				bot.opcion = bot.opcion+1;
-				//System.out.println("opcion: "+ bot.opcion);
 			}
-			repaint();
-			break;
-			
+			break;			
 		case Canvas.UP:
 			if(bot.selec>= 30){
 				bot.selec = bot.selec-30;
 				bot.opcion = bot.opcion-1;
-				//System.out.println("opcion: "+ bot.opcion);
 			}
-			repaint();
 			break;
-
 		}
-
+		repaint();
 	}
 }

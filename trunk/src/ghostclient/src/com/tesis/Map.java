@@ -35,19 +35,20 @@ private Command regresar, menu, arrojar, poder;
 private Display display;
 private Displayable next;
 private Image icon;
+private String key ="fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 private StringItem message;
-private static int zoom=12;
+private static int zoom=17;
 
 	public Map(MIDlet midlet, Display display, Displayable next ) {
 		this.display = display;
 		this.next = next;
-		mapItem = new MapItem("Mapa", "Tesis", midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom);
+		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom);
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
 		mapItem.defineControlKey(ControlKeys.MOVE_RIGHT_KEY, Canvas.KEY_NUM6);
-		mapItem.defineControlKey(ControlKeys.SELECT_KEY, Canvas.KEY_POUND);
-		mapItem.defineControlKey(ControlKeys.SELECT_KEY, Canvas.KEY_STAR);
+		mapItem.defineControlKey(ControlKeys.ZOOM_IN_KEY, Canvas.KEY_POUND);
+		mapItem.defineControlKey(ControlKeys.ZOOM_OUT_KEY, Canvas.KEY_STAR);
 		//define a Control Key para seleccionar un sitio 
 		mapItem.defineControlKey(ControlKeys.SELECT_KEY, -5);
 		

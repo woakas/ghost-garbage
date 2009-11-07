@@ -18,6 +18,7 @@ import com.nutiteq.components.Line;
 import com.nutiteq.components.LineStyle;
 import com.nutiteq.components.Place;
 import com.nutiteq.components.PlaceIcon;
+import com.nutiteq.components.WgsBoundingBox;
 import com.nutiteq.components.WgsPoint;
 import com.nutiteq.controls.ControlKeys;
 import com.nutiteq.kml.KmlUrlReader;
@@ -37,21 +38,19 @@ private Image icon;
 private String key ="fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 private StringItem message;
 private static int zoom=17;
-KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
+KmlUrlReader pp;
 
 	public Map(MIDlet midlet, Display display, Displayable next ) {
 		this.display = display;
 		this.next = next;
-		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom){
-			public void setMiddlePoint(double lon, double lat, int zoom){
-				super.setMiddlePoint(lon, lat, zoom);
-				System.out.println("Paso por aqui  :D");
-			}
-			public void setMiddlePoint(WgsPoint wgs, int zoom){
-				super.setMiddlePoint(wgs, zoom);
-				System.out.println("Paso por aqui wgs :D");
+		pp = new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true){
+			public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom){
+				System.out.println("Paso por aca");
+				return true;
 			}
 		};
+		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom);
+		mapItem.addKmlService(pp);
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
@@ -112,12 +111,12 @@ KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserv
 	       
 	       //mostrar Localizacion gps
 	       if(System.getProperty("microedition.location.version")!= null){
-	    	   final LocationSource dataSource = new LocationAPIProvider(3000);
+	    	   final LocationSource dataSource = new LocationAPIProvider(5000);
 	    	   try{
 	    		   final Image gpsPresentImage = Image.createImage("/banderinazul.png");
 	    		   final Image gpsConnectionLost = Image.createImage("/banderinrojo.png");
 	    		   final LocationMarker marker = new NutiteqLocationMarker(new PlaceIcon(gpsPresentImage, 4, 16),
-	    				   new PlaceIcon(gpsConnectionLost, 4, 16),3000, true);
+	    				   new PlaceIcon(gpsConnectionLost, 4, 16),0, true);
 	    		   dataSource.setLocationMarker(marker);
 	    		   mapItem.setLocationSource(dataSource);
 	    		   } catch (final IOException e){}
@@ -153,7 +152,6 @@ KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserv
 		else if (c==arrojar){
 			//	KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
 				mapItem.addKmlService(pp);
-				mapItem.needRepaint(true);
 			}
 		else if (c==poder){
 			mapItem.removeKmlService(pp);

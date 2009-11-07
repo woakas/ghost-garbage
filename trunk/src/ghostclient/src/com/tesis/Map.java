@@ -20,7 +20,6 @@ import com.nutiteq.components.Place;
 import com.nutiteq.components.PlaceIcon;
 import com.nutiteq.components.WgsPoint;
 import com.nutiteq.controls.ControlKeys;
-import com.nutiteq.kml.KmlService;
 import com.nutiteq.kml.KmlUrlReader;
 import com.nutiteq.listeners.PlaceListener;
 import com.nutiteq.location.LocationMarker;
@@ -38,11 +37,21 @@ private Image icon;
 private String key ="fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 private StringItem message;
 private static int zoom=17;
+KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
 
 	public Map(MIDlet midlet, Display display, Displayable next ) {
 		this.display = display;
 		this.next = next;
-		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom);
+		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(-74.09626007080078,4.652224439717772), zoom){
+			public void setMiddlePoint(double lon, double lat, int zoom){
+				super.setMiddlePoint(lon, lat, zoom);
+				System.out.println("Paso por aqui  :D");
+			}
+			public void setMiddlePoint(WgsPoint wgs, int zoom){
+				super.setMiddlePoint(wgs, zoom);
+				System.out.println("Paso por aqui wgs :D");
+			}
+		};
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
@@ -96,10 +105,10 @@ private static int zoom=17;
 	       //adicionar Layer KML al mapa con Panoramio
 	       //prueba 
 	       //KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/featureserver/prueba.kml",true);
-	       KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
+	       //KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
 	       //mapItem.addKmlService(new KmlUrlReader("http://map.elphel.com/Elphel_Cameras.kml",true));
 	       //mapItem.addKmlService(new KmlUrlReader("http://www.panoramio.com/panoramio.kml?LANG=en_US.utf8",true));
-	       mapItem.addKmlService(pp);
+	       //mapItem.addKmlService(pp);
 	       
 	       //mostrar Localizacion gps
 	       if(System.getProperty("microedition.location.version")!= null){
@@ -136,7 +145,19 @@ private static int zoom=17;
 		} 
 		
 		else if (c==regresar){
-			//zoom = 2;
+		//	KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
+			mapItem.addKmlService(pp);
+			mapItem.zoomIn();
+			mapItem.zoomOut();
+		}
+		else if (c==arrojar){
+			//	KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
+				mapItem.addKmlService(pp);
+				mapItem.needRepaint(true);
+			}
+		else if (c==poder){
+			mapItem.removeKmlService(pp);
+		/*		//zoom = 2;
 			KmlService kk[]= new KmlService[mapItem.getKmlServices().length];
 			for (int i=0; i < mapItem.getKmlServices().length; i ++){
 				kk [i]= mapItem.getKmlServices()[i]; 				
@@ -146,7 +167,8 @@ private static int zoom=17;
 			}
 			for (int i=0; i < kk.length; i ++){
 				mapItem.addKmlService(kk[i]);
-			}
+			}*/
+			
 		}		
 	} 
 	public Form call(){

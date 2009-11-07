@@ -6,16 +6,16 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public class AyudaFiguras extends CustomItem {
+public class InformacionFiguras extends CustomItem {
 	private int w,h;
 	private Image img1,img2;
 	
-	protected AyudaFiguras(String nombre, Displayable d) {
+	protected InformacionFiguras(String nombre, Displayable d) {
 	super(nombre);
 	    seth(d.getHeight());
 	    setw(d.getWidth());
 		try {
-			img1 = Image.createImage("/ayuda.png");
+			img1 = Image.createImage("/info.png");
 			img2 = Image.createImage("/logoj.png");
 			} catch (IOException e) {
 			e.printStackTrace();

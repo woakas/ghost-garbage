@@ -13,6 +13,11 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.StringItem;
 import javax.microedition.midlet.MIDlet;
 
+import org.json.me.JSONArray;
+import org.json.me.JSONException;
+
+import Logica.ConnectHttp;
+
 import com.nutiteq.MapItem;
 import com.nutiteq.components.Line;
 import com.nutiteq.components.LineStyle;
@@ -45,7 +50,6 @@ KmlUrlReader pp;
 		this.next = next;
 		pp = new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true){
 			public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom){
-				System.out.println("Paso por aca");
 				return true;
 			}
 		};
@@ -111,7 +115,19 @@ KmlUrlReader pp;
 	       
 	       //mostrar Localizacion gps
 	       if(System.getProperty("microedition.location.version")!= null){
-	    	   final LocationSource dataSource = new LocationAPIProvider(5000);
+	    	   final LocationSource dataSource = new LocationAPIProvider(5000){
+	    		   public WgsPoint getLocation(){
+	    			   WgsPoint wp = super.getLocation();
+	    			   ConnectHttp.getUrlBody("http://ghost.webhop.org/mobile/position/"+wp.getLon()+"/"+wp.getLat()+"/");
+/*	    			   try {
+						JSONArray ja = new JSONArray(ConnectHttp.getUrlBody("http://ghost.webhop.org/mobile/position/"+wp.getLon()+"/"+wp.getLat()+"/"));
+						System.out.println(ja.getString(0));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					} */
+	    			   return wp;
+	    		   }
+	    	   };
 	    	   try{
 	    		   final Image gpsPresentImage = Image.createImage("/banderinazul.png");
 	    		   final Image gpsConnectionLost = Image.createImage("/banderinrojo.png");
@@ -120,9 +136,7 @@ KmlUrlReader pp;
 	    		   dataSource.setLocationMarker(marker);
 	    		   mapItem.setLocationSource(dataSource);
 	    		   } catch (final IOException e){}
-	       }
-	    		   
-	      
+	       }	   
 	}
 	
 	public void placeClicked(final Place p){
@@ -144,29 +158,10 @@ KmlUrlReader pp;
 		} 
 		
 		else if (c==regresar){
-		//	KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
-			mapItem.addKmlService(pp);
-			mapItem.zoomIn();
-			mapItem.zoomOut();
 		}
 		else if (c==arrojar){
-			//	KmlUrlReader pp= new KmlUrlReader("http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",true);
-				mapItem.addKmlService(pp);
 			}
 		else if (c==poder){
-			mapItem.removeKmlService(pp);
-		/*		//zoom = 2;
-			KmlService kk[]= new KmlService[mapItem.getKmlServices().length];
-			for (int i=0; i < mapItem.getKmlServices().length; i ++){
-				kk [i]= mapItem.getKmlServices()[i]; 				
-			}
-			for (int i=0; i < kk.length; i ++){
-				mapItem.removeKmlService(kk[i]);
-			}
-			for (int i=0; i < kk.length; i ++){
-				mapItem.addKmlService(kk[i]);
-			}*/
-			
 		}		
 	} 
 	public Form call(){

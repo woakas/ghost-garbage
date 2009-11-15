@@ -1,6 +1,7 @@
 package Logica;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.microedition.io.Connector;
@@ -13,7 +14,7 @@ public class ConnectHttp{
 	
 	public static Usuarios us;
 	public static String cookie="";
-	public static String URL_LOGIN="http://dev.ghost.webhop.org/accounts/login/";
+	public static String URL_LOGIN="http://ghost.webhop.org/accounts/login/";
 	public static String USER="anonymus";
 	public static String PASSWORD="anonymus";
 	
@@ -31,19 +32,31 @@ public class ConnectHttp{
 	public static HttpConnection getUrl(String url ){
 		return getUrl(url,USER,PASSWORD);
 	}
+	public static String getUrlBody(String url){
+		HttpConnection httpc = getUrl(url,USER,PASSWORD);
+		try {
+			InputStream dis = httpc.openInputStream();
+			StringBuffer sb = new StringBuffer();
+			int ch = 0;
+			while ((ch=dis.read())!=-1){
+				sb.append((char)ch);
+			}
+			return new String (sb);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+		}
 	
 	
 	public static HttpConnection getUrl(String url,String usuario, String password){ 
 		
 		HttpConnection c = null;
 	    OutputStream os = null;
-	    System.out.println("PEPITO");
 		try {			
 			//Trata de entrar a la url solicitada
 			 c = (HttpConnection)Connector.open(url);
 			 c.setRequestProperty("Cookie",cookie);
-			 System.out.println("Intento 1 "+c.getResponseCode());
-		         
 				
 			// si la respuesta es 401 que significa que es unauthorized trata de entrar a la URL de login 
 	         if (c.getResponseCode()==HttpConnection.HTTP_UNAUTHORIZED){
@@ -55,9 +68,7 @@ public class ConnectHttp{
 		         
 				//Toma la cookie y la setea
 		        String cook=c.getHeaderField("set-cookie");
-				cookie = cook.substring(0, cook.indexOf(";"));
-				System.out.println("cookie "+cookie);
-				System.out.println("Intento logeo "+c.getResponseCode());								
+				cookie = cook.substring(0, cook.indexOf(";"));								
 
 				//Vuelve a tratar de entrar a la URL solicitada
 				c = (HttpConnection)Connector.open(url);

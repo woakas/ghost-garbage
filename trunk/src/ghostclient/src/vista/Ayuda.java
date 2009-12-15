@@ -13,8 +13,8 @@ public class Ayuda extends Form implements CommandListener {
 	private Displayable next;
 	private StringItem ayuda;
 	private Command regresar;
-	public String text="Ghost Garbage es un juego el cual se basa en técnología LBS para determinar puntos cercanos y sevicios asociados directamente a la posición de la persona espacialmente";
-				
+	public String text="Ghost Garbage es un juego que consiste en recolectar la mayor cantidad de objetos los cuales aparecerán aleatoriamente en el mapa, consiguiéndolos al ir a cada uno de los sitios descritos de forma física antes de ser eliminado por un adversario. O existe otra opción la cual es eliminar al adversario de tal manera que no logre recolectar objetos, Para mayor información visite la página http://ghost.webhop.org/";				
+	
 	public Ayuda (Display display, Displayable next) throws IOException{
 	super("Ayuda");
 	ayuda= new StringItem("",text);

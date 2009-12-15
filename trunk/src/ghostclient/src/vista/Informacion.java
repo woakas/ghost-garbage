@@ -13,7 +13,7 @@ public class Informacion extends Form implements CommandListener {
 	private Displayable next;
 	private StringItem ayuda;
 	private Command regresar;
-	public String text="Ghost Garbage es un juego el cual se basa en técnología LBS para determinar puntos cercanos y sevicios asociados directamente a la posición de la persona espacialmente";
+	public String text="Ghost Garbage es un juego el cual se basa en tecnología LBS para determinar puntos cercanos y servicios asociados directamente a la posición de la persona espacialmente.";
 				
 	public Informacion (Display display, Displayable next) throws IOException{
 	super("Informacion");

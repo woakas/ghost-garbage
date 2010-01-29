@@ -20,6 +20,10 @@ converter=[
 ("TypesFeatures","typesfeatures.csv","","TypesFeatures(nombre='%s',descripcion='%s')"),
 ("Juego","juegos.csv","","Juego(name='%s')"),
 ("TypesServices","typesservices.csv","","TypesService(nombre='%s',descripcion='%s')"),
+("Services","services.csv","","Service(nombre='%s',descripcion='%s',clase=TypesService.objects.get(nombre='%s'),logica='%s')"),
+("TypesLugares","typeslugares.csv","","TiposLugar(nombre='%s',descripcion='%s')"),
+("Lugares","lugares.csv","p=%s;p.save();p.lugares.create(nombre='%s',tipolugar=TiposLugar.objects.get(nombre='%s'))","p",[0,1,2],3),
+("ServicesPlay","servicesplay.csv","","ServicePlay(service=Service.objects.get(nombre='%s'),juego=Juego.objects.get(name='%s'),lugar=Lugares.objects.get(nombre='%s'),variables='%s')"),
 # Test Data
 ("UsersTest","users_test.csv","g=Group.objects.get_or_create(name='%s')[0];u=g.user_set.create(username='%s',email='%s'); u.set_password('%s'); u.save()","Personas.objects.create(nombre='%s',apellidos='%s',sexo=%s,user=u)",[0,1,2,3],4),
 #("shape","country.shp","Poligono","{'nombre':'CNTRY_NAME','tipolugar':{'nombre':'TIPOLUGAR'},'dentrode':{'nombre':'PLANETA'}}"),

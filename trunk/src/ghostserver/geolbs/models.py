@@ -5,6 +5,7 @@ from django.contrib.contenttypes import generic
 
 #Geos
 import django.contrib.gis.geos as geos
+from django.contrib.gis.measure import D
 
 class TiposLugar(models.Model) :
     nombre = models.CharField(max_length=100)

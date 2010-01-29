@@ -40,7 +40,12 @@ class Jugador(models.Model) :
 
 
     def updatePosition(self,lon,lat):
+        self.updateServiceLbs()
         return self.position.updateGeoref(lon,lat)
+
+    def updateServiceLbs(self):
+        pp=geolbsModels.Punto.objects.filter(georef__distance_lte=(self.position.georef,geolbsModels.D(m=500)),lugares__isnull=False).values_list('id',flat=True)
+        ServicePlay.objects.filter(lugar__punto__id__in=list(pp))
     
     def __unicode__(self):
         return u"%s" % (self.nickname or self.persona.user.username)
@@ -100,7 +105,7 @@ class ServicePlay(models.Model):
         verbose_name_plural='Servicios del Juego'
     
     def __unicode__(self):
-        return u"%s" % (self.service)
+        return u"%s en %s para el juego %s" % (self.service,self.lugar, self.juego)
 
 
 

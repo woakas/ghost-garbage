@@ -25,3 +25,8 @@ def position_mobile(request,lon,lat):
             return HttpResponse(str({'status':'OK'}))
 
     return HttpResponse(str({'status':'ERROR'}))
+
+
+
+
+

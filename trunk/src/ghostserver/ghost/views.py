@@ -13,6 +13,9 @@ from ghost import forms
 from ghost import models as ghostModels
 from ghost.constsappli import *
 
+#Importes otros
+from garbage import models as garbageModels
+from geolbs import models as geolbsModels
 
 #Importación de Registration
 from registration.models import RegistrationProfile
@@ -50,7 +53,21 @@ def profile(request):
     """Opciones de Usuario
     """
     if request.user.is_authenticated():
-        return render_to_response('user.html',context_instance=RequestContext(request))
+        p=request.user.personas_set.all()
+        if len(p)>0:
+            p=p[0]
+            j=p.jugador_set.filter(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+            
+            if len(j)>0:
+                j=j[0]
+            else:
+                pp=geolbsModels.Punto(georef="POINT(0 0)");
+                pp.save()
+                j=p.jugador_set.create(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p,position=pp,nickname=request.user.username)
+        else:
+            p=None
+            j=None
+        return render_to_response('user.html',{'user':request.user,'persona':p,'jugador':j},context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('auth_login'))
     

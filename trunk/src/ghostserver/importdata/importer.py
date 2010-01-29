@@ -18,7 +18,10 @@ converter=[
 ("Preferencias","preferencias.csv","","Preferencias(nombre='%s',descripcion='%s')"),
 ("FlatPages","flatpages.csv","s=Site.objects.get(id=SITE_ID)","s.flatpage_set.create(url='%s',title='%s',template_name='%s',registration_required=%s)"),
 ("TypesFeatures","typesfeatures.csv","","TypesFeatures(nombre='%s',descripcion='%s')"),
-("TypesServices","typesservices.csv","","TypesService(nombre='%s',descripcion='%s',logica='%s')"),
+("Juego","juegos.csv","","Juego(name='%s')"),
+("TypesServices","typesservices.csv","","TypesService(nombre='%s',descripcion='%s')"),
+# Test Data
+("UsersTest","users_test.csv","g=Group.objects.get_or_create(name='%s')[0];u=g.user_set.create(username='%s',email='%s'); u.set_password('%s'); u.save()","Personas.objects.create(nombre='%s',apellidos='%s',sexo=%s,user=u)",[0,1,2,3],4),
 #("shape","country.shp","Poligono","{'nombre':'CNTRY_NAME','tipolugar':{'nombre':'TIPOLUGAR'},'dentrode':{'nombre':'PLANETA'}}"),
 ]
 

@@ -3,6 +3,8 @@ from django.contrib.gis.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
+#Geos
+import django.contrib.gis.geos as geos
 
 class TiposLugar(models.Model) :
     nombre = models.CharField(max_length=100)
@@ -43,6 +45,15 @@ class Punto(models.Model):
     class Meta:
         verbose_name_plural='Lugares con Punto'
 
+
+    def updateGeoref(self,lon,lat):
+        try:
+            self.georef=geos.Point(float(lon),float(lat))
+            self.save()
+            return True
+        except:
+            return False
+        
 
     def __unicode__(self):
         lug=self.lugares.filter()
@@ -95,7 +106,6 @@ class TypesService(models.Model):
     """
     nombre = models.CharField(max_length=30)
     descripcion = models.CharField(max_length=100, blank=True, null=True)
-    logica = models.TextField()
     
     class Meta:
         verbose_name_plural='Tipos de Servicio'
@@ -105,11 +115,19 @@ class TypesService(models.Model):
 
 
 class Service(models.Model):
-    tipo =models.ForeignKey(TypesService)
-    lugar =models.ForeignKey(Lugares)
+    nombre = models.CharField(max_length=30)
+    descripcion = models.CharField(max_length=50)
+    clase =models.ForeignKey(TypesService)
+    logica = models.TextField()
+
     
     class Meta:
         verbose_name_plural='Servicios'
 
     def __unicode__(self):
-        return u"%s en %s" % (self.tipo,self.lugar)
+        return u"%s" % (self.nombre)
+
+
+
+
+

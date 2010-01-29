@@ -87,7 +87,7 @@ def theperms(groups,funname="g1") :
     """
     print "def %s():" % funname
     for group in groups:
-        a="\tg=Group(name='%s')\n\tg.save()" % group[0]
+        a="\tg=Group.objects.get_or_create(name='%s')[0]" % group[0]
         #for i in group[1]:
         #    a+="\n\tg.permissions.add(Permission.objects.get(codename='%s'))" % i
         if len(group[2]):

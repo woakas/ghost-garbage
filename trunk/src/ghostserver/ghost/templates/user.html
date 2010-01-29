@@ -1,5 +1,147 @@
 {% extends "main_template.html" %}
+
+{% block js %}
+<script src='http://openlayers.org/api/OpenLayers.js'></script>
+<script src='http://www.openstreetmap.org/openlayers/OpenStreetMap.js'></script>
+
+<script type="text/javascript"> 
+
+
+        var map;
+        var size = new OpenLayers.Size(10,10);
+	var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+	var icon = new OpenLayers.Icon('http://static.geoentropica.com/img/p1.png',size,offset);
+ 
+	function createMarker(layer,lonlat,text,icc){
+
+            var feature = new OpenLayers.Feature(layer, lonlat,
+                        {
+                         icon:icc.clone(),
+                         popupContentHTML:text,
+                         popupSize: new OpenLayers.Size(350, 200),
+                        });
+            feature.popupClass=OpenLayers.Popup.FramedCloud;
+            feature.createMarker();
+
+            var markerOver = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(true);
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.show();
+                }
+                OpenLayers.Event.stop(evt);
+            };
+
+
+            feature.marker.events.register("mousedown", feature, markerOver);
+            return feature.marker;
+	};
+
+
+        function transLatLon(llon,llat){
+		return new OpenLayers.LonLat(llon, llat).transform(new 
+                OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+ 
+	};
+
+            function init(){
+                map = new OpenLayers.Map('map');
+
+                var osm_map = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap");
+
+                var routeLayer = new OpenLayers.Layer.Vector("Traza");
+                var layerMarkers = new OpenLayers.Layer.Markers("Puntos");
+                map.addLayers([osm_map,routeLayer,layerMarkers]);
+
+
+                map.addControl(new OpenLayers.Control.LayerSwitcher());
+                map.addControl(new OpenLayers.Control.Attribution());
+                var lonLat = new OpenLayers.LonLat(-74, 4).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+                map.setCenter(lonLat, 6);
+            }
+</script> 
+
+
+{% endblock %}
+
+
+{% block body %}
+<body onload="init()">
+{% endblock %}
+
+
+
+
 {% block primaryContent %}
-<h2>USER</h2><br />
+<h2>HOLA {{ persona.nombre }}!!</h2><br />
+
+
+<table style="width:100%" class="vcard">
+  <tr>
+    <!--cell-->
+    <td style="vertical-align:top; width:170px">
+      <table>
+        <tr>
+          <td style="padding:20px 20px 8px 20px">
+            {% if persona.foto %}
+            <img src="/static/media/{{ persona.foto }}" height="250" width="250" alt="" class="logo" >
+            {% else %}
+            <img src="/static/media/logogrup.png" height="250" width="250" alt="" class="logo" >
+            {% endif %}
+          </td>
+          
+        </tr>
+             
+      </table>
+    </td>
+    <!--cell-->
+    
+    <td style="vertical-align: top; width:350px">
+
+    <table class="user-details">
+      <tr>
+        <td style="width:120px">Nombre</td>
+        <td style="width:230px" class="fn nickname"><b>{{ persona.nombre }} {{ persona.apelliods }}</b></td>
+      </tr>
+      <tr>
+        <td>member for</td>
+        <td><span class="cool" title="2009-05-14 14:29:21Z">8 months</span></td>
+        
+      </tr>
+      <tr>
+        <td>Último Acceso</td>
+        <td>{{ user.last_login|date:"d M  h:mA" }}</td>
+      </tr>
+      
+      <tr>
+        <td>user</td>
+        
+        <td>{{ user.username }}</td>
+      </tr>
+      
+      <tr>
+        <td>website</td>
+        <td>
+        <div class="no-overflow">{% if persona.url %}<a href="{{ persona.url }}" rel="nofollow me" class="url">{{ persona.url }}</a>{% else %} ----- {% endif %}</div>                                
+        </td>
+      </tr>
+
+    </table>
+  </td>
+</tr>
+</table>
+
+<h3> Jugador </h3>
+
+{% if jugador %}
+
+<div id="map" class="smallmap"></div> 
+
+
+{% else %}
+<p> No posee Jugadores </p>
+{% endif %}
 
 {% endblock %}

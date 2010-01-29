@@ -19,6 +19,7 @@ urlpatterns = patterns('',
                        # Example:
                            (r'^lbs/', include('ghostserver.geolbs.urls')),
                        (r'^', include('ghostserver.ghost.urls')),
+                       (r'^', include('ghostserver.garbage.urls')),
                        
                        
                        # Descomente la siguiente linea si desea tener documentación sobre el aplicativo

@@ -13,6 +13,8 @@ import javax.microedition.lcdui.Gauge;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.TextField;
 
+import org.json.me.JSONObject;
+
 import Logica.*;
 import com.tesis.Map;
 
@@ -27,7 +29,7 @@ public class Usuarios extends Form implements CommandListener {
 	private Timer tm;
 	private Progreso pr;
 			
-	public Usuarios (Display display, Displayable next,  Image image1 ,Map mapa) throws IOException{
+	public Usuarios (Display display, Displayable next,  Image image1 ,Map mapa,String image, String image2) throws IOException{
 	super("Login");
 	usuario= new TextField("Usuario","",30,TextField.ANY);
 	password= new TextField("Password","",30,TextField.PASSWORD);
@@ -35,7 +37,7 @@ public class Usuarios extends Form implements CommandListener {
 	regresar=new Command("Regresar",Command.BACK,1);
 	load = new Gauge(null,false,20,1);
 	alert = new Alert ("Error de Logeo", "              Usuario o Contrasena no valida", image1 ,AlertType.ERROR);
-	append(new Figuras(null, this));
+	append(new PadreFiguras(null, this,image,image2));
 	append(usuario);
 	append(password);
 	append(load);
@@ -59,6 +61,10 @@ public class Usuarios extends Form implements CommandListener {
 			}
 			else{
 				System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
+				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getPuntaje/");
+				mapa.setPuntaje(js.optString("puntaje", "0"));
+				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getEstado/");
+				mapa.setEstado(js.optString("estado", ""));
 				display.setCurrent(mapa.call());
 			} 
 		}

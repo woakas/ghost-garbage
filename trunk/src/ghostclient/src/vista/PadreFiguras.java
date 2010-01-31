@@ -1,23 +1,22 @@
 package vista;
 
 import java.io.IOException;
-
 import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-public class Figuras extends CustomItem {
+public class PadreFiguras extends CustomItem {
 	private int w,h;
 	private Image img1,img2;
 	
-	protected Figuras(String nombre, Displayable d) {
+	protected PadreFiguras(String nombre, Displayable d, String image,String image2) {
 	super(nombre);
 	    seth(d.getHeight());
 	    setw(d.getWidth());
 		try {
-			img1 = Image.createImage("/escobita.png");
-			img2 = Image.createImage("/fantasma.png");
+			img1 = Image.createImage("/"+image);
+			img2 = Image.createImage("/"+image2);
 			} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -26,8 +25,8 @@ public class Figuras extends CustomItem {
 	protected void paint(Graphics g, int w, int h) {
 		g.setColor(0,0,0);
 		g.fillRect(0, 0, w, h);
-		g.drawImage(img1, 10, 0, Graphics.TOP|Graphics.LEFT);
-		g.drawImage(img2, w/2+10, 0, Graphics.TOP|Graphics.LEFT);
+		g.drawImage(img1, 20, 25, Graphics.TOP|Graphics.LEFT);
+		g.drawImage(img2, w/2+25, 25, Graphics.TOP|Graphics.LEFT);
 	}
 	public void seth(int h) {
 		this.h = h-120;

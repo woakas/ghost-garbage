@@ -7,6 +7,9 @@ import java.io.OutputStream;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
+import org.json.me.JSONException;
+import org.json.me.JSONObject;
+
 import vista.Usuarios;
 
 
@@ -31,6 +34,15 @@ public class ConnectHttp{
 	
 	public static HttpConnection getUrl(String url ){
 		return getUrl(url,USER,PASSWORD);
+	}
+	public static JSONObject getUrlJson(String url){
+		String body = getUrlBody(url);
+		if (body != null) {
+			try {
+				return new JSONObject(body);
+			} catch (JSONException e) {}			
+			}
+		return null;
 	}
 	public static String getUrlBody(String url){
 		HttpConnection httpc = getUrl(url,USER,PASSWORD);

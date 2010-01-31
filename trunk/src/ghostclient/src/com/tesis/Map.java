@@ -2,6 +2,8 @@ package com.tesis;
 
 import java.io.IOException;
 
+import javax.microedition.lcdui.Alert;
+import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -15,6 +17,8 @@ import javax.microedition.midlet.MIDlet;
 
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
+
+import vista.Padre;
 
 import Logica.ConnectHttp;
 
@@ -36,17 +40,20 @@ import com.nutiteq.location.providers.LocationAPIProvider;
 public class Map implements CommandListener, PlaceListener {
 	private Form mMainForm;
 	private MapItem mapItem;
-	private Command regresar, menu, arrojar, poder;
+	private Command regresar, menu, identificar,inventario;
 	private Display display;
 	private Displayable next;
+	private Padre identify;
+	private Padre inventory;
 	private Image icon;
 	private String key = "fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
-	private StringItem message;
+	private StringItem message, puntaje, estado;
+	private Alert alert;
 	private static int zoom = 17;
 
 	KmlUrlReader pp;
 
-	public Map(MIDlet midlet, Display display, Displayable next) {
+	public Map(MIDlet midlet, final Display display, Displayable next) {
 		this.display = display;
 		this.next = next;
 		pp = new KmlUrlReader(
@@ -70,18 +77,22 @@ public class Map implements CommandListener, PlaceListener {
 
 		menu = new Command("Menu Principal", Command.EXIT, 2);
 		regresar = new Command("Regresar", Command.OK, 1);
-		poder = new Command("Poder", Command.OK, 1);
-		arrojar = new Command("Arrojar", Command.OK, 1);
+		identificar = new Command("Identificar", Command.OK, 1);
+		inventario = new Command("Inventario", Command.OK, 1);
 		mMainForm = new Form("Ghost Garbage");
 		mMainForm.append(mapItem);
 		mMainForm.addCommand(menu);
 		mMainForm.addCommand(regresar);
-		mMainForm.addCommand(arrojar);
-		mMainForm.addCommand(poder);
+		mMainForm.addCommand(identificar);
+		mMainForm.addCommand(inventario);
+		puntaje= new StringItem("Puntaje","0");
+		estado= new StringItem("Estado","");
 		mMainForm.setCommandListener(this);
 		mapItem.startMapping();
 		message = new StringItem("", "");
 		mMainForm.append(message);
+		mMainForm.append(puntaje);
+		mMainForm.append(estado);
 
 		// Para celulares con touch screen
 		final Canvas canvas = new Canvas() {
@@ -125,9 +136,9 @@ public class Map implements CommandListener, PlaceListener {
 		// KmlUrlReader("http://www.panoramio.com/panoramio.kml?LANG=en_US.utf8",true));
 		// mapItem.addKmlService(pp);
 
-		// mostrar Localizacion gps
+		// Mostrar Localizacion gps
 		if (System.getProperty("microedition.location.version") != null) {
-			final LocationSource dataSource = new LocationAPIProvider(5000) {
+			final LocationSource dataSource = new LocationAPIProvider(3000) {
 				public WgsPoint getLocation() {
 					WgsPoint wp = super.getLocation();
 					String body = ConnectHttp
@@ -140,7 +151,21 @@ public class Map implements CommandListener, PlaceListener {
 							JSONObject js = new JSONObject(body);
 							wp = new WgsPoint(Double.parseDouble(js.getString("lon")), 
 									Double.parseDouble(js.getString("lat")));
-
+							if (js.optBoolean("puntaje_change",false)){
+								puntaje.setText(js.optString("puntaje",puntaje.getText()));
+							}
+							if (js.optBoolean("estado_change",false)){
+								estado.setText(js.optString("estado",estado.getText()));
+							}
+							if (js.optString("messageAlert",null)!= null){
+								Image img1 = null;
+								try {
+									img1 = Image.createImage("/"+js.getString("iconAlert"));
+								} catch (IOException e) {}
+								alert = new Alert ("Mensaje", js.getString("messageAlert"), img1,AlertType.ERROR);
+								display.setCurrent(alert);
+								display.vibrate(2);
+							} 
 						}else {
 							wp=new WgsPoint(vista.GhostGarbage.LON_DEFAULT,vista.GhostGarbage.LAT_DEFAULT);
 						}
@@ -168,17 +193,17 @@ public class Map implements CommandListener, PlaceListener {
 
 	public void placeClicked(final Place p) {
 		message.setText("Click ID: " + p.getId() + "Nombre del Sitio: "
-				+ p.getName());
+				+ p.getName()+"\n");
 	}
 
 	public void placeEntered(final Place p) {
 		message.setText("Entered ID: " + p.getId() + "Nombre del Sitio: "
-				+ p.getName());
+				+ p.getName()+"\n");
 	}
 
 	public void placeLeft(final Place p) {
 		message.setText("Izquierda ID : " + p.getId() + "Nombre del Sitio"
-				+ p.getName());
+				+ p.getName()+"\n");
 	}
 
 	public void commandAction(Command c, Displayable d) {
@@ -187,13 +212,34 @@ public class Map implements CommandListener, PlaceListener {
 		}
 
 		else if (c == regresar) {
-		} else if (c == arrojar) {
-		} else if (c == poder) {
+		}  else if (c == identificar) {
+			try {
+				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/identifyServices/");
+				identify = new vista.Padre(display,this.call(),js.optString("services", "No hay servicios Cercanos"),"identificar.png","logoj.png", "Identificar");
+			} catch (IOException e) {
+			}
+			display.setCurrent(identify);
+		} else if (c == inventario) {
+			try {
+				inventory = new vista.Padre(display,this.call(),"texto","inventario.png","logoj.png", "Inventario actual");
+			} catch (IOException e) {
+			}
+			display.setCurrent(inventory);
 		}
 	}
-
+	public String getPuntaje(){
+		return puntaje.getText();
+	}
+	public void setPuntaje(String estado){
+		this.puntaje.setText(estado);
+	}
+	public String getEstado(){
+		return estado.getText();
+	}
+	public void setEstado(String estado){
+		this.estado.setText(estado);
+	}
 	public Form call() {
 		return mMainForm;
-
-	}
+	}	
 }

@@ -18,8 +18,8 @@ public class GhostGarbage extends MIDlet {
 	private Form f;
 	private Intro intro;
 	private Map mapa;
-	private Ayuda ayuda;
-	private Informacion informacion;
+	private Padre ayuda;
+	private Padre informacion;
 	private Image img, img1;
 	private Usuarios usuarios;
 	public static String URLGHOST = "http://dev1.ghost.webhop.org/";
@@ -37,9 +37,9 @@ public class GhostGarbage extends MIDlet {
 		intro = new Intro(p, pres, img, 5000);
 		
 		mapa = new Map((MIDlet)(this), p, pres);
-		usuarios = new Usuarios(p,pres,img1,mapa);
-		ayuda = new Ayuda(p, pres);
-		informacion = new Informacion(p, pres);
+		usuarios = new Usuarios(p,pres,img1,mapa,"escobita.png","fantasma.png");
+		ayuda = new Padre(p, pres,"Ghost Garbage es un juego que consiste en recolectar la mayor cantidad de objetos los cuales aparecerán aleatoriamente en el mapa, consiguiéndolos al ir a cada uno de los sitios descritos de forma física antes de ser eliminado por un adversario. O existe otra opción la cual es eliminar al adversario de tal manera que no logre recolectar objetos, Para mayor información visite la página http://ghost.webhop.org/","ayuda.png","logoj.png","Ayuda");
+		informacion = new Padre (p, pres,"Ghost Garbage es un juego el cual se basa en tecnología LBS para determinar puntos cercanos y servicios asociados directamente a la posición de la persona espacialmente.","info.png","logoj.png","Informacion");
 	}
 		
 	public void getOpcion(int opcion) {

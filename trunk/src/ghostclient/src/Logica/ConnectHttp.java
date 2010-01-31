@@ -14,7 +14,7 @@ public class ConnectHttp{
 	
 	public static Usuarios us;
 	public static String cookie="";
-	public static String URL_LOGIN="http://ghost.webhop.org/accounts/login/";
+    public static String URL_LOGIN=vista.GhostGarbage.URLGHOST+"accounts/login/";
 	public static String USER="anonymus";
 	public static String PASSWORD="anonymus";
 	
@@ -34,6 +34,9 @@ public class ConnectHttp{
 	}
 	public static String getUrlBody(String url){
 		HttpConnection httpc = getUrl(url,USER,PASSWORD);
+		if (httpc==null){
+			return null;
+		}
 		try {
 			InputStream dis = httpc.openInputStream();
 			StringBuffer sb = new StringBuffer();
@@ -81,9 +84,11 @@ public class ConnectHttp{
 					USER=usuario;
 					PASSWORD=password;	
 				}
-
 			}
-			return c;
+	        if (c.getResponseCode()==HttpConnection.HTTP_OK){
+					return c;		
+			}
+			return null;
 		}  
 		catch (IOException e) {
 			System.out.println(e);

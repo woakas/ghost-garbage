@@ -22,6 +22,9 @@ public class GhostGarbage extends MIDlet {
 	private Informacion informacion;
 	private Image img, img1;
 	private Usuarios usuarios;
+	public static String URLGHOST = "http://dev1.ghost.webhop.org/";
+	public static double LON_DEFAULT = -74.13538813591003;
+	public static double LAT_DEFAULT = 4.630740894173603;
 			
 	public GhostGarbage() throws IOException {
 		f = new Form("Ghost Garbage");
@@ -32,6 +35,7 @@ public class GhostGarbage extends MIDlet {
 		img = Image.createImage("/logogrup.png");
 		img1 = Image.createImage("/cerrar.png");
 		intro = new Intro(p, pres, img, 5000);
+		
 		mapa = new Map((MIDlet)(this), p, pres);
 		usuarios = new Usuarios(p,pres,img1,mapa);
 		ayuda = new Ayuda(p, pres);

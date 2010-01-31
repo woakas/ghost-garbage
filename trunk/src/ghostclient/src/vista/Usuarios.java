@@ -52,14 +52,13 @@ public class Usuarios extends Form implements CommandListener {
 			tm = new Timer();
 			pr = new Progreso(load);
 			tm.scheduleAtFixedRate(pr, 0, 1000);
-			//System.out.println("prueba " +ConnectHttp.getUrl("http://dev.ghost.webhop.org/mobile/login","ghost","garbage"));
-			if (ConnectHttp.getUrl("http://ghost.webhop.org/mobile/login",usuario.getString(),password.getString()) == null){
-				System.out.println("prueba1 " +ConnectHttp.getUrl("http://ghost.webhop.org/mobile/login"));
+			if (ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login",usuario.getString(),password.getString()) == null){
+				System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
 				display.setCurrent(alert);
 				display.vibrate(2);
 			}
 			else{
-				System.out.println("prueba1 " +ConnectHttp.getUrl("http://ghost.webhop.org/mobile/login"));
+				System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
 				display.setCurrent(mapa.call());
 			} 
 		}

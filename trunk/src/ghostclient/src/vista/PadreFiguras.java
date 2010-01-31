@@ -25,8 +25,8 @@ public class PadreFiguras extends CustomItem {
 	protected void paint(Graphics g, int w, int h) {
 		g.setColor(0,0,0);
 		g.fillRect(0, 0, w, h);
-		g.drawImage(img1, 20, 25, Graphics.TOP|Graphics.LEFT);
-		g.drawImage(img2, w/2+25, 25, Graphics.TOP|Graphics.LEFT);
+		g.drawImage(img1, 20, 10, Graphics.TOP|Graphics.LEFT);
+		g.drawImage(img2, w/2+25, 10, Graphics.TOP|Graphics.LEFT);
 	}
 	public void seth(int h) {
 		this.h = h-120;

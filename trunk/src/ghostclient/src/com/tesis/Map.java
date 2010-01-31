@@ -57,7 +57,8 @@ public class Map implements CommandListener, PlaceListener {
 		this.display = display;
 		this.next = next;
 		pp = new KmlUrlReader(
-				"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
+				//"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
+				vista.GhostGarbage.URLGHOST+"data/kml/",
 				true) {
 			public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom) {
 				return true;
@@ -221,7 +222,8 @@ public class Map implements CommandListener, PlaceListener {
 			display.setCurrent(identify);
 		} else if (c == inventario) {
 			try {
-				inventory = new vista.Padre(display,this.call(),"texto","inventario.png","logoj.png", "Inventario actual");
+				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/");
+				inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
 			} catch (IOException e) {
 			}
 			display.setCurrent(inventory);

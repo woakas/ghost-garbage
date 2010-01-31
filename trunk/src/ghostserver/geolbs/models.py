@@ -7,6 +7,7 @@ from django.contrib.contenttypes import generic
 import django.contrib.gis.geos as geos
 from django.contrib.gis.measure import D
 
+
 class TiposLugar(models.Model) :
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=300, blank=True )
@@ -47,14 +48,17 @@ class Punto(models.Model):
         verbose_name_plural='Lugares con Punto'
 
 
-    def updateGeoref(self,lon,lat):
+    def updateGeoref(self,p):
+        """ Actualiza la posición de un punto, si es posible
+            realizar la operación retorna True de lo contrario
+            False
+        """
         try:
-            self.georef=geos.Point(float(lon),float(lat))
+            self.georef=p
             self.save()
             return True
         except:
             return False
-        
 
     def __unicode__(self):
         lug=self.lugares.filter()
@@ -116,10 +120,44 @@ class TypesService(models.Model):
 
 
 class Service(models.Model):
-    nombre = models.CharField(max_length=30)
+    nombre = models.CharField(max_length=30,unique=True)
     descripcion = models.CharField(max_length=50)
     clase =models.ForeignKey(TypesService)
     logica = models.TextField()
+
+
+    def __evalLogica__(self,body='',**kargs):
+        vr=locals() # Variables Locales que se encuentran dentro de la función
+        vr.update(kargs)
+        vr.update(globals()) # Variables Globales y se agregan a vr
+
+
+        logic=self.logica.replace('\r','')
+        logic+='\n%s'%body
+        exec logic in vr # Se ejecuta body con exec y se pasan como parametro vr para tener consistencia con todas las variables.
+
+        return out
+        
+
+        try:
+            logic=self.logica.replace('\r','')
+            logic+='\n%s'%body
+            exec logic in vr # Se ejecuta body con exec y se pasan como parametro vr para tener consistencia con todas las variables.
+            return out
+        except:
+            return None
+
+
+    def identifyService(self):
+        return self.__evalLogica__('out=identifyService()')
+
+
+    def triggerService(self,jugador=None,**kargs):
+        r=self.__evalLogica__('out=triggerService(jugador)',jugador=jugador,**kargs)
+        if type(r)==dict:
+            return r
+        return {}
+
 
     
     class Meta:

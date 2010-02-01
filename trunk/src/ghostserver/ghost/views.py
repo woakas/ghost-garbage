@@ -78,6 +78,7 @@ def profile(request):
 
 def login_mobile(request):
     response = HttpResponse()
+    #print request
     if not request.user.is_authenticated():
         response.status_code = 401
         return response

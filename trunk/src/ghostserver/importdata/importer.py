@@ -25,8 +25,13 @@ converter=[
 ("Lugares","lugares.csv","p=%s;p.save();p.lugares.create(nombre='%s',tipolugar=TiposLugar.objects.get(nombre='%s'))","p",[0,1,2],3),
 ("ServicesPlay","servicesplay.csv","","ServicePlay(service=Service.objects.get(nombre='%s'),juego=Juego.objects.get(name='%s'),lugar=Lugares.objects.get(nombre='%s'),variables='%s')"),
 # Test Data
-("UsersTest","users_test.csv","g=Group.objects.get_or_create(name='%s')[0];u=g.user_set.create(username='%s',email='%s'); u.set_password('%s'); u.save()","Personas.objects.create(nombre='%s',apellidos='%s',sexo=%s,user=u)",[0,1,2,3],4),
+#("UsersTest","users_test.csv","g=Group.objects.get_or_create(name='%s')[0];u=g.user_set.create(username='%s',email='%s'); u.set_password('%s'); u.save()","Personas.objects.create(nombre='%s',apellidos='%s',sexo=%s,user=u)",[0,1,2,3],4),
+("UsersTest","users_test.csv","g=Group.objects.get_or_create(name='%s')[0];u=g.user_set.create(username='%s',email='%s'); u.set_password('%s'); u.save(); pp=Personas.objects.create(nombre='%s',apellidos='%s',sexo=%s,user=u); pp.save();point=%s;point.save()","Jugador(nickname='%s',persona=pp,juego=Juego.objects.get(name='GhostGarbage'),status=%s,position=point)",[0,1,2,3,4,5,6,7],8),
 #("shape","country.shp","Poligono","{'nombre':'CNTRY_NAME','tipolugar':{'nombre':'TIPOLUGAR'},'dentrode':{'nombre':'PLANETA'}}"),
+# Features en Juego
+("Features","features.csv","","Features(nombre='%s',descripcion='%s',clase=TypesFeatures.objects.get(nombre='%s'),logica=\"%s\")"),
+("FeaturePlay","featuresservicesplay.csv","","FeatureServicePlay(feature=Features.objects.get(nombre='%s'),jugador=Jugador.objects.get(nickname='%s'),service=%s,variables='%s')"),
+
 ]
 
 

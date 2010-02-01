@@ -130,8 +130,6 @@ class Service(models.Model):
         vr=locals() # Variables Locales que se encuentran dentro de la función
         vr.update(kargs)
         vr.update(globals()) # Variables Globales y se agregan a vr
-
-
         logic=self.logica.replace('\r','')
         logic+='\n%s'%body
         exec logic in vr # Se ejecuta body con exec y se pasan como parametro vr para tener consistencia con todas las variables.

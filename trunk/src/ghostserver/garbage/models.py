@@ -8,7 +8,7 @@ from django.contrib.contenttypes import generic
 
 CHOICES_STATUS=[(1,'Vivo'),(2,'Muerto'),(3,'Off Line')]
 DISTANCE_MIN=40
-
+DISTANCE_SERVICES=30
 
 class Juego(models.Model):
     """Juego que posee los diferentes Jugadores y Servicios
@@ -63,8 +63,7 @@ class Jugador(models.Model) :
             servicios
         """
         ms={}
-        pp=geolbsModels.Punto.objects.filter(georef__distance_lte=(self.position.georef,geolbsModels.D(m=500)),lugares__isnull=False).values_list('id',flat=True)
-        for sp in  ServicePlay.objects.filter(lugar__punto__id__in=list(pp)):
+        for sp in self.getServicesVisibles():
             ms.update(sp.triggerService(self))
         return ms
 
@@ -85,8 +84,46 @@ class Jugador(models.Model) :
         
         if len(fs)>0 and list==False:
             return fs[0]
+        elif list==False:
+            return None
         return fs
+
+
+    def getServicesVisibles(self):
+        """Retorna los Servicios Visibles para el Jugador
+        """
+        fp= self.getFeaturePlay('Vision')
+        if fp:
+            dis= fp.getValue()
+        else:
+            dis=Features.objects.get(nombre="Vision").defaultValue()
+
         
+        pns=self.getPuntosLte(dis).values_list('id',flat=True)
+        
+        return ServicePlay.objects.filter(lugar__punto__id__in=list(pns))
+
+
+
+    def getPuntosLte(self,distance):
+        """Retorna los puntos cercanos menores a una distacia determinada en metros
+        """
+        pn=geolbsModels.Punto.objects.filter(georef__distance_lte=(self.position.georef,geolbsModels.D(m=distance)),lugares__isnull=False)
+        return pn
+    
+
+    def identifyServices(self):
+        """Realiza la identificación de los servicios visibles
+        """
+        ms=[]
+
+        pn=geolbsModels.Punto.objects.filter(georef__distance_lte=(self.position.georef,geolbsModels.D(m=DESTANCE_SERVICES)),lugares__isnull=False).distance(self.position.georef)
+        
+        for i in pn:
+            sp=i.lugares.get().serviceplay_set.filter()
+            if len(sp)>0:
+                ms.append((sp[0].identifyService(),i.distance))
+        return ms
 
     
     def __unicode__(self):
@@ -157,6 +194,10 @@ class Features(models.Model):
         return self.__evalLogica__('out=setValue(%d)'%pnt,**kargs)
 
 
+    def defaultValue(self,**kargs):
+        return self.__evalLogica__('out=defaultValue()',**kargs)
+
+
     
     def __unicode__(self):
         return u"%s" % (self.nombre)
@@ -182,6 +223,7 @@ class ServicePlay(models.Model):
             exec self.variables
         except:
             pass
+        servicePlay=self
         vr=locals()
         del(vr['body'])
         del(vr['self'])
@@ -196,6 +238,7 @@ class ServicePlay(models.Model):
             exec self.variables.replace('\r','')
         except:
             pass
+        servicePlay=self
         r=locals()
         del(r['jugador'])
         del(r['self'])

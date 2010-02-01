@@ -7,4 +7,9 @@ urlpatterns = patterns('ghostserver.garbage.views',
                        url(r'^mobile/getPuntaje/$' , 'getPuntaje', name="getPuntaje"),
                        url(r'^mobile/getEstado/$' , 'getEstado', name="getEstado"),
                        url(r'^mobile/identifyServices/$' , 'identifyServices', name="identifyServices"),
+                       url(r'^mobile/inventory/$' , 'inventory', name="inventory"),
+                       url(r'^mobile/getIdJugador/$' , 'getIdJugador', name="getIdJugador"),
+                       url(r'^data/kml/(?P<idJ>[0-9]+)/$' , 'getKml', name="getKml"),
+                       url(r'^data/kml/$' , 'getKml', name="getKml"),
+                       
                        )

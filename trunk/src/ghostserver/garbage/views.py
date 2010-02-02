@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.core.urlresolvers import reverse
+
 
 import settings
 
 #Importes de garbage
 from garbage import forms
-from garbage import models as garbageModels
 from garbage.constsappli import *
+from garbage import models as garbageModels
+
 
 import simplejson
 
@@ -110,7 +112,17 @@ def inventory(request):
 
 
 def getKml(request,idJ=None):
+    try:
+        j=garbageModels.Jugador.objects.get(id=idJ)
+    except garbageModels.Jugador.DoesNotExist:
+        raise Http404
+    
+
+    
+    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST'])}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
+
     if not idJ:
+        
         
         iserv="""<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0" xmlns:fs="http://featureserver.com/ns" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -127,11 +139,9 @@ def getKml(request,idJ=None):
         </kml>"""
         return HttpResponse(iserv,mimetype='text/xml; charset=utf-8')
 
-    from garbage import models as garbageModels
     j=garbageModels.Jugador.objects.get(id=idJ)
     
-    iserv="No tiene nada en el Inventario."
-    
+   
     puntos=""
     for i in j.getPuntos():
         puntos+="""

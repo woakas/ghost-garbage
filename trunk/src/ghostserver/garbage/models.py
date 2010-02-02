@@ -7,8 +7,8 @@ from django.contrib.contenttypes import generic
 
 
 CHOICES_STATUS=[(1,'Vivo'),(2,'Muerto'),(3,'Off Line')]
+CHOICES_STATUS_SERVICE_PLAY=[(1,'Activo'),(2,'Inactivo')]
 DISTANCE_MIN=40
-DISTANCE_SERVICES=30
 
 class Juego(models.Model):
     """Juego que posee los diferentes Jugadores y Servicios
@@ -34,7 +34,8 @@ class Jugador(models.Model) :
     juego = models.ForeignKey(Juego)
     status = models.IntegerField(choices=CHOICES_STATUS, default=2)
     position = models.ForeignKey(geolbsModels.Punto)
-    
+
+
 
     class Meta:
         verbose_name_plural='Jugador'
@@ -51,8 +52,9 @@ class Jugador(models.Model) :
         gp=geolbsModels.geos.Point(float(lon),float(lat))
         dd=geolbsModels.Punto.objects.distance(gp).get(id=self.position.id)
         if dd.distance.m<=DISTANCE_MIN or self.position.georef.coords==(0,0):
-            msT=self.updateServiceLbs()
+            msT={}
             msT['position_update']=self.position.updateGeoref(gp)
+            msT.update(self.updateServiceLbs())
             return msT
         
         return {'position_update':False}
@@ -66,6 +68,9 @@ class Jugador(models.Model) :
         for sp in self.getServicesVisibles():
             ms.update(sp.triggerService(self))
         return ms
+
+
+
 
 
     def getFeaturePlay(self,feature,list=False):
@@ -89,19 +94,21 @@ class Jugador(models.Model) :
         return fs
 
 
+    def getValue(self,feature,default=None):
+        value=self.getFeaturePlay(feature)
+        if value:
+            return value.getValue()
+        return default
+
+
     def getServicesVisibles(self):
         """Retorna los Servicios Visibles para el Jugador
         """
-        fp= self.getFeaturePlay('Vision')
-        if fp:
-            dis= fp.getValue()
-        else:
-            dis=Features.objects.get(nombre="Vision").defaultValue()
+        dis= self.getValue('Vision',Features.objects.get(nombre="Vision").defaultValue())
+        
+        return ServicePlay.objects.getServices(self.position.georef,dis).filter(juego=self.juego)
 
-        
-        pns=self.getPuntosLte(dis).values_list('id',flat=True)
-        
-        return ServicePlay.objects.filter(lugar__punto__id__in=list(pns))
+
 
 
 
@@ -116,14 +123,15 @@ class Jugador(models.Model) :
         """Realiza la identificación de los servicios visibles
         """
         ms=[]
-
-        pn=geolbsModels.Punto.objects.filter(georef__distance_lte=(self.position.georef,geolbsModels.D(m=DESTANCE_SERVICES)),lugares__isnull=False).distance(self.position.georef)
+        dis= self.getValue('Vision',Features.objects.get(nombre="Vision").defaultValue())
+        pn=self.getPuntosLte(dis).distance(self.position.georef)
         
         for i in pn:
             sp=i.lugares.get().serviceplay_set.filter()
-            if len(sp)>0:
+            if len(sp)>0 and sp[0].status ==1:
                 ms.append((sp[0].identifyService(),i.distance))
         return ms
+
 
     
     def __unicode__(self):
@@ -206,6 +214,15 @@ class Features(models.Model):
 
 
 
+class ServicePlayManager(models.Manager):
+    """ Manager para Servicios en Juego
+    """
+
+    def getServices(self,geo,distance=0):
+        l_ids=geolbsModels.Lugares.objects.getLugares(geo,distance).values_list("id",flat=True)
+        return self.filter(lugar__id__in=list(l_ids))
+    
+
 class ServicePlay(models.Model):
     """Servicios en Juego 
 
@@ -214,37 +231,37 @@ class ServicePlay(models.Model):
     juego = models.ForeignKey(Juego)
     lugar =models.ForeignKey(geolbsModels.Lugares)
     variables = models.TextField(blank=True,null=True)
+    status = models.IntegerField(choices=CHOICES_STATUS_SERVICE_PLAY, default=1)
+    
+    objects =ServicePlayManager()
 
     class Meta:
-        verbose_name_plural='Servicios del Juego'
+        verbose_name_plural='Servicios en Juego'
         
-    def __evalLogica__(self,body=''):
-        try:
-            exec self.variables
-        except:
-            pass
-        servicePlay=self
-        vr=locals()
-        del(vr['body'])
-        del(vr['self'])
-        return self.service.__evalLogica__(body,**vr)
-
-
-    def identifyService(self):
-        return self.service.identifyService()
-    
-    def triggerService(self,jugador=None):
+    def __func_services__(self,func,**kargs):
+        """ Función que llama a la función dada de Service
+            y retorna su contenido aplicando las variables
+        """
         try:
             exec self.variables.replace('\r','')
         except:
             pass
         servicePlay=self
         r=locals()
-        del(r['jugador'])
+        r.update(kargs)
         del(r['self'])
-        return self.service.triggerService(jugador,**r)
+        return geolbsModels.Service.__dict__[func].__call__(self.service,**r)
+
+
     
-    
+    def triggerService(self,jugador=None):
+        return self.__func_services__('triggerService',jugador=jugador)
+
+    def identifyService(self):
+        return self.__func_services__('identifyService')
+
+
+
     def __unicode__(self):
         return u"%s en %s para el juego %s" % (self.service,self.lugar, self.juego)
 

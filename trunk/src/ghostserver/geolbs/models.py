@@ -19,6 +19,20 @@ class TiposLugar(models.Model) :
         return u"%s" % (self.nombre)
 
 
+class LugaresManager(models.Manager):
+    """ Manager para Lugares
+    """
+
+    def getLugares(self,geo,distance):
+        """ Retorna los Lugares que se encuentran dentro o a una cierta distacia de una geometría
+        """
+        pns=Punto.objects.getPuntosLte(geo,distance).filter(lugares__isnull=False).values_list("id",flat=True)
+        pls=Poligono.objects.getPoligonoContains(geo).filter(lugares__isnull=False).values_list("id",flat=True)
+        return (self.filter(content_type=ContentType.objects.get(name='punto'),object_id__in=list(pns))
+                |self.filter(content_type=ContentType.objects.get(name='poligono'),object_id__in=list(pls)))
+        
+
+
 class Lugares(models.Model) :
     nombre = models.CharField(max_length=80)
     tipolugar = models.ForeignKey(TiposLugar)
@@ -29,8 +43,24 @@ class Lugares(models.Model) :
     object_id = models.PositiveIntegerField(null=True,blank=True)
     content_object = generic.GenericForeignKey()
 
+    objects= LugaresManager()
+
     class Meta:
         verbose_name_plural='Lugares'
+
+
+    def getDistance(self,geo):
+        """ Retorna una distacio con un error aproximadamente de 1% de error en el calculo
+            geo que es una geometría
+        """
+        if not self.content_object:
+            return None
+        geo=geo.clone()
+        if not geo.srs:
+            geo.set_srid(4326)
+        geo.transform('EPSG:900913')
+        
+        return D(m=geo.distance(self.content_object.georef.transform('EPSG:900913',clone=True)))
 
  
     def __unicode__(self):
@@ -39,10 +69,20 @@ class Lugares(models.Model) :
         return u"%s(%s)" % (self.nombre,self.dentrode.nombre)
 
 
+
+class PuntoManager(models.GeoManager):
+    """ Manager con consultar determinadas para la busqueda de puntos
+    """
+    def getPuntosLte(self,geo,distance):
+        """Retorna los Puntos Menores a una distancia
+        """
+        return self.filter(georef__distance_lte=(geo,D(m=distance)))
+
+
 class Punto(models.Model):
     georef = models.PointField(srid=4326)
     lugares = generic.GenericRelation(Lugares)
-    objects =models.GeoManager()
+    objects =PuntoManager()
 
     class Meta:
         verbose_name_plural='Lugares con Punto'
@@ -66,12 +106,25 @@ class Punto(models.Model):
             return u"Punto sin Lugar especificado"
         else:
             return u"%s" % (', '.join(map(lambda x: x.__unicode__(), lug)))
+
+
+
+
+
+class PoligonoManager(models.GeoManager):
+    """ Manager con consultar determinadas para la busqueda de Poligonos
+    """
+    def getPoligonoContains(self,geo):
+        """Retorna los Poligonos que contengan una geometría
+        """
+        return self.filter(georef__contains=geo)
+
         
     
 class Poligono(models.Model):
     georef = models.MultiPolygonField(srid=4326)
     lugares = generic.GenericRelation(Lugares)
-    objects =models.GeoManager()
+    objects =PoligonoManager()
 
 
     class Meta:
@@ -126,17 +179,17 @@ class Service(models.Model):
     logica = models.TextField()
 
 
+   
     def __evalLogica__(self,body='',**kargs):
         vr=locals() # Variables Locales que se encuentran dentro de la función
         vr.update(kargs)
         vr.update(globals()) # Variables Globales y se agregan a vr
+
         logic=self.logica.replace('\r','')
         logic+='\n%s'%body
         exec logic in vr # Se ejecuta body con exec y se pasan como parametro vr para tener consistencia con todas las variables.
 
         return out
-        
-
         try:
             logic=self.logica.replace('\r','')
             logic+='\n%s'%body
@@ -145,11 +198,6 @@ class Service(models.Model):
         except:
             return None
 
-
-    def identifyService(self):
-        return self.__evalLogica__('out=identifyService()')
-
-
     def triggerService(self,jugador=None,**kargs):
         r=self.__evalLogica__('out=triggerService(jugador)',jugador=jugador,**kargs)
         if type(r)==dict:
@@ -157,7 +205,9 @@ class Service(models.Model):
         return {}
 
 
-    
+    def identifyService(self,**kargs):
+        return self.__evalLogica__('out=identifyService()')
+
     class Meta:
         verbose_name_plural='Servicios'
 

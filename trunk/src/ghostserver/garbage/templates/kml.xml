@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/{% block kml_version %}2.1{% endblock %}">
+<Document>{% block name %}{% endblock %}
+{% block styles %}{% for style in styles %}
+  <Style id="{{ style.name }}Icon">
+    <IconStyle>
+      <Icon>
+        <href>{{ SERVER_NAME|safe }}{{ MEDIA_URL|safe}}media/imagesKml/{{ style.icon }}</href>
+      </Icon>
+    </IconStyle>
+  </Style>{% endfor %}{% endblock %}
+{% block placemarks %}{% for place in places %}
+  <Placemark>
+    <name>{% if place.name %}{{ place.name }}{% else %}{{ place }}{% endif %}</name>
+    <description>{% if place.description %}{{ place.description }}{% else %}{{ place }}{% endif %}</description>
+    {{ place.kml|safe }}
+  </Placemark>{% endfor %}{% endblock %}
+</Document>
+</kml>

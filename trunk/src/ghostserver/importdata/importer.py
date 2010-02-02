@@ -38,6 +38,7 @@ converter=[
 
 addons=[
 ('rawOSMBeta',"osm_add_postgis",'from django.contrib.gis.gdal import SpatialReference\n\tfrom django.contrib.gis.utils import add_postgis_srs\n\tadd_postgis_srs(SpatialReference(900913)) '),
+
 ]
 
 

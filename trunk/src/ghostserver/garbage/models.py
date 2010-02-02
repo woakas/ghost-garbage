@@ -71,8 +71,6 @@ class Jugador(models.Model) :
 
 
 
-
-
     def getFeaturePlay(self,feature,list=False):
         """ Retorna el Feature o Features que el jugador tiene
             si se envia el parámetro list retornará todos los features
@@ -110,8 +108,6 @@ class Jugador(models.Model) :
 
 
 
-
-
     def getPuntosLte(self,distance):
         """Retorna los puntos cercanos menores a una distacia determinada en metros
         """
@@ -131,6 +127,24 @@ class Jugador(models.Model) :
             if len(sp)>0 and sp[0].status ==1:
                 ms.append((sp[0].identifyService(),i.distance))
         return ms
+
+
+
+    def getPlaceMarks(self):
+        """ Retorna un diccionario con el atributo nombre, descripcion,
+            icon y geo para la generación de KML o algún otro servicio.
+        """
+        spp=self.getServicesVisibles()
+        attrs=[]
+        for sp in spp:
+            attrs.append({
+                    'nombre':sp.service.nombre,
+                    'descripcion':sp.service.descripcion,
+                    'icon':sp.service.icon,
+                    'style':sp.service.icon.name.split('/')[-1].replace('.png','').capitalize(),
+                    'geo':sp.lugar.content_object.georef
+                    })
+        return attrs
 
 
     
@@ -255,11 +269,15 @@ class ServicePlay(models.Model):
 
     
     def triggerService(self,jugador=None):
+        """ Llama el trigger del servicio asociado asociado a un jugador
+        """
         return self.__func_services__('triggerService',jugador=jugador)
 
-    def identifyService(self):
-        return self.__func_services__('identifyService')
 
+    def identifyService(self):
+        """ Retorna el identify Del servicio en juego
+        """
+        return self.__func_services__('identifyService')
 
 
     def __unicode__(self):

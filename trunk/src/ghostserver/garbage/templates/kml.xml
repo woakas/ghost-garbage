@@ -11,9 +11,10 @@
   </Style>{% endfor %}{% endblock %}
 {% block placemarks %}{% for place in places %}
   <Placemark>
-    <name>{% if place.name %}{{ place.name }}{% else %}{{ place }}{% endif %}</name>
-    <description>{% if place.description %}{{ place.description }}{% else %}{{ place }}{% endif %}</description>
-    {{ place.kml|safe }}
+    <styleUrl>#{{ place.style }}Icon</styleUrl>
+    <name>{{ place.nombre }}</name>
+    <description>{{ place.descripcion }}</description>
+    {{ place.geo.kml|safe }}
   </Placemark>{% endfor %}{% endblock %}
 </Document>
 </kml>

@@ -117,9 +117,9 @@ def getKml(request,idJ=None):
     except garbageModels.Jugador.DoesNotExist:
         raise Http404
     
+    places=j.getPlaceMarks()
 
-    
-    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST'])}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
+    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
 
     if not idJ:
         

@@ -20,7 +20,7 @@ converter=[
 ("TypesFeatures","typesfeatures.csv","","TypesFeatures(nombre='%s',descripcion='%s')"),
 ("Juego","juegos.csv","","Juego(name='%s')"),
 ("TypesServices","typesservices.csv","","TypesService(nombre='%s',descripcion='%s')"),
-("Services","services.csv","","Service(nombre='%s',descripcion='%s',clase=TypesService.objects.get(nombre='%s'),logica='%s')"),
+("Services","services.csv","","Service(nombre='%s',descripcion='%s',clase=TypesService.objects.get(nombre='%s'),icon='media/icons/%s.png',logica='%s')"),
 ("TypesLugares","typeslugares.csv","","TiposLugar(nombre='%s',descripcion='%s')"),
 ("Lugares","lugares.csv","p=%s;p.save();p.lugares.create(nombre='%s',tipolugar=TiposLugar.objects.get(nombre='%s'))","p",[0,1,2],3),
 ("ServicesPlay","servicesplay.csv","","ServicePlay(service=Service.objects.get(nombre='%s'),juego=Juego.objects.get(name='%s'),lugar=Lugares.objects.get(nombre='%s'),variables='%s')"),

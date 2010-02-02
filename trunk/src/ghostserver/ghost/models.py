@@ -31,7 +31,7 @@ class Personas(models.Model) :
     telefono = models.CharField(max_length=50, blank = True, null=True)
     url = models.URLField(blank=True,null=True)
     user = models.ForeignKey(User)
-    foto = models.ImageField(upload_to='images/people',blank=True)
+    foto = models.ImageField(upload_to='media/images/people',blank=True)
     sexo = models.IntegerField(choices=CHOICES_TYPE_SEX)
     menus = models.ManyToManyField(Menu,blank=True)
 

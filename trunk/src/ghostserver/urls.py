@@ -38,7 +38,7 @@ urlpatterns = patterns('',
 if settings.STATIC_MEDIA:
     urlpatterns += patterns('',
                             ## Servir Archivos Media, css y JS
-                            (r'^'+settings.ROOT_PREFIX+'static/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT , 'show_indexes': True}),
+                            (r'^'+settings.ROOT_PREFIX+'static/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGE_ROOT , 'show_indexes': True}),
                             (r'^'+settings.ROOT_PREFIX+'static/css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_ROOT , 'show_indexes': True}),
                             (r'^'+settings.ROOT_PREFIX+'static/js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_ROOT , 'show_indexes': True}),
                             )

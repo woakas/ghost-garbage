@@ -176,6 +176,7 @@ class Service(models.Model):
     nombre = models.CharField(max_length=30,unique=True)
     descripcion = models.CharField(max_length=50)
     clase =models.ForeignKey(TypesService)
+    icon = models.ImageField(upload_to='media/icons')
     logica = models.TextField()
 
 

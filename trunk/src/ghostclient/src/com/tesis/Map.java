@@ -19,6 +19,7 @@ import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 import vista.Padre;
+import vista.Inventario;
 
 import Logica.ConnectHttp;
 
@@ -40,33 +41,35 @@ import com.nutiteq.location.providers.LocationAPIProvider;
 public class Map implements CommandListener, PlaceListener {
 	private Form mMainForm;
 	private MapItem mapItem;
-	private Command regresar, menu, identificar,inventario;
+	private Command regresar, menu, identificar,inventario, servicios;
 	private Display display;
 	private Displayable next;
 	private Padre identify;
-	private Padre inventory;
+	private Inventario inventory;
 	private Image icon;
 	private String key = "fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 	private StringItem message, puntaje, estado;
 	private Alert alert;
 	private static int zoom = 17;
 
-	KmlUrlReader pp;
+	//KmlUrlReader pp;
 
 	public Map(MIDlet midlet, final Display display, Displayable next) {
 		this.display = display;
 		this.next = next;
-		pp = new KmlUrlReader(
+		puntaje= new StringItem("Puntaje","0");
+		estado= new StringItem("Estado","");
+		/*pp = new KmlUrlReader(
 				//"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
 				vista.GhostGarbage.URLGHOST+"data/kml/",
 				true) {
 			public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom) {
 				return true;
 			}
-		};
+		};*/
 		mapItem = new MapItem("Mapa", key, midlet, 300, 150, new WgsPoint(
 				-74.09626007080078, 4.652224439717772), zoom);
-		mapItem.addKmlService(pp);
+		//mapItem.addKmlService(pp);
 		mapItem.defineControlKey(ControlKeys.MOVE_UP_KEY, Canvas.KEY_NUM2);
 		mapItem.defineControlKey(ControlKeys.MOVE_DOWN_KEY, Canvas.KEY_NUM8);
 		mapItem.defineControlKey(ControlKeys.MOVE_LEFT_KEY, Canvas.KEY_NUM4);
@@ -80,14 +83,14 @@ public class Map implements CommandListener, PlaceListener {
 		regresar = new Command("Regresar", Command.OK, 1);
 		identificar = new Command("Identificar", Command.OK, 1);
 		inventario = new Command("Inventario", Command.OK, 1);
+		servicios = new Command("Acceder Servicios", Command.OK, 1);
 		mMainForm = new Form("Ghost Garbage");
 		mMainForm.append(mapItem);
 		mMainForm.addCommand(menu);
 		mMainForm.addCommand(regresar);
 		mMainForm.addCommand(identificar);
 		mMainForm.addCommand(inventario);
-		puntaje= new StringItem("Puntaje","0");
-		estado= new StringItem("Estado","");
+		mMainForm.addCommand(servicios);
 		mMainForm.setCommandListener(this);
 		mapItem.startMapping();
 		message = new StringItem("", "");
@@ -139,7 +142,7 @@ public class Map implements CommandListener, PlaceListener {
 
 		// Mostrar Localizacion gps
 		if (System.getProperty("microedition.location.version") != null) {
-			final LocationSource dataSource = new LocationAPIProvider(3000) {
+			final LocationSource dataSource = new LocationAPIProvider(7000) {
 				public WgsPoint getLocation() {
 					WgsPoint wp = super.getLocation();
 					String body = ConnectHttp
@@ -152,6 +155,8 @@ public class Map implements CommandListener, PlaceListener {
 							JSONObject js = new JSONObject(body);
 							wp = new WgsPoint(Double.parseDouble(js.getString("lon")), 
 									Double.parseDouble(js.getString("lat")));
+							mapItem.getZoom();
+							mapItem.getZoomRange();
 							if (js.optBoolean("puntaje_change",false)){
 								puntaje.setText(js.optString("puntaje",puntaje.getText()));
 							}
@@ -166,13 +171,14 @@ public class Map implements CommandListener, PlaceListener {
 								alert = new Alert ("Mensaje", js.getString("messageAlert"), img1,AlertType.ERROR);
 								display.setCurrent(alert);
 								display.vibrate(2);
-							} 
+							}
 						}else {
 							wp=new WgsPoint(vista.GhostGarbage.LON_DEFAULT,vista.GhostGarbage.LAT_DEFAULT);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
+					
 					return wp;
 				}
 			};
@@ -211,9 +217,13 @@ public class Map implements CommandListener, PlaceListener {
 		if (c == menu) {
 			display.setCurrent(next);
 		}
-
 		else if (c == regresar) {
-		}  else if (c == identificar) {
+
+		}  
+		else if (c == servicios) {
+
+		}
+		else if (c == identificar) {
 			try {
 				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/identifyServices/");
 				identify = new vista.Padre(display,this.call(),js.optString("services", "No hay servicios Cercanos"),"identificar.png","logoj.png", "Identificar");
@@ -222,8 +232,9 @@ public class Map implements CommandListener, PlaceListener {
 			display.setCurrent(identify);
 		} else if (c == inventario) {
 			try {
-				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/");
-				inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
+				//JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/");
+				inventory = new vista.Inventario(display,this.call(),"escobita.png","fantasma.png");
+				//inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
 			} catch (IOException e) {
 			}
 			display.setCurrent(inventory);
@@ -240,6 +251,9 @@ public class Map implements CommandListener, PlaceListener {
 	}
 	public void setEstado(String estado){
 		this.estado.setText(estado);
+	}
+	public MapItem getMapItem(){
+		return mapItem;
 	}
 	public Form call() {
 		return mMainForm;

@@ -16,6 +16,9 @@ import javax.microedition.lcdui.TextField;
 import org.json.me.JSONObject;
 
 import Logica.*;
+
+import com.nutiteq.components.WgsBoundingBox;
+import com.nutiteq.kml.KmlUrlReader;
 import com.tesis.Map;
 
 public class Usuarios extends Form implements CommandListener {
@@ -65,6 +68,16 @@ public class Usuarios extends Form implements CommandListener {
 				mapa.setPuntaje(js.optString("puntaje", "0"));
 				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getEstado/");
 				mapa.setEstado(js.optString("estado", ""));
+				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getIdJugador/");
+				KmlUrlReader pp = new KmlUrlReader(
+				//"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
+				vista.GhostGarbage.URLGHOST+"data/kml/"+js.optString("idJugador","")+"/",
+				true) {
+						public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom) {
+							return true;
+						}
+				};
+					mapa.getMapItem().addKmlService(pp);
 				display.setCurrent(mapa.call());
 			} 
 		}

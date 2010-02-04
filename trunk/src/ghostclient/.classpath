@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="con" path="J2MELIB"/>
-	<classpathentry exported="true" kind="lib" path="maps_lib-0.8.0.jar"/>
 	<classpathentry kind="lib" path="C:/Archivos de programa/Java/jre1.6.0_07/lib/rt.jar"/>
 	<classpathentry exported="true" kind="lib" path="jsonme.jar"/>
+	<classpathentry exported="true" kind="lib" path="maps_lib-0.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

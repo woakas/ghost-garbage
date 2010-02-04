@@ -25,8 +25,8 @@ public class Padre extends Form implements CommandListener {
 	addCommand(regresar);
 	setCommandListener(this);
 	}
-	public void commandAction(Command co, Displayable d){
-		if (co==regresar){
+	public void commandAction(Command c, Displayable d){
+		if (c.getLabel() =="Regresar"){
 			display.setCurrent(next); 
 		}
 	}

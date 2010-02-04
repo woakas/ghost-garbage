@@ -34,8 +34,7 @@ public class GhostGarbage extends MIDlet {
         pres.setFullScreenMode(true);
 		img = Image.createImage("/logogrup.png");
 		img1 = Image.createImage("/cerrar.png");
-		intro = new Intro(p, pres, img, 5000);
-		
+		intro = new Intro(p, pres, img, 5000);	
 		mapa = new Map((MIDlet)(this), p, pres);
 		usuarios = new Usuarios(p,pres,img1,mapa,"escobita.png","fantasma.png");
 		ayuda = new Padre(p, pres,"Ghost Garbage es un juego que consiste en recolectar la mayor cantidad de objetos los cuales aparecerán aleatoriamente en el mapa, consiguiéndolos al ir a cada uno de los sitios descritos de forma física antes de ser eliminado por un adversario. O existe otra opción la cual es eliminar al adversario de tal manera que no logre recolectar objetos, Para mayor información visite la página http://ghost.webhop.org/","ayuda.png","logoj.png","Ayuda");

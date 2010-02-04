@@ -52,8 +52,8 @@ public class Usuarios extends Form implements CommandListener {
 	setCommandListener(this);
 	}
 	
-	public void commandAction(Command co, Displayable d){
-		if (co==ingresar){
+	public void commandAction(Command c, Displayable d){
+		if (c.getLabel() =="Ingresar"){
 			tm = new Timer();
 			pr = new Progreso(load);
 			tm.scheduleAtFixedRate(pr, 0, 1000);
@@ -81,7 +81,7 @@ public class Usuarios extends Form implements CommandListener {
 				display.setCurrent(mapa.call());
 			} 
 		}
-		else if (co==regresar){
+		else if (c.getLabel() =="Regresar"){
 			display.setCurrent(next); 
 		}
 	}

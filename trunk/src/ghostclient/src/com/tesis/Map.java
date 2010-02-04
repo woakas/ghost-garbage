@@ -15,11 +15,12 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.StringItem;
 import javax.microedition.midlet.MIDlet;
 
+import org.json.me.JSONArray;
 import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 import vista.Padre;
-import vista.Inventario;
+import vista.Lista;
 
 import Logica.ConnectHttp;
 
@@ -45,7 +46,7 @@ public class Map implements CommandListener, PlaceListener {
 	private Display display;
 	private Displayable next;
 	private Padre identify;
-	private Inventario inventory;
+	private Lista inventory,services;
 	private Image icon;
 	private String key = "fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 	private StringItem message, puntaje, estado;
@@ -118,8 +119,8 @@ public class Map implements CommandListener, PlaceListener {
 
 		// linea
 		WgsPoint[] linePoints = {
-		// new WgsPoint(-74.13538813591003, 4.630740894173603),
-		// new WgsPoint(-74.13138813591003, 4.631740894173603),
+				// new WgsPoint(-74.13538813591003, 4.630740894173603),
+				// new WgsPoint(-74.13138813591003, 4.631740894173603),
 		};
 
 		final Line line = new Line(linePoints, new LineStyle(0xFF0000, 5));
@@ -146,17 +147,16 @@ public class Map implements CommandListener, PlaceListener {
 				public WgsPoint getLocation() {
 					WgsPoint wp = super.getLocation();
 					String body = ConnectHttp
-							.getUrlBody(vista.GhostGarbage.URLGHOST
-									+ "mobile/position/" + wp.getLon() + "/"
-									+ wp.getLat() + "/");
+					.getUrlBody(vista.GhostGarbage.URLGHOST
+							+ "mobile/position/" + wp.getLon() + "/"
+							+ wp.getLat() + "/");
 					System.out.println(body);
 					try {
 						if (body != null) {
 							JSONObject js = new JSONObject(body);
 							wp = new WgsPoint(Double.parseDouble(js.getString("lon")), 
 									Double.parseDouble(js.getString("lat")));
-							mapItem.getZoom();
-							mapItem.getZoomRange();
+							mapItem.mapMoved();
 							if (js.optBoolean("puntaje_change",false)){
 								puntaje.setText(js.optString("puntaje",puntaje.getText()));
 							}
@@ -178,15 +178,15 @@ public class Map implements CommandListener, PlaceListener {
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
-					
+
 					return wp;
 				}
 			};
 			try {
 				final Image gpsPresentImage = Image
-						.createImage("/banderinazul.png");
+				.createImage("/banderinazul.png");
 				final Image gpsConnectionLost = Image
-						.createImage("/banderinrojo.png");
+				.createImage("/banderinrojo.png");
 				final LocationMarker marker = new NutiteqLocationMarker(
 						new PlaceIcon(gpsPresentImage, 4, 16), new PlaceIcon(
 								gpsConnectionLost, 4, 16), 0, true);
@@ -214,28 +214,46 @@ public class Map implements CommandListener, PlaceListener {
 	}
 
 	public void commandAction(Command c, Displayable d) {
-		if (c == menu) {
+		if (c.getLabel() =="Menu Principal") {
 			display.setCurrent(next);
 		}
-		else if (c == regresar) {
+		else if (c.getLabel() =="Regresar") {
 
 		}  
-		else if (c == servicios) {
-
+		else if (c.getLabel() =="Acceder Servicios") {
+			try {
+				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/services/");
+				JSONArray jsa = js.optJSONArray("services");
+				String aux [] = new String [jsa.length()];
+				for (int i=0;i<jsa.length(); i++){
+					aux[i] = jsa .optString(i,"");
+				}
+				services= new vista.Lista(display,this.call(),aux,"escobita.png","fantasma.png","Enviar");
+				//inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
+			} catch (IOException e) {
+			}
+			display.setCurrent(services);
 		}
-		else if (c == identificar) {
+		else if (c.getLabel() =="Identificar") {
 			try {
 				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/identifyServices/");
 				identify = new vista.Padre(display,this.call(),js.optString("services", "No hay servicios Cercanos"),"identificar.png","logoj.png", "Identificar");
 			} catch (IOException e) {
 			}
 			display.setCurrent(identify);
-		} else if (c == inventario) {
+		} else if (c.getLabel() =="Inventario") {
 			try {
 				//JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/");
-				inventory = new vista.Inventario(display,this.call(),"escobita.png","fantasma.png");
-				//inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
-			} catch (IOException e) {
+				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/");
+				JSONArray jsa = js.optJSONArray("services");
+				String aux [] = new String [jsa.length()];
+				for (int i=0;i<jsa.length(); i++){
+					aux[i] = jsa .optString(i,"");
+					//inventory = new vista.Padre(display,this.call(),js.optString("services", "No Tiene nada en su inventario"),"inventario.png","logoj.png", "Inventario actual");
+				}
+				inventory = new vista.Lista(display,this.call(),aux,"escobita.png","fantasma.png","Activar");
+			}
+			catch (IOException e) {
 			}
 			display.setCurrent(inventory);
 		}

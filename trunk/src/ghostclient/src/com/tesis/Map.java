@@ -147,7 +147,7 @@ public class Map implements CommandListener, PlaceListener {
 
 		// Mostrar Localizacion gps
 		if (System.getProperty("microedition.location.version") != null) {
-			final LocationSource dataSource = new LocationAPIProvider(7000) {
+			final LocationSource dataSource = new LocationAPIProvider(4000) {
 				public WgsPoint getLocation() {
 					WgsPoint wp = super.getLocation();
 					String body = ConnectHttp

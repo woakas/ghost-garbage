@@ -69,7 +69,7 @@ public class Usuarios extends Form implements CommandListener {
 				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getEstado/");
 				mapa.setEstado(js.optString("estado", ""));
 				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getIdJugador/");
-				KmlUrlReader pp = new KmlUrlReader(
+				/*KmlUrlReader pp = new KmlUrlReader(
 				//"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
 				vista.GhostGarbage.URLGHOST+"data/kml/"+js.optString("idJugador","")+"/",
 				true) {
@@ -77,7 +77,7 @@ public class Usuarios extends Form implements CommandListener {
 							return true;
 						}
 				};
-					mapa.getMapItem().addKmlService(pp);
+					mapa.getMapItem().addKmlService(pp);*/
 				display.setCurrent(mapa.call());
 			} 
 		}

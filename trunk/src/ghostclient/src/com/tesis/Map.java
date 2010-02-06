@@ -1,6 +1,8 @@
 package com.tesis;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
@@ -38,6 +40,7 @@ import com.nutiteq.location.LocationMarker;
 import com.nutiteq.location.LocationSource;
 import com.nutiteq.location.NutiteqLocationMarker;
 import com.nutiteq.location.providers.LocationAPIProvider;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 public class Map implements CommandListener, PlaceListener {
 	private Form mMainForm;
@@ -47,7 +50,8 @@ public class Map implements CommandListener, PlaceListener {
 	private Displayable next;
 	private Padre identify;
 	private Lista inventory,services;
-	private Image icon;
+	private Hashtable icons = new Hashtable();
+	private Hashtable places= new Hashtable();
 	private String key = "fe131d7f5a6b38b23cc967316c13dae24aef25e2a8e067.74529412";
 	private StringItem message, puntaje, estado;
 	private Alert alert;
@@ -111,11 +115,11 @@ public class Map implements CommandListener, PlaceListener {
 		else
 			mapItem.showDefaultControlsOnScreen(false);
 		try {
-			icon = Image.createImage("/casita.png");
+			Image icon = Image.createImage("/casita.png");
+			icons.put("/casita.png",icon);
 		} catch (IOException e) {
 		}
-		mapItem.addPlace(new Place(1, "Casita", icon, vista.GhostGarbage.LON_DEFAULT,
-				vista.GhostGarbage.LAT_DEFAULT));
+		//mapItem.addPlace(new Place(1, "Casita", icon, vista.GhostGarbage.LON_DEFAULT,	vista.GhostGarbage.LAT_DEFAULT));
 
 		// linea
 		WgsPoint[] linePoints = {
@@ -175,10 +179,33 @@ public class Map implements CommandListener, PlaceListener {
 						}else {
 							wp=new WgsPoint(vista.GhostGarbage.LON_DEFAULT,vista.GhostGarbage.LAT_DEFAULT);
 						}
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-
+						
+						JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST + "data/json/");
+						if (js.optString("status").equals("OK")){							
+						JSONArray jsa = js.optJSONArray("places");
+						Place [] pls = new Place[jsa.length()];
+						Hashtable tempPlaces = new Hashtable();
+						for (int i=0;i<jsa.length(); i++){							
+							pls [i] = new Place(1, jsa.optJSONObject(i).optString("nombre","no name"), getImage(jsa.optJSONObject(i).optString("icon","/casita.png")),
+									Double.parseDouble(jsa.optJSONObject(i).optString("lon","0.0")),Double.parseDouble(jsa.optJSONObject(i).optString("lat","0.0")));
+							tempPlaces.put(jsa.optJSONObject(i).optString("id",""), pls[i]);
+						}						
+						mapItem.addPlaces(pls);
+						for (Enumeration en = places.keys(); en.hasMoreElements();){
+							String tt = (String) en.nextElement();
+							Place p = (Place) places.get(tt);
+							Place pt = (Place) tempPlaces.get(tt);
+							if (pt==null){
+								mapItem.removePlace(p);
+							}
+							else if(!((Place) places.get(tt)).getWgs().equals(((Place) tempPlaces.get(tt)).getWgs())){
+								mapItem.removePlace((Place) places.get(tt));	
+							}
+						}
+						places = tempPlaces; 
+						}
+						
+					} catch (JSONException e) {	}
 					return wp;
 				}
 			};
@@ -275,5 +302,17 @@ public class Map implements CommandListener, PlaceListener {
 	}
 	public Form call() {
 		return mMainForm;
-	}	
+	}
+	protected Image getImage(String url){
+		Image n = (Image) icons.get(url);
+		if (n == null){
+			try {
+				n = Image.createImage(url);
+				icons.put(url, n);
+			} catch (IOException e) {
+				return (Image) icons.get("/casita.png");
+			}
+		}
+		return n;		
+	}
 }

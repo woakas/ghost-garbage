@@ -14,8 +14,13 @@ class FeatureServicePlayAdmin(admin.ModelAdmin):
 
 
 
-
-admin.site.register(Jugador)
+class JugadorAdmin(admin.ModelAdmin):
+    list_display = ('nickname','persona','juego','status')
+    list_filter = ('juego', 'status')
+    list_editable= ('status',)
+    
+    
+admin.site.register(Jugador,JugadorAdmin)
 admin.site.register(Juego)
 admin.site.register(TypesFeatures)
 admin.site.register(Features)

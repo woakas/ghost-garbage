@@ -199,7 +199,7 @@ class Service(models.Model):
         except:
             return None
 
-    def triggerService(self,jugador=None,**kargs):
+    def triggerService(self,jugador,**kargs):
         r=self.__evalLogica__('out=triggerService(jugador)',jugador=jugador,**kargs)
         if type(r)==dict:
             return r
@@ -207,7 +207,7 @@ class Service(models.Model):
 
 
     def identifyService(self,**kargs):
-        return self.__evalLogica__('out=identifyService()')
+        return self.__evalLogica__('out=identifyService()',**kargs)
 
     class Meta:
         verbose_name_plural='Servicios'

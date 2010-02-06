@@ -24,6 +24,25 @@ class Juego(models.Model):
 
 
 
+
+class JugadorManager(models.Manager):
+    """ Manager para Jugador
+    """
+
+    def getJugadores(self,point,distance=0,**kargs):
+        """ Retorna los jugadores dados en un rango de distancia 
+            un punto
+        """
+        rgs={}
+        rgs['georef__distance_lte']=(point,geolbsModels.D(m=distance))
+        rgs['jugador__isnull']=False
+        rgs.update(kargs)
+        j_ids=geolbsModels.Punto.objects.filter(**rgs).values_list("id",flat=True)
+        
+        return self.filter(position__id__in=list(j_ids))
+
+
+
 class Jugador(models.Model) :
     """Posee todos los atributos y las especificaciones del jugador
        dentro de un juego específico esto permitirá tener varios juegos
@@ -35,6 +54,7 @@ class Jugador(models.Model) :
     status = models.IntegerField(choices=CHOICES_STATUS, default=2)
     position = models.ForeignKey(geolbsModels.Punto)
 
+    objects=JugadorManager()
 
 
     class Meta:
@@ -66,24 +86,27 @@ class Jugador(models.Model) :
         """
         ms={}
         for sp in self.getServicesVisibles():
-            ms.update(sp.triggerService(self))
+            ms.update(sp.triggerService(self) or {})
         return ms
 
 
 
-    def getFeaturePlay(self,feature,list=False):
+    def getFeaturePlay(self,feature=None,list=False,all=False):
         """ Retorna el Feature o Features que el jugador tiene
             si se envia el parámetro list retornará todos los features
             que posea este jugador con dicho nombre
         """
-        try:
-            ft=Features.objects.get(nombre=feature)
-        except:
-            if list:
-                return []
-            return None
-        
-        fs=FeatureServicePlay.objects.filter(jugador=self,feature=ft)
+        if not all:
+            try:
+                ft=Features.objects.get(nombre=feature)
+            except:
+                if list:
+                    return []
+                return None
+            fs=FeatureServicePlay.objects.filter(jugador=self,feature=ft)
+        else:
+            fs=FeatureServicePlay.objects.filter(jugador=self)
+            list=True
         
         if len(fs)>0 and list==False:
             return fs[0]
@@ -93,17 +116,28 @@ class Jugador(models.Model) :
 
 
     def getValue(self,feature,default=None):
+        """Retorna el valor de un feature dado si este no existe 
+           se retorna lo que se tenga por default
+        """
         value=self.getFeaturePlay(feature)
         if value:
             return value.getValue()
         return default
 
 
+    def getVariable(self,variable,feature=None,default=None):
+        fsps=self.getFeaturePlay(all=True)
+        for fsp in fsps:
+            r=fsp.getVariable(variable)
+            if r:
+                return r
+        return default
+            
+
     def getServicesVisibles(self):
         """Retorna los Servicios Visibles para el Jugador
         """
         dis= self.getValue('Vision',Features.objects.get(nombre="Vision").defaultValue())
-        
         return ServicePlay.objects.getServices(self.position.georef,dis).filter(juego=self.juego)
 
 
@@ -125,7 +159,9 @@ class Jugador(models.Model) :
         for i in pn:
             sp=i.lugares.get().serviceplay_set.filter()
             if len(sp)>0 and sp[0].status ==1:
-                ms.append((sp[0].identifyService(),i.distance))
+                serv=sp[0].identifyService(jugador=self)
+                if serv:
+                    ms.append((serv,i.distance))
         return ms
 
 
@@ -134,26 +170,37 @@ class Jugador(models.Model) :
         """ Retorna un diccionario con el atributo nombre, descripcion,
             icon y geo para la generación de KML o algún otro servicio.
         """
-        spp=self.getServicesVisibles()
+        spp=self.getServicesVisibles().filter(status=1)
         attrs=[]
         for sp in spp:
+            if sp.identifyService(jugador=self):
+                attrs.append({
+                        'nombre':sp.service.nombre,
+                        'descripcion':sp.service.descripcion,
+                        'icon':sp.service.icon,
+                        'style':sp.service.icon.name.split('/')[-1].replace('.png','').capitalize(),
+                        'geo':sp.lugar.content_object.georef,
+                        'id':'%s_%d'%(sp.service.nombre.replace(' ',''),sp.id),
+                        'status':sp.status==1 and True or False
+                        })
+
+        fsp_id=FeatureServicePlay.objects.filter(feature=Features.objects.get(nombre="Tipo Jugador"),variables=self.getFeaturePlay('Tipo Jugador').variables).values_list("id",flat=True)
+        for j in Jugador.objects.filter(featureserviceplay__id__in=fsp_id).exclude(id=self.id):
             attrs.append({
-                    'nombre':sp.service.nombre,
-                    'descripcion':sp.service.descripcion,
-                    'icon':sp.service.icon,
-                    'style':sp.service.icon.name.split('/')[-1].replace('.png','').capitalize(),
-                    'geo':sp.lugar.content_object.georef
+                    'nombre':j.nickname,
+                    'descripcion':"Jugador %s"%(j.nickname),
+                    'icon':'media/icons/colector.png',
+                    'style':'Colector',
+                    'geo':j.position.georef,
+                    'id':'%s_%d'%('Colector',j.id),
+                    'status':j.status==1 and True or False
                     })
         return attrs
-
+        
 
     
     def __unicode__(self):
         return u"%s" % (self.nickname or self.persona.user.username)
-
-    
-
-
 
 
 class TypesFeatures(models.Model):
@@ -169,8 +216,6 @@ class TypesFeatures(models.Model):
     
     def __unicode__(self):
         return u"%s" % (self.nombre)
-    
-
     
 
 class Features(models.Model):
@@ -215,6 +260,9 @@ class Features(models.Model):
     def __setValue__(self,pnt=0,**kargs):
         return self.__evalLogica__('out=setValue(%d)'%pnt,**kargs)
 
+    def __getVariable__(self,variable=None,**kargs):
+        return self.__evalLogica__('out=locals().get("%s",None)'%variable,**kargs)
+
 
     def defaultValue(self,**kargs):
         return self.__evalLogica__('out=defaultValue()',**kargs)
@@ -224,9 +272,6 @@ class Features(models.Model):
     def __unicode__(self):
         return u"%s" % (self.nombre)
     
-
-
-
 
 class ServicePlayManager(models.Manager):
     """ Manager para Servicios en Juego
@@ -268,23 +313,20 @@ class ServicePlay(models.Model):
 
 
     
-    def triggerService(self,jugador=None):
+    def triggerService(self,jugador,**kargs):
         """ Llama el trigger del servicio asociado asociado a un jugador
         """
-        return self.__func_services__('triggerService',jugador=jugador)
+        return self.__func_services__('triggerService',jugador=jugador,**kargs)
 
 
-    def identifyService(self):
+    def identifyService(self,**kargs):
         """ Retorna el identify Del servicio en juego
         """
-        return self.__func_services__('identifyService')
+        return self.__func_services__('identifyService',**kargs)
 
 
     def __unicode__(self):
         return u"%s en %s para el juego %s" % (self.service,self.lugar, self.juego)
-
-
-
 
 
 class FeatureServicePlay(models.Model):
@@ -319,6 +361,10 @@ class FeatureServicePlay(models.Model):
         return self.__func_features__('__getValue__')
 
 
+    def getVariable(self,variable):
+        return self.__func_features__('__getVariable__',variable=variable)
+
+
     def setValue(self,pnt):
         return self.__func_features__('__setValue__',pnt=pnt)
   
@@ -326,5 +372,4 @@ class FeatureServicePlay(models.Model):
     def __unicode__(self):
         return u"%s" % (self.feature)
     
-
 

@@ -41,5 +41,6 @@ if settings.STATIC_MEDIA:
                             (r'^'+settings.ROOT_PREFIX+'static/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGE_ROOT , 'show_indexes': True}),
                             (r'^'+settings.ROOT_PREFIX+'static/css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_ROOT , 'show_indexes': True}),
                             (r'^'+settings.ROOT_PREFIX+'static/js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_ROOT , 'show_indexes': True}),
+                            (r'^'+settings.ROOT_PREFIX+'static/downloads/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.DOWNLOADS_ROOT , 'show_indexes': True}),
                             )
     

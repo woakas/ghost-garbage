@@ -97,17 +97,37 @@ def identifyServices(request):
 
 
 @login_required
-def inventory(request):
+def services(request,field=None):
     p=request.user.personas_set.all()
     if p>0:
         p=p[0]
         j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
-        iserv="No tiene nada en el Inventario."
+
+        if field:
+            return HttpResponse(simplejson.dumps({'status':'OK','services':['X2','Oscuridad','Muro']}))
+
+        iserv=["Comprar","Vender"]
         
         return HttpResponse(simplejson.dumps({'status':'OK','services':iserv}))
     return HttpResponse(simplejson.dumps({'status':'ERROR'}))
 
 
+
+
+
+@login_required
+def inventory(request,field=None):
+    p=request.user.personas_set.all()
+    if p>0:
+        p=p[0]
+        j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+        if field:
+            return HttpResponse(simplejson.dumps({'status':'OK','messageAlert':field+' Activo','iconAlert':'oscuridad.png'}))
+
+        iserv=["X2","Oscuridad"]
+        
+        return HttpResponse(simplejson.dumps({'status':'OK','services':iserv}))
+    return HttpResponse(simplejson.dumps({'status':'ERROR'}))
 
 
 
@@ -118,61 +138,5 @@ def getKml(request,idJ=None):
         raise Http404
     
     places=j.getPlaceMarks()
-
-    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
-
-    if not idJ:
-        
-        
-        iserv="""<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://earth.google.com/kml/2.0" xmlns:fs="http://featureserver.com/ns" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-<atom:link rel="self" href="http://dev1.ghost.webhop.org/data/kml/5" type="application/vnd.google-earth.kml+xml" /> 
-<Style id="PepitaIcon">
-<IconStyle>
-<Icon>
-<href>http://dev1.ghost.webhop.org/static/media/kml/puntos.png</href>
-</Icon>
-</IconStyle>
-</Style>    
-</Document>
-        </kml>"""
-        return HttpResponse(iserv,mimetype='text/xml; charset=utf-8')
-
-    j=garbageModels.Jugador.objects.get(id=idJ)
-    
-   
-    puntos=""
-    for i in j.getPuntos():
-        puntos+="""
-<Placemark>
-<styleUrl>#PepitaIcon</styleUrl>
- <Point>
- <coordinates>%f,%f</coordinates>
-</Point>
-<name>Pepita</name>
-<description>TESTES</description>
-</Placemark>
-"""%(i.georef.x,i.georef.y)
-
-    
-
-    iserv="""<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://earth.google.com/kml/2.0" xmlns:fs="http://featureserver.com/ns" xmlns:atom="http://www.w3.org/2005/Atom">
-<Document>
-<atom:link rel="self" href="http://dev1.ghost.webhop.org/data/kml/5" type="application/vnd.google-earth.kml+xml" /> 
-<Style id="PepitaIcon">
-<IconStyle>
-<Icon>
-<href>http://dev1.ghost.webhop.org/static/media/kml/puntos.png</href>
-</Icon>
-</IconStyle>
-</Style>    
-%s
-</Document>
-        </kml>"""%puntos
-            
-    return HttpResponse(iserv,mimetype='text/xml; charset=utf-8')
-        
-    
-
+    styles=[{'name':'Puntos','icon':'puntos','disable':True},{'name':'Base','icon':'nacibuenos','disable':False},{'name':'Colector','icon':'colector','disable':True}]
+    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places,'styles':styles}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')

@@ -5,13 +5,20 @@
   <Style id="{{ style.name }}Icon">
     <IconStyle>
       <Icon>
-        <href>{{ SERVER_NAME|safe }}{{ MEDIA_URL|safe}}media/imagesKml/{{ style.icon }}</href>
+        <href>{{ SERVER_NAME|safe }}{{ MEDIA_URL|safe}}media/icons/{{ style.icon }}.png</href>
       </Icon>
     </IconStyle>
-  </Style>{% endfor %}{% endblock %}
+  </Style>
+  {% if style.disable %}<Style id="{{ style.name }}DisableIcon">
+    <IconStyle>
+      <Icon>
+        <href>{{ SERVER_NAME|safe }}{{ MEDIA_URL|safe}}media/icons/{{ style.icon }}_disable.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>{% endif %}{% endfor %}{% endblock %}
 {% block placemarks %}{% for place in places %}
-  <Placemark>
-    <styleUrl>#{{ place.style }}Icon</styleUrl>
+  <Placemark targetId='{{ place.id }}'>
+    {% if place.status %}<styleUrl>#{{ place.style }}Icon</styleUrl>{% else %}<styleUrl>#{{ place.style }}DisableIcon</styleUrl>{% endif %}
     <name>{{ place.nombre }}</name>
     <description>{{ place.descripcion }}</description>
     {{ place.geo.kml|safe }}

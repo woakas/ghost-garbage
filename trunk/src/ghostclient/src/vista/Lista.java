@@ -54,21 +54,16 @@ public class Lista extends Form implements CommandListener {
 		}
 		
 		if (c.getLabel() =="Activar"){
-			System.out.println(inventario.getString(inventario.getSelectedIndex()));
 			JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/inventory/"+inventario.getString(inventario.getSelectedIndex())+"/");
 			Alert alert;
 			Image img1 = null;
 			try {
 				img1 = Image.createImage("/"+js.getString("iconAlert"));
-				alert = new Alert ("Mensaje", js.getString(            "messageAlert"),img1 ,AlertType.INFO);
-				System.out.println(js.getString("messageAlert"));
-				alert = new Alert("Hello");
+				alert = new Alert ("Activo",js.getString("messageAlert"),img1 ,AlertType.INFO);
 				display.setCurrent(alert,next);
 				display.vibrate(2);
-				
 			}catch (JSONException e) {	}
 			  catch (IOException e)   {	}
-			  
 		}
 		
 		if (c.getLabel() =="Salvar"){

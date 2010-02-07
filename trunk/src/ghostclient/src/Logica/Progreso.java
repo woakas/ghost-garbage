@@ -9,9 +9,7 @@ public class Progreso extends TimerTask{
 	public Progreso(Gauge load) {
 		this.load =load;
 	}
-
 	public final void run() {
-	// Is current value of gauge less than the max?
 		   if (load.getValue() < load.getMaxValue()){
 	    	   load.setValue(load.getValue() + 1);
 	       }

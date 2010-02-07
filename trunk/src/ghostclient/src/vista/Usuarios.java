@@ -16,9 +16,6 @@ import javax.microedition.lcdui.TextField;
 import org.json.me.JSONObject;
 
 import Logica.*;
-
-import com.nutiteq.components.WgsBoundingBox;
-import com.nutiteq.kml.KmlUrlReader;
 import com.tesis.Map;
 
 public class Usuarios extends Form implements CommandListener {
@@ -58,26 +55,18 @@ public class Usuarios extends Form implements CommandListener {
 			pr = new Progreso(load);
 			tm.scheduleAtFixedRate(pr, 0, 1000);
 			if (ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login",usuario.getString(),password.getString()) == null){
-				System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
 				display.setCurrent(alert);
 				display.vibrate(2);
 			}
 			else{
-				System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
+				//System.out.println("prueba1 " +ConnectHttp.getUrl(vista.GhostGarbage.URLGHOST+"mobile/login"));
 				JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getPuntaje/");
 				mapa.setPuntaje(js.optString("puntaje", "0"));
 				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getEstado/");
 				mapa.setEstado(js.optString("estado", ""));
+				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getVision/");
+				mapa.setVision(js.optString("vision", "0"));
 				js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"mobile/getIdJugador/");
-				/*KmlUrlReader pp = new KmlUrlReader(
-				//"http://library.devnull.li/cgi-bin/featureserver.cgi/scribble/all.kml",
-				vista.GhostGarbage.URLGHOST+"data/kml/"+js.optString("idJugador","")+"/",
-				true) {
-						public boolean needsUpdate(WgsBoundingBox boundingBox, int zoom) {
-							return true;
-						}
-				};
-					mapa.getMapItem().addKmlService(pp);*/
 				display.setCurrent(mapa.call());
 			} 
 		}

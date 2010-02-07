@@ -12,7 +12,6 @@ public class BotonIni extends CustomItem {
 	public int selec = 0, opcion = 1;
 
 	protected BotonIni(String nombre, Displayable d) {
-		
 		super(nombre);
 		this.d = d;
 		seth(d.getHeight());
@@ -32,27 +31,22 @@ public class BotonIni extends CustomItem {
 	protected int getMinContentHeight() {
 		return h;
 	}
-
 	protected int getMinContentWidth() {
 		
 		return w;
 	}
-
 	protected int getPrefContentHeight(int arg0) {
 		return getMinContentHeight();
 	}
-
 	protected int getPrefContentWidth(int arg0) {
 		return getMinContentWidth();
 	}
-
 	protected void paint(Graphics g, int w, int h) {
-		
 		if(seleccionador){
 			g.setColor(200, 200, 200);
 			g.fillRoundRect(x-17, (y+selec)-3, w+10, alto+7, 20, 45);
 		}
-		
+
 		g.fillRoundRect(x-15, y, w+10, alto, 20, 45);
 		g.setColor(90, 90, 90);
 		g.fillRoundRect(x-14, y+1, w+10, alto, 20, 45);

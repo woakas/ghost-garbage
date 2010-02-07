@@ -14,13 +14,11 @@ import vista.Usuarios;
 
 
 public class ConnectHttp{
-	
 	public static Usuarios us;
 	public static String cookie="";
     public static String URL_LOGIN=vista.GhostGarbage.URLGHOST+"accounts/login/";
 	public static String USER="anonymus";
 	public static String PASSWORD="anonymus";
-	
 	
 	public ConnectHttp(){
 		cleanValues();
@@ -57,15 +55,11 @@ public class ConnectHttp{
 				sb.append((char)ch);
 			}
 			return new String (sb);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 		return null;
 		}
 	
-	
 	public static HttpConnection getUrl(String url,String usuario, String password){ 
-		
 		HttpConnection c = null;
 	    OutputStream os = null;
 		try {			
@@ -102,9 +96,7 @@ public class ConnectHttp{
 			}
 			return null;
 		}  
-		catch (IOException e) {
-			System.out.println(e);
-		}
+		catch (IOException e) {	}
 		return null;	
 	}
 }

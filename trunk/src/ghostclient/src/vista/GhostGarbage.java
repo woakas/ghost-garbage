@@ -25,6 +25,8 @@ public class GhostGarbage extends MIDlet {
 	public static String URLGHOST = "http://dev1.ghost.webhop.org/";
 	public static double LON_DEFAULT = -74.13538813591003;
 	public static double LAT_DEFAULT = 4.630740894173603;
+	public static double LONGPS = 0;
+	public static double LATGPS = 0;
 			
 	public GhostGarbage() throws IOException {
 		f = new Form("Ghost Garbage");

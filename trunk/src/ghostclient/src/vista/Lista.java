@@ -67,7 +67,20 @@ public class Lista extends Form implements CommandListener {
 		}
 		
 		if (c.getLabel() =="Salvar"){
+			String pp = inventario.getString(inventario.getSelectedIndex());
 			
+			System.out.println(pp.substring(0,pp.indexOf(":")));
+			System.out.println(pp.substring(pp.indexOf(":")+1));
+			JSONObject js = ConnectHttp.getUrlJson(vista.GhostGarbage.URLGHOST+"/mobile/services/"+pp.substring(0,pp.indexOf(":"))+"/"+pp.substring(pp.indexOf(":")+1)+"/");
+			Alert alert;
+			Image img1 = null;
+			try {
+				img1 = Image.createImage("/"+js.getString("iconAlert"));
+				alert = new Alert ("Activo",js.getString("messageAlert"),img1 ,AlertType.INFO);
+				display.setCurrent(alert,next);
+				display.vibrate(2);
+			}catch (JSONException e) {	}
+			  catch (IOException e)   {	}
 		}
 		if (c.getLabel() =="Regresar"){
 			display.setCurrent(next); 

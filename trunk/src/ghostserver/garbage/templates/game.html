@@ -1,0 +1,98 @@
+{% extends "main_template.html" %}
+
+
+{% block js %}
+<script src='http://openlayers.org/api/OpenLayers.js'></script>
+<script src='http://www.openstreetmap.org/openlayers/OpenStreetMap.js'></script>
+
+<script type="text/javascript"> 
+
+
+        var map,layerKml;
+        var size = new OpenLayers.Size(10,10);
+	var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+	var icon = new OpenLayers.Icon('http://static.geoentropica.com/img/p1.png',size,offset);
+ 
+	function createMarker(layer,lonlat,text,icc){
+
+            var feature = new OpenLayers.Feature(layer, lonlat,
+                        {
+                         icon:icc.clone(),
+                         popupContentHTML:text,
+                         popupSize: new OpenLayers.Size(350, 200),
+                        });
+            feature.popupClass=OpenLayers.Popup.FramedCloud;
+            feature.createMarker();
+
+            var markerOver = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(true);
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.show();
+                }
+                OpenLayers.Event.stop(evt);
+            };
+
+
+            feature.marker.events.register("mousedown", feature, markerOver);
+            return feature.marker;
+	};
+
+
+        function transLatLon(llon,llat){
+		return new OpenLayers.LonLat(llon, llat).transform(new 
+                OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+ 
+	};
+
+            function init(){
+                map = new OpenLayers.Map('map');
+
+                var osm_map = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap");
+
+                var routeLayer = new OpenLayers.Layer.Vector("Traza");
+                var layerMarkers = new OpenLayers.Layer.Markers("Puntos");
+                map.addLayers([osm_map,routeLayer,layerMarkers]);
+
+
+                map.addControl(new OpenLayers.Control.LayerSwitcher());
+                map.addControl(new OpenLayers.Control.Attribution());
+                var lonLat = new OpenLayers.LonLat({{ jugador.position.georef.x }},{{ jugador.position.georef.y }}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+                map.setCenter(lonLat, 16);
+
+
+
+layerKml = new OpenLayers.Layer.Vector("Ghost Garbage", {
+    projection: map.displayProjection,
+    visibility:true, 
+    strategies: [new OpenLayers.Strategy.Fixed()],
+    protocol: new OpenLayers.Protocol.HTTP({
+        url:"/data/kml/",
+        format: new OpenLayers.Format.KML({
+            extractStyles: true,
+            extractAttributes: true })
+        })
+    });
+map.addLayer(layerKml);
+
+setInterval('layerKml.refresh({force:true})', 7000);
+            }
+</script> 
+
+
+{% endblock %}
+
+
+{% block body %}
+<body onload="init()">
+{% endblock %}
+
+{% block primaryContent %}
+<h2>Game</h2><br />
+
+
+<div id="map" class="bigmap"></div> 
+
+{% endblock %}

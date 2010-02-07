@@ -54,6 +54,20 @@ def getPuntaje(request):
 
 
 
+@login_required
+def getVision(request):
+    p=request.user.personas_set.all()
+    if p>0:
+        p=p[0]
+        j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+        
+        fsp=j.getFeaturePlay('Vision')
+        if fsp:
+            return HttpResponse(simplejson.dumps({'status':'OK','vision':fsp.getValue()}))
+    return HttpResponse(simplejson.dumps({'status':'ERROR'}))
+
+
+
 
 @login_required
 def getIdJugador(request):
@@ -130,13 +144,36 @@ def inventory(request,field=None):
     return HttpResponse(simplejson.dumps({'status':'ERROR'}))
 
 
+@login_required
+def getKml(request):
+    p=request.user.personas_set.all()
+    if p>0:
+        p=p[0]
+        j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+        places=j.getPlaceMarks()
+        styles=[{'name':'Puntos','icon':'puntos','disable':False,'icon_width':17,'icon_height':17},{'name':'Nacibuenos','icon':'nacibuenos','disable':False,'icon_width':30,'icon_height':30},{'name':'Nacimalos','icon':'nacimalos','disable':False,'icon_width':30,'icon_height':30},{'name':'Colector','icon':'colector','disable':True,'icon_width':23,'icon_height':38},{'name':'Fantasma','icon':'fantasma','disable':True,'icon_width':23,'icon_height':38}]
+        return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places,'styles':styles}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
+    return HttpResponse(simplejson.dumps({'status':'ERROR'}))
 
-def getKml(request,idJ=None):
-    try:
-        j=garbageModels.Jugador.objects.get(id=idJ)
-    except garbageModels.Jugador.DoesNotExist:
-        raise Http404
-    
-    places=j.getPlaceMarks()
-    styles=[{'name':'Puntos','icon':'puntos','disable':True},{'name':'Base','icon':'nacibuenos','disable':False},{'name':'Colector','icon':'colector','disable':True}]
-    return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places,'styles':styles}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
+
+
+def getJson(request):
+    if not request.user.is_authenticated():
+        return HttpResponse(simplejson.dumps({'status':'ERROR'}))
+
+    p=request.user.personas_set.all()
+    if p>0:
+        p=p[0]
+        j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+        places=j.getPlaceMarks(True)
+        return HttpResponse(simplejson.dumps({'status':'OK','places':places}))
+    return HttpResponse(simplejson.dumps({'status':'ERROR'}))
+
+@login_required
+def game(request):
+    p=request.user.personas_set.all()
+    if p>0:
+        p=p[0]
+        j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
+        return render_to_response('game.html',{'jugador':j}, context_instance=RequestContext(request))
+    return render_to_response('game.html',{}, context_instance=RequestContext(request))

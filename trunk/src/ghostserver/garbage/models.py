@@ -28,7 +28,6 @@ class Juego(models.Model):
 class JugadorManager(models.Manager):
     """ Manager para Jugador
     """
-
     def getJugadores(self,point,distance=0,**kargs):
         """ Retorna los jugadores dados en un rango de distancia 
             un punto
@@ -87,8 +86,20 @@ class Jugador(models.Model) :
         ms={}
         for sp in self.getServicesVisibles():
             ms.update(sp.triggerService(self) or {})
+        ms.update(self.updateJugadores() or {})
         return ms
 
+
+
+    def updateJugadores(self):
+        """ Actualiza los servicios y realiza los triggers respectivos para los
+            servicios
+        """
+        ms={}
+        for jj in self.getJugadoresVisibles().exclude(id=self.id):
+            for fsp in jj.featureserviceplay_set.filter():
+                ms.update(fsp.triggerFeature(self) or {})
+        return ms
 
 
     def getFeaturePlay(self,feature=None,list=False,all=False):
@@ -141,6 +152,12 @@ class Jugador(models.Model) :
         return ServicePlay.objects.getServices(self.position.georef,dis).filter(juego=self.juego)
 
 
+    def getJugadoresVisibles(self):
+        """Retorna los Jugadores Visibles para el Jugador
+        """
+        dis= self.getValue('Vision',Features.objects.get(nombre="Vision").defaultValue())
+        return Jugador.objects.getJugadores(self.position.georef,dis).filter(juego=self.juego)
+
 
     def getPuntosLte(self,distance):
         """Retorna los puntos cercanos menores a una distacia determinada en metros
@@ -166,7 +183,7 @@ class Jugador(models.Model) :
 
 
 
-    def getPlaceMarks(self):
+    def getPlaceMarks(self,json=False):
         """ Retorna un diccionario con el atributo nombre, descripcion,
             icon y geo para la generación de KML o algún otro servicio.
         """
@@ -174,27 +191,44 @@ class Jugador(models.Model) :
         attrs=[]
         for sp in spp:
             if sp.identifyService(jugador=self):
-                attrs.append({
-                        'nombre':sp.service.nombre,
-                        'descripcion':sp.service.descripcion,
-                        'icon':sp.service.icon,
-                        'style':sp.service.icon.name.split('/')[-1].replace('.png','').capitalize(),
-                        'geo':sp.lugar.content_object.georef,
-                        'id':'%s_%d'%(sp.service.nombre.replace(' ',''),sp.id),
-                        'status':sp.status==1 and True or False
-                        })
+                tr={
+                    'nombre':sp.service.nombre,
+                    'style':sp.service.icon.name.split('/')[-1].replace('.png','').capitalize(),
+                    'id':'%s_%d'%(sp.service.nombre.replace(' ',''),sp.id),
+                    'status':True,
+                    }
+                if json:
+                    tr['lon']=sp.lugar.content_object.georef.x
+                    tr['lat']=sp.lugar.content_object.georef.y
+                    tr['icon']=sp.service.icon.name.replace('media','') 
+                else:
+                    tr['descripcion']=sp.service.descripcion,
+                    tr['geo']=sp.lugar.content_object.georef
+                    tr['icon']=sp.service.icon.name,
+                    
+                attrs.append(tr)
 
-        fsp_id=FeatureServicePlay.objects.filter(feature=Features.objects.get(nombre="Tipo Jugador"),variables=self.getFeaturePlay('Tipo Jugador').variables).values_list("id",flat=True)
-        for j in Jugador.objects.filter(featureserviceplay__id__in=fsp_id).exclude(id=self.id):
-            attrs.append({
-                    'nombre':j.nickname,
-                    'descripcion':"Jugador %s"%(j.nickname),
-                    'icon':'media/icons/colector.png',
-                    'style':'Colector',
-                    'geo':j.position.georef,
-                    'id':'%s_%d'%('Colector',j.id),
-                    'status':j.status==1 and True or False
-                    })
+        #fsp_id=FeatureServicePlay.objects.filter(feature=Features.objects.get(nombre="Tipo Jugador"),variables=self.getFeaturePlay('Tipo Jugador').variables).values_list("id",flat=True)
+        
+        for j in self.getJugadoresVisibles():#.exclude(id=self.id):
+            fsp=j.getFeaturePlay('Tipo Jugador')
+            tr={
+                'nombre':j.nickname,
+                'style':fsp.getVariable("icono").split('/')[-1].replace('.png','').capitalize(),
+                'id':'%s_%d'%(fsp.getValue(),j.id),
+                }
+            
+            if json:
+                rr=fsp.getVariable("icono").replace('media','')
+                tr['lon']=j.position.georef.x
+                tr['lat']=j.position.georef.y
+                tr['icon']=j.status==1 and rr or rr.replace('.png','_disable.png') 
+            else:
+                tr['descripcion']="Jugador %s"%(j.nickname),
+                tr['geo']=j.position.georef
+                tr['icon']=fsp.getVariable("icono")
+                tr['status']=j.status==1 and True or False
+            attrs.append(tr)        
         return attrs
         
 
@@ -237,7 +271,6 @@ class Features(models.Model):
         vr.update(kargs)
         vr.update(globals()) # Variables Globales y se agregan a vr
 
-
         logic=self.logica.replace('\r','')
         logic+='\n%s'%body
         exec logic in vr # Se ejecuta body con exec y se pasan como parametro vr para tener consistencia con todas las variables.
@@ -262,6 +295,10 @@ class Features(models.Model):
 
     def __getVariable__(self,variable=None,**kargs):
         return self.__evalLogica__('out=locals().get("%s",None)'%variable,**kargs)
+
+
+    def __triggerFeature__(self,jugador,jugAccess,**kargs):
+        return self.__evalLogica__('out=triggerFeature(jugador,jugAccess)',jugador=jugador,jugAccess=jugAccess,**kargs)
 
 
     def defaultValue(self,**kargs):
@@ -367,6 +404,14 @@ class FeatureServicePlay(models.Model):
 
     def setValue(self,pnt):
         return self.__func_features__('__setValue__',pnt=pnt)
+
+
+    def triggerFeature(self,jugador,**kargs):
+        """ Llama el trigger del servicio asociado asociado a un jugador
+        """
+        return self.__func_features__('__triggerFeature__',jugador=self.jugador,jugAccess=jugador,**kargs)
+
+
   
     
     def __unicode__(self):

@@ -357,8 +357,15 @@ select {
 
 
 
-#map {
+.smallmap {
        width: 300px;
+       height: 300px;
+       border: 1px solid black;
+       }
+
+
+.bigmap {
+       width: 700px;
        height: 300px;
        border: 1px solid black;
        }

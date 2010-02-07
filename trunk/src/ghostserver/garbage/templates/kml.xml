@@ -6,6 +6,8 @@
     <IconStyle>
       <Icon>
         <href>{{ SERVER_NAME|safe }}{{ MEDIA_URL|safe}}media/icons/{{ style.icon }}.png</href>
+          <w>{{ style.icon_width }}</w>
+          <h>{{ style.icon_height}}</h>
       </Icon>
     </IconStyle>
   </Style>

@@ -10,10 +10,11 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 
 
 
-ROOT_ROOT='/home/woakas/Tesis/svn/trunk/data/static'
-MEDIA_ROOT =  ROOT_ROOT+'/media'
-CSS_ROOT = ROOT_ROOT+'/css'
-JS_ROOT = ROOT_ROOT+'/js'
+MEDIA_ROOT='/home/woakas/personal/ghost/trunk/data/static'
+IMAGE_ROOT =  MEDIA_ROOT+'/media'
+CSS_ROOT = MEDIA_ROOT+'/css'
+JS_ROOT = MEDIA_ROOT+'/js'
+DOWNLOADS_ROOT = MEDIA_ROOT+'/downloads'
 MEDIA_URL =   '/static/'
 LOG_FILE = "/tmp/djangoGhost.log"
 STATIC_MEDIA=True

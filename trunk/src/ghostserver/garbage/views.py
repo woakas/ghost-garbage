@@ -176,7 +176,7 @@ def getKml(request):
         p=p[0]
         j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
         places=j.getPlaceMarks()
-        styles=[{'name':'Puntos','icon':'puntos','disable':False,'icon_width':17,'icon_height':17},{'name':'Nacibuenos','icon':'nacibuenos','disable':False,'icon_width':30,'icon_height':30},{'name':'Nacimalos','icon':'nacimalos','disable':False,'icon_width':30,'icon_height':30},{'name':'Colector','icon':'colector','disable':True,'icon_width':23,'icon_height':38},{'name':'Fantasma','icon':'fantasma','disable':True,'icon_width':23,'icon_height':38},{'name':'Tienda','icon':'tienda','disable':False,'icon_width':33,'icon_height':20}]
+        styles=[{'name':'Puntos','icon':'puntos','disable':False,'icon_width':17,'icon_height':17},{'name':'Nacibuenos','icon':'nacibuenos','disable':False,'icon_width':30,'icon_height':30},{'name':'Nacimalos','icon':'nacimalos','disable':False,'icon_width':30,'icon_height':30},{'name':'Colector','icon':'colector','disable':True,'icon_width':23,'icon_height':38},{'name':'Fantasma','icon':'fantasma','disable':True,'icon_width':23,'icon_height':38},{'name':'Tienda','icon':'tienda','disable':False,'icon_width':30,'icon_height':30}]
         return render_to_response('kml.xml',{'SERVER_NAME':'http://%s'%(request.META['HTTP_HOST']),'places':places,'styles':styles}, context_instance=RequestContext(request),mimetype='text/xml; charset=utf-8')
     return HttpResponse(simplejson.dumps({'status':'ERROR'}))
 

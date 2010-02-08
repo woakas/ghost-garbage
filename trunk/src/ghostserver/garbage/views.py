@@ -10,7 +10,6 @@ from django.core.urlresolvers import reverse
 import settings
 
 #Importes de garbage
-from garbage import forms
 from garbage.constsappli import *
 from garbage import models as garbageModels
 

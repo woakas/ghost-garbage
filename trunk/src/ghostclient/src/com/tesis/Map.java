@@ -234,7 +234,7 @@ public class Map implements CommandListener, PlaceListener {
 				for (int i=0;i<jsa.length(); i++){
 					aux[i] = jsa .optString(i,"");
 				}
-				services= new vista.Lista(display,this.call(),aux,"escobita.png","fantasma.png","Enviar");
+				services= new vista.Lista(display,this.call(),aux,"tienda.png","logoj.png","Enviar");
 			} catch (IOException e) {
 			}
 			display.setCurrent(services);
@@ -254,7 +254,7 @@ public class Map implements CommandListener, PlaceListener {
 				for (int i=0;i<jsa.length(); i++){
 					aux[i] = jsa .optString(i,"");
 				}
-				inventory = new vista.Lista(display,this.call(),aux,"escobita.png","fantasma.png","Activar");
+				inventory = new vista.Lista(display,this.call(),aux,"inventario.png","logoj.png","Activar");
 			}
 			catch (IOException e) {
 			}

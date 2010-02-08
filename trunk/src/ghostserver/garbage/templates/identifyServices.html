@@ -1,0 +1,18 @@
+{% extends "main_template.html" %}
+
+{% block primaryContent %}
+<h2>Servicios Cercanos</h2><br />
+
+{% if services %}
+<table>
+  <tr><th>Icono</th><th>Servicio</th><th>Distancia</th></tr>
+  {% for service,distance,icon in services %}<tr><td><img src="{{ MEDIA_URL|safe}}{{ icon }}"/> </td><td>{{ service }} </td><td>{{ distance }} </td></tr>
+  {% endfor %}
+
+  
+</table>
+
+{% else %}
+<p>No existe Servicios cercanos a usted</p>
+{% endif %}
+{% endblock %}

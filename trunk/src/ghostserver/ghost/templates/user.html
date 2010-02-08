@@ -1,77 +1,5 @@
 {% extends "main_template.html" %}
 
-{% block js %}
-<script src='http://openlayers.org/api/OpenLayers.js'></script>
-<script src='http://www.openstreetmap.org/openlayers/OpenStreetMap.js'></script>
-
-<script type="text/javascript"> 
-
-
-        var map;
-        var size = new OpenLayers.Size(10,10);
-	var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
-	var icon = new OpenLayers.Icon('http://static.geoentropica.com/img/p1.png',size,offset);
- 
-	function createMarker(layer,lonlat,text,icc){
-
-            var feature = new OpenLayers.Feature(layer, lonlat,
-                        {
-                         icon:icc.clone(),
-                         popupContentHTML:text,
-                         popupSize: new OpenLayers.Size(350, 200),
-                        });
-            feature.popupClass=OpenLayers.Popup.FramedCloud;
-            feature.createMarker();
-
-            var markerOver = function (evt) {
-                if (this.popup == null) {
-                    this.popup = this.createPopup(true);
-                    map.addPopup(this.popup);
-                    this.popup.show();
-                } else {
-                    this.popup.show();
-                }
-                OpenLayers.Event.stop(evt);
-            };
-
-
-            feature.marker.events.register("mousedown", feature, markerOver);
-            return feature.marker;
-	};
-
-
-        function transLatLon(llon,llat){
-		return new OpenLayers.LonLat(llon, llat).transform(new 
-                OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
- 
-	};
-
-            function init(){
-                map = new OpenLayers.Map('map');
-
-                var osm_map = new OpenLayers.Layer.OSM.Mapnik("OpenStreetMap");
-
-                var routeLayer = new OpenLayers.Layer.Vector("Traza");
-                var layerMarkers = new OpenLayers.Layer.Markers("Puntos");
-                map.addLayers([osm_map,routeLayer,layerMarkers]);
-
-
-                map.addControl(new OpenLayers.Control.LayerSwitcher());
-                map.addControl(new OpenLayers.Control.Attribution());
-                var lonLat = new OpenLayers.LonLat(-74, 4).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-                map.setCenter(lonLat, 6);
-            }
-</script> 
-
-
-{% endblock %}
-
-
-{% block body %}
-<body onload="init()">
-{% endblock %}
-
-
 
 
 {% block primaryContent %}
@@ -82,9 +10,11 @@
   <tr>
     <!--cell-->
     <td style="vertical-align:top; width:170px">
+      <form method="post">
+      
       <table>
         <tr>
-          <td style="padding:20px 20px 8px 20px">
+          <td style="padding:20px 20px 8px 20px" colspan="2">
             {% if persona.foto %}
             <img src="/static/media/{{ persona.foto }}" height="250" width="250" alt="" class="logo" >
             {% else %}
@@ -93,8 +23,10 @@
           </td>
           
         </tr>
-             
+          {{ form }}
+        <tr><td></td><td><input type="submit" value="Cambiar Avatar"/></td></tr>
       </table>
+      </form>
     </td>
     <!--cell-->
     
@@ -133,15 +65,5 @@
 </tr>
 </table>
 
-<h3> Jugador </h3>
-
-{% if jugador %}
-
-<div id="map" class="smallmap"></div> 
-
-
-{% else %}
-<p> No posee Jugadores </p>
-{% endif %}
 
 {% endblock %}

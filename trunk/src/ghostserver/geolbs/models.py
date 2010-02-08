@@ -209,6 +209,13 @@ class Service(models.Model):
     def identifyService(self,**kargs):
         return self.__evalLogica__('out=identifyService()',**kargs)
 
+
+    def getService(self,jugador,feature,attr,**kargs):
+        r=self.__evalLogica__('out=getService(jugador,feature,attr)',jugador=jugador,feature=feature,attr=attr,**kargs)
+        if type(r)==dict:
+            return r
+        return {}
+
     class Meta:
         verbose_name_plural='Servicios'
 

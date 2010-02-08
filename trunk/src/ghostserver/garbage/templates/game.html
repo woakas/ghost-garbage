@@ -8,11 +8,41 @@
 <script type="text/javascript"> 
 
 
-        var map,layerKml;
+        var map,layerKml,select;
         var size = new OpenLayers.Size(10,10);
 	var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
 	var icon = new OpenLayers.Icon('http://static.geoentropica.com/img/p1.png',size,offset);
- 
+
+function onPopupClose(evt) {
+            select.unselectAll();
+        };
+
+//Funcion para el el uso del popup
+        function onFeatureSelect(event) {
+            var feature = event.feature;
+            var selectedFeature = feature;
+            var popup = new OpenLayers.Popup.FramedCloud("Pronarea",
+                feature.geometry.getBounds().getCenterLonLat(),
+                new OpenLayers.Size(100,600),
+                "<h2>"+feature.attributes.name + "</h2>" + feature.attributes.description,
+                null, true, onPopupClose
+            );
+    popup.autoSize=true;
+            feature.popup = popup;
+            map.addPopup(popup);
+        };
+//Funcion para evento de seleccionar otro popup o cualquier zona del mapa
+        function onFeatureUnselect(event) {
+            var feature = event.feature;
+            if(feature.popup) {
+                map.removePopup(feature.popup);
+                feature.popup.destroy();
+                delete feature.popup;
+            }
+        };
+
+
+
 	function createMarker(layer,lonlat,text,icc){
 
             var feature = new OpenLayers.Feature(layer, lonlat,
@@ -78,7 +108,18 @@ layerKml = new OpenLayers.Layer.Vector("Ghost Garbage", {
 map.addLayer(layerKml);
 
 setInterval('layerKml.refresh({force:true})', 7000);
-            }
+
+ select = new OpenLayers.Control.SelectFeature(layerKml);
+               layerKml.events.on({
+                  "featureselected": onFeatureSelect,
+                  "featureunselected": onFeatureUnselect
+         });
+         //Adicion del control del kml
+                         map.addControl(select);
+                         select.activate();
+       
+
+}
 </script> 
 
 
@@ -92,6 +133,11 @@ setInterval('layerKml.refresh({force:true})', 7000);
 {% block primaryContent %}
 <h2>Game</h2><br />
 
+<ul>
+  <li><b>Puntaje:</b> {{ puntaje }}</li>
+  <li><b>Vision:</b> {{ vision }}</li>
+  <li><b>Estado:</b> {{ estado }}</li>
+</ul>
 
 <div id="map" class="bigmap"></div> 
 

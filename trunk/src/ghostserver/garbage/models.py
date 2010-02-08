@@ -178,7 +178,7 @@ class Jugador(models.Model) :
             if len(sp)>0 and sp[0].status ==1:
                 serv=sp[0].identifyService(jugador=self)
                 if serv:
-                    ms.append((serv,i.distance))
+                    ms.append((serv,i.distance,sp[0].service.icon.name))
         return ms
 
 
@@ -202,9 +202,9 @@ class Jugador(models.Model) :
                     tr['lat']=sp.lugar.content_object.georef.y
                     tr['icon']=sp.service.icon.name.replace('media','') 
                 else:
-                    tr['descripcion']=sp.service.descripcion,
+                    tr['descripcion']=sp.service.descripcion
                     tr['geo']=sp.lugar.content_object.georef
-                    tr['icon']=sp.service.icon.name,
+                    tr['icon']=sp.service.icon.name
                     
                 attrs.append(tr)
 
@@ -224,7 +224,7 @@ class Jugador(models.Model) :
                 tr['lat']=j.position.georef.y
                 tr['icon']=j.status==1 and rr or rr.replace('.png','_disable.png') 
             else:
-                tr['descripcion']="Jugador %s"%(j.nickname),
+                tr['descripcion']="Jugador %s"%j.nickname
                 tr['geo']=j.position.georef
                 tr['icon']=fsp.getVariable("icono")
                 tr['status']=j.status==1 and True or False
@@ -360,6 +360,12 @@ class ServicePlay(models.Model):
         """ Retorna el identify Del servicio en juego
         """
         return self.__func_services__('identifyService',**kargs)
+
+
+    def getService(self,jugador,feature=None,attr=None,**kargs):
+        """ Retorna el identify Del servicio en juego
+        """
+        return self.__func_services__('getService',jugador=jugador,feature=feature,attr=attr,**kargs)
 
 
     def __unicode__(self):

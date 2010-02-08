@@ -67,7 +67,14 @@ def profile(request):
         else:
             p=None
             j=None
-        return render_to_response('user.html',{'user':request.user,'persona':p,'jugador':j},context_instance=RequestContext(request))
+        if request.method=='POST':
+            form=forms.UserForm(request.POST)
+            if form.is_valid():
+                pass
+        else:
+            form=forms.UserForm()
+
+        return render_to_response('user.html',{'user':request.user,'persona':p,'jugador':j,'form':form},context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('auth_login'))
     

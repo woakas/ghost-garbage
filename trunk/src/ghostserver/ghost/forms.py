@@ -17,3 +17,7 @@ class ActiveUserForm(forms.Form):
     sexo =forms.IntegerField(widget=forms.Select(choices=CHOICES_TYPE_SEX),initial=1)
     
 
+
+
+class UserForm(forms.Form):
+    image = forms.ImageField(label="Change Avatar...", required=True)

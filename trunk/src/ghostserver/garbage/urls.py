@@ -17,4 +17,6 @@ urlpatterns = patterns('ghostserver.garbage.views',
                        url(r'^data/kml/$' , 'getKml', name="getKml"),
                        url(r'^data/json/$' , 'getJson', name="getJson"),
                        url(r'^game/$' , 'game', name="game"),
+                       url(r'^game/identify/$' , 'identifyServ', name="identifyServ"),
                        )
+

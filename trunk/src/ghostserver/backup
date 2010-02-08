@@ -855,7 +855,7 @@
             "is_active": true, 
             "is_superuser": false, 
             "is_staff": false, 
-            "last_login": "2010-02-07 17:23:42", 
+            "last_login": "2010-02-08 07:31:12", 
             "groups": [
                 1
             ], 
@@ -33728,14 +33728,6 @@
         }
     }, 
     {
-        "pk": "7fc6d431bd145868a6e999c4b713e4d4", 
-        "model": "sessions.session", 
-        "fields": {
-            "expire_date": "2010-02-20 06:58:58", 
-            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
-        }
-    }, 
-    {
         "pk": "2b980927e21126e810b4f57feeaf985c", 
         "model": "sessions.session", 
         "fields": {
@@ -34616,6 +34608,30 @@
         }
     }, 
     {
+        "pk": "53b7bfd2be90e3ecf186a0bf58ecf2aa", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:45:24", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "33a9b5df3329a3b0a2d9bf40738434a2", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:46:39", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "d67251ec37c8b06406436851830fcaef", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:53:27", 
+            "session_data": "gAJ9cQFVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNzLmFmZWQ4Yjk1Njk1MWZiYTlkMTJjZTY1YjU3\nZDZiMDlm\n"
+        }
+    }, 
+    {
         "pk": "82546c49352c60890112c1cb17d63cdf", 
         "model": "sessions.session", 
         "fields": {
@@ -34624,11 +34640,670 @@
         }
     }, 
     {
+        "pk": "9ba18b41bbb141bfdb0b1bebd26d6846", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:29:52", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "8aecd5a63e64a4664db1385e6f02877b", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:37:31", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "583790b139a2832fff783e5a870b9cf8", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:44:06", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "af220dfda2b0b8d72e09c75d030eb780", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:47:42", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "04e0351433619c8c357057429cd802ab", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:48:02", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "8fd20230b59a5ca9ac374486e882eadf", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:55:06", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "d2530162bf27b4e0160e657c78cdef95", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:56:43", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "11af44a44d21b0fa855131e29b2e6176", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 17:58:05", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "40d91c323330ff319959d976cbab6e41", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 18:00:19", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "1c9454c0ca816c81493222c3bdce4eb0", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:37:09", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "327878ab7aef42ce1b64d0edcdf09aa8", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:38:42", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "fa5ae10b0bb3787a7f63d5cbdeee9040", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:42:18", 
+            "session_data": "gAJ9cQFVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNzLmFmZWQ4Yjk1Njk1MWZiYTlkMTJjZTY1YjU3\nZDZiMDlm\n"
+        }
+    }, 
+    {
+        "pk": "e25f13e481cb665eb12a12dd05a5d7c2", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:42:27", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "92e162b261dbf31262937ffaf2d9024d", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:43:29", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "516f9809628df74d2df3114c7c2c188d", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:44:18", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "4f6e220a3756c586a50729ee378d0944", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:45:17", 
+            "session_data": "gAJ9cQFVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNzLmFmZWQ4Yjk1Njk1MWZiYTlkMTJjZTY1YjU3\nZDZiMDlm\n"
+        }
+    }, 
+    {
+        "pk": "bd69a18f4026a0703ab572b1cecf287b", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-21 19:53:33", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "374326d50406a664316f5f8107e0efe0", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-22 05:21:37", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
+        "pk": "49cd375b72b4b73ca53cdf74aba55870", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2010-02-22 07:31:12", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEESwN1LjVkYmU3ZmU4M2VjZTAzMWY3ODg5\nZGRjMDVkMGZmOTU4\n"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
             "domain": "example.com", 
             "name": "example.com"
+        }
+    }, 
+    {
+        "pk": 386, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:28:18", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 385, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:20:15", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 384, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:16:18", 
+            "object_repr": "Base Colector", 
+            "object_id": "1", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 383, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:15:31", 
+            "object_repr": "Moneda", 
+            "object_id": "2", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 382, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:14:44", 
+            "object_repr": "Base Fantasma", 
+            "object_id": "3", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 381, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 07:14:09", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 380, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 06:17:06", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 379, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 06:16:23", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 378, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 06:15:37", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 377, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 06:02:22", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 376, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-08 06:00:56", 
+            "object_repr": "Casita para Comprar en Tienda para el juego GhostGarbage", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 28
+        }
+    }, 
+    {
+        "pk": 375, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-08 06:00:23", 
+            "object_repr": "Tienda", 
+            "object_id": "21", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 374, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-08 06:00:20", 
+            "object_repr": "Tiendas", 
+            "object_id": "3", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 373, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:56:28", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 372, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:56:14", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 371, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:55:45", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 370, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:54:06", 
+            "object_repr": "Moneda", 
+            "object_id": "2", 
+            "change_message": "No ha cambiado ning\u00fan campo.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 369, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:53:35", 
+            "object_repr": "Base Fantasma", 
+            "object_id": "3", 
+            "change_message": "No ha cambiado ning\u00fan campo.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 368, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:50:23", 
+            "object_repr": "Base Colector", 
+            "object_id": "1", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 367, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:50:14", 
+            "object_repr": "Moneda", 
+            "object_id": "2", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 366, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:49:54", 
+            "object_repr": "Base Fantasma", 
+            "object_id": "3", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 365, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:49:45", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 364, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:31:59", 
+            "object_repr": "Base Colector", 
+            "object_id": "1", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 363, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:31:48", 
+            "object_repr": "Moneda", 
+            "object_id": "2", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 362, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:31:36", 
+            "object_repr": "Base Fantasma", 
+            "object_id": "3", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 361, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:31:22", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "No ha cambiado ning\u00fan campo.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 360, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:30:48", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 359, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:29:48", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 358, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-08 05:26:28", 
+            "object_repr": "Casita para Comprar", 
+            "object_id": "4", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 357, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 05:23:41", 
+            "object_repr": "X2", 
+            "object_id": "5", 
+            "change_message": "Modificado/a logica.", 
+            "user": 1, 
+            "content_type": 27
+        }
+    }, 
+    {
+        "pk": 356, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-08 05:22:20", 
+            "object_repr": "X2", 
+            "object_id": "5", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 27
+        }
+    }, 
+    {
+        "pk": 355, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2010-02-08 00:18:26", 
+            "object_repr": "Index - Devel", 
+            "object_id": "7", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 354, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-08 00:15:59", 
+            "object_repr": "Jugador", 
+            "object_id": "2", 
+            "change_message": "Modificado/a menus.", 
+            "user": 1, 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 353, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-07 23:46:53", 
+            "object_repr": "Moneda en Monedas 16 para el juego GhostGarbage", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 28
+        }
+    }, 
+    {
+        "pk": 352, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2010-02-07 23:46:10", 
+            "object_repr": "Monedas 16", 
+            "object_id": "20", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 14
+        }
+    }, 
+    {
+        "pk": 351, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-07 22:49:00", 
+            "object_repr": "Juego - Identificar Servicios", 
+            "object_id": "16", 
+            "change_message": "Modificado/a name, url y desc.", 
+            "user": 1, 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 350, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-07 22:47:10", 
+            "object_repr": "/about/credits/ -- Creditos", 
+            "object_id": "4", 
+            "change_message": "Modificado/a url, title y content.", 
+            "user": 1, 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 349, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-07 22:32:09", 
+            "object_repr": "Sobre - Creditos", 
+            "object_id": "8", 
+            "change_message": "Modificado/a name, url y desc.", 
+            "user": 1, 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 348, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2010-02-07 17:33:47", 
+            "object_repr": "/game/download/ -- Descarga", 
+            "object_id": "7", 
+            "change_message": "Modificado/a content.", 
+            "user": 1, 
+            "content_type": 11
         }
     }, 
     {
@@ -39177,13 +39852,13 @@
         "model": "flatpages.flatpage", 
         "fields": {
             "registration_required": false, 
-            "title": "Licencia", 
-            "url": "/about/licence/", 
+            "title": "Creditos", 
+            "url": "/about/credits/", 
             "template_name": "default.html", 
             "sites": [
                 1
             ], 
-            "content": "", 
+            "content": "<p>Se agradece a las siguientes personas o instituciones </p>\r\n\r\n<ul>\r\n<li>Dios</li>\r\n<li>Familia Cordero Villalba, Angulo Morales</li>\r\n<li>Universidad Distrital</li>\r\n<li>Proyecto de Ingener\u00eda de sistemas.</li>\r\n</ul>\r\n", 
             "enable_comments": false
         }
     }, 
@@ -39198,7 +39873,7 @@
             "sites": [
                 1
             ], 
-            "content": "<p> Para descargar haga en el jar </p>", 
+            "content": "<h3> Para instalar el Juego </h3>\r\n\r\n<ul>\r\n<li>Descarga el Jar en el Computador</li>\r\n<li>Enviar el jar al celular.</li>\r\n<li>Aceptar la instalacion</li>\r\n<li>Acepta el uso de GPS y uso de Internet.</li>\r\n</ul>\r\n\r\n\r\nDescargar Juego <a href='/static/downloads/GhostGarbage.jar'>GhostGarbage.jar</a>", 
             "enable_comments": false
         }
     }, 
@@ -39261,6 +39936,14 @@
         "fields": {
             "descripcion": "Monedas para aumentar el puntaje de juego", 
             "nombre": "Monedas"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "geolbs.tiposlugar", 
+        "fields": {
+            "descripcion": "Tiendas", 
+            "nombre": "Tiendas"
         }
     }, 
     {
@@ -39440,6 +40123,28 @@
         }
     }, 
     {
+        "pk": 17, 
+        "model": "geolbs.lugares", 
+        "fields": {
+            "nombre": "Monedas 16", 
+            "tipolugar": 2, 
+            "object_id": 20, 
+            "content_type": 14, 
+            "dentrode": null
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "geolbs.lugares", 
+        "fields": {
+            "nombre": "Tienda", 
+            "tipolugar": 3, 
+            "object_id": 21, 
+            "content_type": 14, 
+            "dentrode": null
+        }
+    }, 
+    {
         "pk": 2, 
         "model": "geolbs.punto", 
         "fields": {
@@ -39573,6 +40278,20 @@
         }
     }, 
     {
+        "pk": 20, 
+        "model": "geolbs.punto", 
+        "fields": {
+            "georef": "POINT (-74.1363644467135714 4.6299816321454550)"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "geolbs.punto", 
+        "fields": {
+            "georef": "POINT (-74.1368365155222335 4.6315322351335064)"
+        }
+    }, 
+    {
         "pk": 1, 
         "model": "geolbs.typesservice", 
         "fields": {
@@ -39595,7 +40314,7 @@
             "descripcion": "Base para Revivir Colector", 
             "nombre": "Base Colector", 
             "clase": 1, 
-            "logica": "distance=40 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='colector':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Servicio para volver a revivir\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance:\r\n        return {}\r\n\r\n    au={}\r\n    if jugador and jugador.status!=1:\r\n        jugador.status=1\r\n        jugador.save()\r\n        au['messageAlert']='Ha vuelto a revivir'\r\n        au['estado_change']=True\r\n        au['estado']=jugador.get_status_display()\r\n    return au\r\n", 
+            "logica": "distance=40 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='colector':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\ndef getService(jugador=None, feature=None,attr=None):\r\n    return {}\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Servicio para volver a revivir\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance:\r\n        return {}\r\n\r\n    au={}\r\n    if jugador and jugador.status!=1:\r\n        jugador.status=1\r\n        jugador.save()\r\n        au['messageAlert']='Ha vuelto a revivir'\r\n        au['estado_change']=True\r\n        au['estado']=jugador.get_status_display()\r\n    return au\r\n", 
             "icon": "media/icons/nacibuenos.png"
         }
     }, 
@@ -39606,8 +40325,19 @@
             "descripcion": "Puntos para el colector", 
             "nombre": "Moneda", 
             "clase": 2, 
-            "logica": "distance=15 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='colector':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Monedas\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance or servicePlay.status==2:\r\n        return {}\r\n    fsp=jugador.getFeaturePlay('Puntaje')\r\n    if fsp:\r\n        p=fsp.getValue()+valor\r\n        fsp.setValue(p)\r\n        servicePlay.status=2\r\n        servicePlay.save()\r\n        return {'puntaje_change':True,'puntaje':p} \r\n    return {}", 
+            "logica": "distance=15 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='colector':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\ndef getService(jugador=None, feature=None,attr=None):\r\n    return {}\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Monedas\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance or servicePlay.status==2:\r\n        return {}\r\n    fsp=jugador.getFeaturePlay('Puntaje')\r\n    if fsp:\r\n        p=fsp.getValue()+valor\r\n        fsp.setValue(p)\r\n        servicePlay.status=2\r\n        servicePlay.save()\r\n        return {'puntaje_change':True,'puntaje':p} \r\n    return {}", 
             "icon": "media/icons/puntos.png"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "geolbs.service", 
+        "fields": {
+            "descripcion": "Casita para Comprar", 
+            "nombre": "Casita para Comprar", 
+            "clase": 1, 
+            "logica": "distance=500 # Distancia en metros para disparar el trigger\r\nservices=['Comprar']\r\nfeatures={'Comprar':['Comprar:X2','Comprar:Oscuridad']}\r\n\r\ndef identifyService():\r\n    return \"Tienda para Comprar utilidades\"\r\n\r\n\r\ndef getService(jugador=None, feature=None,attr=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance:\r\n        return {}\r\n    if not feature:\r\n        return {'services':services}\r\n    if not attr:\r\n        return {'services':features.get(feature,[])}\r\n\r\n    return {'messageAlert':attr+' Activo','iconAlert':'tienda.png'}\r\n\r\n\r\ndef triggerService(jugador=None):\r\n    return {}", 
+            "icon": "media/icons/tienda.png"
         }
     }, 
     {
@@ -39617,7 +40347,7 @@
             "descripcion": "Base para Revivir Fantasmas", 
             "nombre": "Base Fantasma", 
             "clase": 1, 
-            "logica": "distance=40 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='fantasma':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Servicio para volver a revivir\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance:\r\n        return {}\r\n\r\n    au={}\r\n    if jugador and jugador.status!=1:\r\n        jugador.status=1\r\n        jugador.save()\r\n        au['messageAlert']='Ha vuelto a revivir'\r\n        au['estado_change']=True\r\n        au['estado']=jugador.get_status_display()\r\n    return au\r\n", 
+            "logica": "distance=40 # Distancia en metros para disparar el trigger\r\n\r\ndef verifyJugador(function):\r\n    def verify(*args,**kargs):\r\n        if globals().get('jugador') and globals().get('jugador').getValue('Tipo Jugador')!='fantasma':\r\n            return None\r\n        return function(*args,**kargs)\r\n    return verify\r\n\r\ndef getService(jugador=None, feature=None,attr=None):\r\n    return {}\r\n\r\n@verifyJugador\r\ndef identifyService():\r\n    return \"Servicio para volver a revivir\"\r\n\r\n@verifyJugador\r\ndef triggerService(jugador=None):\r\n    if servicePlay.lugar.getDistance(jugador.position.georef).m >distance:\r\n        return {}\r\n\r\n    au={}\r\n    if jugador and jugador.status!=1:\r\n        jugador.status=1\r\n        jugador.save()\r\n        au['messageAlert']='Ha vuelto a revivir'\r\n        au['estado_change']=True\r\n        au['estado']=jugador.get_status_display()\r\n    return au\r\n", 
             "icon": "media/icons/nacimalos.png"
         }
     }, 
@@ -39685,28 +40415,6 @@
             "padre": 1, 
             "name": "Galer\u00eda", 
             "desc": "Galer\u00eda de im\u00e1genes"
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "ghost.menu", 
-        "fields": {
-            "url": "index/devel/", 
-            "posicion": 2, 
-            "padre": 1, 
-            "name": "Devel", 
-            "desc": "Desarrolladores"
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "ghost.menu", 
-        "fields": {
-            "url": "about/licence/", 
-            "posicion": 1, 
-            "padre": 2, 
-            "name": "Licencia", 
-            "desc": "Licencia"
         }
     }, 
     {
@@ -39787,17 +40495,6 @@
         }
     }, 
     {
-        "pk": 16, 
-        "model": "ghost.menu", 
-        "fields": {
-            "url": "game/add/", 
-            "posicion": 1, 
-            "padre": 4, 
-            "name": "Crear Juego", 
-            "desc": "Adici\u00f3n de Juegos"
-        }
-    }, 
-    {
         "pk": 17, 
         "model": "ghost.menu", 
         "fields": {
@@ -39806,6 +40503,28 @@
             "padre": 4, 
             "name": "Eliminar Juego", 
             "desc": "Eliminar Juego"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "ghost.menu", 
+        "fields": {
+            "url": "about/credits/", 
+            "posicion": 1, 
+            "padre": 2, 
+            "name": "Creditos", 
+            "desc": "Creditos"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "ghost.menu", 
+        "fields": {
+            "url": "game/identify/", 
+            "posicion": 1, 
+            "padre": 4, 
+            "name": "Identificar Servicios", 
+            "desc": "Identificaci\u00f3n de Juegos"
         }
     }, 
     {
@@ -39876,9 +40595,9 @@
             "menus": [
                 1, 
                 2, 
-                4, 
                 10, 
-                15
+                15, 
+                16
             ], 
             "grupo": 1
         }
@@ -39982,6 +40701,16 @@
             "nombre": "Tipo Jugador", 
             "clase": 1, 
             "logica": "TYPES={'fantasma':{'tipo':'fantasma','icono':'media/icons/fantasma.png','sytle':'Fantasma'},\r\n  'colector':{'tipo':'colector','icono':'media/icons/colector.png','sytle':'Colector'},}\r\n\r\ndef addValue(pnt):\r\n    return tipo\r\n\r\ndef subValue(pnt):\r\n    return tipo\r\n\r\ndef getValue():\r\n    return tipo\r\n\r\ndef setValue(pnt):\r\n    return tipo\r\n\r\ndef defaultValue():\r\n    return tipo\r\n\r\ndef triggerFeature(jugador,jugAccess):\r\n    typeAccess=jugAccess.getValue(\"Tipo Jugador\")\r\n    typeJugador=jugador.getValue(\"Tipo Jugador\")\r\n    if jugador.status!=1 or jugAccess.status !=1 or typeJugador=='colector' or typeAccess=='fantasma':\r\n        return {}\r\n    geo=jugador.position.georef.clone()\r\n    geo.transform('EPSG:900913')\r\n    if (jugador.getValue(\"Vision\")/2.0)< geo.distance(jugAccess.position.georef.transform('EPSG:900913',clone=True)):\r\n        return {}\r\n    jugAccess.status=2\r\n    jugAccess.save()\r\n    fsja=jugAccess.getFeaturePlay('Puntaje')\r\n    fsj=jugador.getFeaturePlay('Puntaje')\r\n    fsj.setValue(fsj.getValue()+((int)(fsja.getValue()*0.7)))\r\n    fsja.setValue((int)(fsja.getValue()*0.2))\r\n    return {\"estado_change\":True,'estado':'Muerto','puntaje_change':True,'puntaje':jugAccess.getValue('Puntaje'),'messageAlert':'Usted ha muerto','iconAlert':'cerrar.png'}\r\n\r\nif type(locals().get('opc'))==str:\r\n    locals().update(TYPES.get(opc,TYPES['fantasma']))\r\nelse:\r\n    locals().update(TYPES['fantasma'])"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "garbage.features", 
+        "fields": {
+            "descripcion": "X2 los puntos", 
+            "nombre": "X2", 
+            "clase": 2, 
+            "logica": "def addValue(vn):\r\n    return None\r\n\r\ndef subValue(vn):\r\n    return None\r\n\r\ndef getValue():\r\n    return None\r\n\r\ndef setValue(vn):\r\n    return None\r\n\r\ndef defaultValue():\r\n    return None\r\n\r\ndef triggerFeature(jugador,jugAccess):\r\n    return {}\r\n"
         }
     }, 
     {
@@ -40139,6 +40868,28 @@
         }
     }, 
     {
+        "pk": 17, 
+        "model": "garbage.serviceplay", 
+        "fields": {
+            "lugar": 17, 
+            "status": 1, 
+            "variables": "valor=30", 
+            "juego": 1, 
+            "service": 2
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "garbage.serviceplay", 
+        "fields": {
+            "lugar": 18, 
+            "status": 1, 
+            "variables": "", 
+            "juego": 1, 
+            "service": 4
+        }
+    }, 
+    {
         "pk": 9, 
         "model": "garbage.serviceplay", 
         "fields": {
@@ -40168,16 +40919,6 @@
             "feature": 2, 
             "service": null, 
             "jugador": 3
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "garbage.featureserviceplay", 
-        "fields": {
-            "variables": "vision=200", 
-            "feature": 2, 
-            "service": null, 
-            "jugador": 2
         }
     }, 
     {
@@ -40238,6 +40979,16 @@
             "feature": 3, 
             "service": null, 
             "jugador": 3
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "garbage.featureserviceplay", 
+        "fields": {
+            "variables": "vision=500", 
+            "feature": 2, 
+            "service": null, 
+            "jugador": 2
         }
     }, 
     {

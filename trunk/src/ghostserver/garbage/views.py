@@ -111,14 +111,17 @@ def identifyServices(request):
 
 
 @login_required
-def services(request,field=None):
+def services(request,field=None,attr=None):
     p=request.user.personas_set.all()
     if p>0:
         p=p[0]
         j=p.jugador_set.get(juego=garbageModels.Juego.objects.get(name='GhostGarbage'),persona=p)
 
+        if attr:
+            return HttpResponse(simplejson.dumps({'status':'OK','messageAlert':attr+' Activo','iconAlert':'tienda.png'}))
+
         if field:
-            return HttpResponse(simplejson.dumps({'status':'OK','services':['X2','Oscuridad','Muro']}))
+            return HttpResponse(simplejson.dumps({'status':'OK','services':['Comprar:X2','Comprar:Oscuridad','Comprar:Muro']}))
 
         iserv=["Comprar","Vender"]
         

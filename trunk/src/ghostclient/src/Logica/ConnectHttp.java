@@ -72,11 +72,15 @@ public class ConnectHttp{
 	        	 c = (HttpConnection)Connector.open(URL_LOGIN);
 		         c.setRequestMethod(HttpConnection.POST);
 		         os = c.openOutputStream();
-		         os.write(("username="+usuario+"&password="+password).getBytes());
+		         String tt = ("username="+usuario+"&password="+password);
+		         //c.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		         //c.setRequestProperty("Content-Length",""+ tt.length());
+		         os.write(tt.getBytes());
 		         os.flush();
-		         
+		         System.out.println("Algo falla" + c.getResponseMessage());
 				//Toma la cookie y la setea
 		        String cook=c.getHeaderField("set-cookie");
+		        System.out.println(cook);
 				cookie = cook.substring(0, cook.indexOf(";"));								
 
 				//Vuelve a tratar de entrar a la URL solicitada
